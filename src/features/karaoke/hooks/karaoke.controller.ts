@@ -2,7 +2,12 @@ import { useState } from "react";
 
 const karaokeController = () => {
     const [hasPermission, setHasPermission] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
+
+    const handlePlaying = (value: boolean)=>{
+        setIsPlaying(value);
+    }
 
     const requestPermissions = async () => {
         setIsLoad(true);
@@ -34,7 +39,9 @@ const karaokeController = () => {
     return {
         hasPermission,
         requestPermissions,
-        isLoad
+        isLoad,
+        handlePlaying,
+        isPlaying
     }
 }
 

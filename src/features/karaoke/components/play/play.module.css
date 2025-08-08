@@ -1,0 +1,10 @@
+.play__container{
+    @apply h-svh w-full fixed left-0 top-0 bg-black bg-opacity-80 z-10 flex items-center justify-center;
+}
+.play__container button{
+    @apply w-[7vw] h-[7vw] bg-primary rounded-full flex items-center justify-center shadow-md shadow-white;
+}
+
+.play__container button img{
+    @apply w-[3vw];
+}
