@@ -1,0 +1,6 @@
+.video{
+    @apply fixed w-full h-svh overflow-hidden left-0 top-0 flex items-center justify-center pointer-events-none;
+}
+.video iframe{
+    @apply w-[140%] h-[140%] border-0;
+}

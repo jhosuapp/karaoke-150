@@ -1,0 +1,15 @@
+.permissions{
+    @apply fixed w-full h-full flex items-center justify-center z-10 bg-black left-0 top-0 bg-opacity-80;
+}
+
+.permissions__content{
+    @apply w-full max-w-[400px] bg-white rounded-md px-5 py-8 flex flex-col justify-center items-center gap-4 shadow-white border border-primary;
+}
+
+.permissions__content h2{
+    @apply text-[25px] uppercase text-secondary font-bold;
+}
+
+.permissions__content picture{
+    @apply w-full max-w-[100px] my-3;
+}
