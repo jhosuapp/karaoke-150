@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { Permissions, Play, Video } from "../components"
+import { Audio, Permissions, Play, Video } from "../components"
 import { karaokeController } from "../hooks/karaoke.controller";
 
 const KaraokeView = () => {
@@ -18,12 +18,16 @@ const KaraokeView = () => {
                     <Play handlePlaying={ handlePlaying } isPlaying={ isPlaying } />
                 }
             </AnimatePresence>
-            <AnimatePresence mode='wait'>
+            {/* <AnimatePresence mode='wait'>
                 {!hasPermission &&
                 <Permissions requestPermissions={ requestPermissions } isLoad={ isLoad } hasPermission={ hasPermission } />
                 }
-            </AnimatePresence>
+            </AnimatePresence> */}
             <Video />
+            <Audio
+                isPlaying={ isPlaying }
+                handlePlaying={ handlePlaying }
+            />
         </section>
     )
 }

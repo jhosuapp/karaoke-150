@@ -1,5 +1,5 @@
 .permissions{
-    @apply fixed w-full h-full flex items-center justify-center z-10 bg-black left-0 top-0 bg-opacity-80;
+    @apply fixed w-full h-full flex items-center justify-center z-[999] bg-black left-0 top-0 bg-opacity-80;
 }
 
 .permissions__content{
