@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import styles from './audio.module.css';
-import audioMp3 from '../../../../assets/audio-2.mp3'
+import audioMp3 from '../../../../config/assets/audio-2.mp3'
 import { lyrics } from "./lyrics";
 
 type Props = {
     isPlaying: boolean;
     handlePlaying: (value: boolean) => void;
+    stopRecording: () => void;
 }
 
 
-const Audio = ({ isPlaying, handlePlaying }:Props) => {
+const Audio = ({ isPlaying, handlePlaying, stopRecording }:Props) => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [currentTime, setCurrentTime] = useState(0);
 
@@ -29,6 +30,15 @@ const Audio = ({ isPlaying, handlePlaying }:Props) => {
             //     left: scrollPosition,
             //     behavior: 'smooth'
             // });
+            if(now > 15){
+                audio.pause();
+                stopRecording();
+                handlePlaying(false);
+                audio.currentTime = 0;
+                return () => {
+                    clearInterval(interval);
+                };
+            }
         };
 
         const interval = setInterval(updatePosition, 100);
@@ -52,8 +62,8 @@ const Audio = ({ isPlaying, handlePlaying }:Props) => {
                 controls={false}
             />
             {/* Contenedor de letras con scroll horizontal */}
-            <div className={styles.lyricsScrollContainer}>
-                <AnimatePresence mode="wait">
+            {isPlaying && (
+                <div className={styles.lyricsScrollContainer}>
                     {lyrics.map((word, index) => {
                         const isActive = currentTime >= word.time && 
                                         currentTime < word.time + word.duration;
@@ -90,8 +100,8 @@ const Audio = ({ isPlaying, handlePlaying }:Props) => {
                             </motion.span>
                         );
                     })}
-                </AnimatePresence>
-            </div>
+                </div>
+            )}
         </section>
     )
 }

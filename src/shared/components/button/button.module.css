@@ -1,5 +1,5 @@
 .button{
-    @apply w-fit h-[2.5vw] min-h-[40px] min-w-[150px] flex justify-center items-center gap-[15px] relative overflow-hidden; 
+    @apply w-full min-h-[65px] flex justify-center items-center gap-[15px] relative overflow-hidden px-5; 
 }
 
 .button__icon{
@@ -8,7 +8,7 @@
 
 .button span{
     transition: .3s ease left;
-    @apply uppercase text-button relative left-0;
+    @apply uppercase text-button relative left-0 font-extrabold leading-none;
 }
 
 .button__icon {
@@ -74,15 +74,17 @@ button:hover .button__iconSecondary{
 /* secondary */
 .button--secondary{
     transition: .5s ease background-color;
-    @apply bg-secondary rounded-full;
+    background: linear-gradient(-180deg, #FFEB00 0%, #C59400 100%);
+    @apply border border-secondary rounded-md w-full;
 }
 
 .button--secondary:hover{
-    @apply bg-secondary;
+    @apply bg-primary;
 }
 
 .button--secondary span{
-    @apply text-white;
+    text-shadow: 0 1px 0 #FFEB00;
+    @apply text-tertiary;
 }
 
 /* White */

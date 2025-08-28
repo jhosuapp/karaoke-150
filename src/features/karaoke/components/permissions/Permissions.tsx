@@ -3,9 +3,9 @@ import { fadeInMotion, fadeUpMotion } from '../../../../shared/motion/motion';
 import { PermissionsKaraoke } from '../../interfaces';
 
 import styles from './permissions.module.css';
-import iconAudio from '../../../../assets/icon-audio.svg';
-import iconCamera from '../../../../assets/icon-camera.svg';
-import iconScreen from '../../../../assets/icon-screen.svg';
+import iconAudio from '../../../../config/assets/icon-audio.svg';
+import iconCamera from '../../../../config/assets/icon-camera.svg';
+import iconScreen from '../../../../config/assets/icon-screen.svg';
 import { PermissionsItem } from './PermissionsItem';
 
 type Props = {
@@ -16,12 +16,12 @@ type Props = {
 const Permissions = ({ requestPermissionsMicrophone, statusMic }:Props) => {
     return (
         <motion.section 
-            {...fadeInMotion(0.5)}
+            {...fadeInMotion(0, 0)}
             className={ styles.permissions }
             // key={ `key${statusMic.hasPermissions}` }
         >
             <motion.article 
-                {...fadeUpMotion(0.6, 0.5)}
+                {...fadeUpMotion(0.2, 0.2)}
                 className={ styles.permissions__content }
             >
                 <h2>Dar permisos</h2>

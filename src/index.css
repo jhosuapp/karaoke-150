@@ -3,5 +3,40 @@
 @tailwind utilities;
 
 body {
-    @apply flex h-[100vh] justify-center text-center;
+    @apply flex h-[100vh] justify-center text-center font-futura;
+}
+
+.global-dsc{
+    @apply text-white text-description font-futura;
+}
+
+.global-title{
+    @apply text-transparent text-title uppercase leading-none font-futura font-extrabold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #FFF;
+    mix-blend-mode: plus-lighter;
+    /* 🔹 Glow azul */
+    /* text-shadow: 
+      0 0 5px #00c3ff,
+      0 0 10px #00c3ff,
+      0 0 20px #00c3ff,
+      0 0 40px #00c3ff; */
+}
+
+@font-face {
+    font-family: "FuturaStd";
+    src: url("./config/typography/FuturaStdBook.otf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "FuturaStd";
+    src: url("./config/typography/FuturaStdMedium.otf") format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "FuturaStd";
+    src: url("./config/typography/FuturaStdCondensedExtraBd.otf") format("truetype");
+    font-weight: 800;
 }

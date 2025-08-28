@@ -1,4 +1,5 @@
-import { githubApi } from "../../../api";
+
+import { githubApi } from "../../../shared/api";
 import { LabelInterface } from "../interfaces";
 
 const getLabels = async():Promise<LabelInterface[]> => {

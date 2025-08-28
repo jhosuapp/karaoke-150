@@ -3,7 +3,7 @@
 }
 
 .permissions__content{
-    @apply w-full max-w-[450px] bg-white rounded-md px-5 py-8 flex flex-col justify-center items-center gap-4 shadow-white border border-primary;
+    @apply w-[90%] max-w-[450px] bg-white rounded-md px-5 py-8 flex flex-col justify-center items-center gap-4 shadow-white border border-primary;
 }
 
 .permissions__content h2{
@@ -36,4 +36,8 @@
 
 .permissions__item picture{
     @apply w-5;
+}
+
+.permissions__item p{
+    @apply text-left leading-none;
 }

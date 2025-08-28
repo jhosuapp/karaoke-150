@@ -1,0 +1,31 @@
+.wrapper{
+    @apply flex flex-col items-center justify-center;
+}
+
+.wrapper__ice{
+    @apply relative z-10 w-[90%] max-w-[440px];
+}
+
+.wrapper__content{
+    @apply relative z-10 mt-14;
+}
+
+.wrapper__content{
+    @apply relative z-10 flex flex-col justify-center items-center gap-10 w-full max-w-[90%];
+}
+
+.wrapper__content{
+    @apply relative z-10 flex flex-col justify-center items-center gap-10 w-full max-w-[90%];
+}
+
+.wrapper__icon{
+    @apply w-full block max-w-[140px];
+}
+
+.wrapper__icon img{
+    @apply w-full;
+}
+
+.wrapper__dsc{
+    @apply text-description text-white;
+}

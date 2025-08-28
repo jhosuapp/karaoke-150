@@ -1,6 +1,6 @@
-
+import { motion, MotionProps } from 'framer-motion';
 import styles from './button.module.css';
-import iconDefault from '../../../assets/icon-arrow.svg';
+import iconDefault from '../../../config/assets/icon-arrow.svg';
 import { ButtonHTMLAttributes } from 'react';
 
 type NativeProps = ButtonHTMLAttributes<HTMLButtonElement>;
@@ -15,14 +15,15 @@ type CustomProps = {
     isLoad?: boolean;
 }
 
-type Props = CustomProps & NativeProps;
+type Props = CustomProps & NativeProps & MotionProps;
 
 const Button = ({ text, style, isLight, className, icon, iconRight, isLoad, ...props }:Props) => {
     const isWhite = isLight;
 
     return (
-        <button 
+        <motion.button 
             className={ `${styles.button} ${styles[`button--${style}`]} ${isWhite ? styles['button--white'] : ''} ${isLoad && styles.button__load} ${className ?? ''}` }
+            whileTap={{ scale: 0.95 }}
             {...props}
         >
             <img 
@@ -31,7 +32,7 @@ const Button = ({ text, style, isLight, className, icon, iconRight, isLoad, ...p
                 alt="icono blotcraft"
             />
             <span>{ isLoad ? 'Cargando' : text }</span>
-        </button>
+        </motion.button>
     )
 }
 
