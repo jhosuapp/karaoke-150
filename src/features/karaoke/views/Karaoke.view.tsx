@@ -1,14 +1,18 @@
 import { AnimatePresence } from "framer-motion";
 import { Audio, Permissions, Play, Video } from "../components"
-import { karaokeController } from "../hooks/karaoke.controller";
+import { useAudioController, useKaraokeController } from "../hooks";
 
 const KaraokeView = () => {
+    // Audio hook
     const { 
         requestPermissionsMicrophone, 
         statusMic,
-        handlePlaying,
-        isPlaying
-    } = karaokeController();
+    } = useAudioController();
+    // General hook
+    const {
+        isPlaying,
+        handlePlaying
+    } = useKaraokeController();
 
     return (
         <section className="animate-fadeIn">

@@ -5,6 +5,7 @@ import { PermissionsKaraoke } from '../../interfaces';
 import styles from './permissions.module.css';
 import iconAudio from '../../../../assets/icon-audio.svg';
 import iconCamera from '../../../../assets/icon-camera.svg';
+import iconScreen from '../../../../assets/icon-screen.svg';
 import { PermissionsItem } from './PermissionsItem';
 
 type Props = {
@@ -25,12 +26,20 @@ const Permissions = ({ requestPermissionsMicrophone, statusMic }:Props) => {
             >
                 <h2>Dar permisos</h2>
                 <PermissionsItem 
+                    text='Permisos de audio'
                     icon={ iconAudio }
+                    status={ statusMic }
+                    requestPermissions={ requestPermissionsMicrophone }
+                    />
+                <PermissionsItem 
+                    text='Permisos de camara'
+                    icon={ iconCamera }
                     status={ statusMic }
                     requestPermissions={ requestPermissionsMicrophone }
                 />
                 <PermissionsItem 
-                    icon={ iconCamera }
+                    text='Permisos de compartir pantalla'
+                    icon={ iconScreen }
                     status={ statusMic }
                     requestPermissions={ requestPermissionsMicrophone }
                 />

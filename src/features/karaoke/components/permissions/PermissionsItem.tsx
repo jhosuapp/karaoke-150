@@ -9,9 +9,10 @@ type Props = {
     icon: string;
     requestPermissions: ()=> void;
     status: PermissionsKaraoke;
+    text: string;
 }
 
-const PermissionsItem = ({ icon, status, requestPermissions }:Props) => {
+const PermissionsItem = ({ icon, status, text, requestPermissions }:Props) => {
 
     const hasStatus = status.isError || status.hasPermissions;
     
@@ -22,7 +23,7 @@ const PermissionsItem = ({ icon, status, requestPermissions }:Props) => {
                 <picture>
                     <img src={ icon } alt="icon" />
                 </picture>
-                <p>Permisos de audio</p>
+                <p>{ text }</p>
             </div>
             {status.isLoad ? (
                 <Loader />

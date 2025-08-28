@@ -3,7 +3,7 @@
 }
 
 .permissions__content{
-    @apply w-full max-w-[400px] bg-white rounded-md px-5 py-8 flex flex-col justify-center items-center gap-4 shadow-white border border-primary;
+    @apply w-full max-w-[450px] bg-white rounded-md px-5 py-8 flex flex-col justify-center items-center gap-4 shadow-white border border-primary;
 }
 
 .permissions__content h2{
