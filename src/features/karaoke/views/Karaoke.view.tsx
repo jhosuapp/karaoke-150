@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { Audio, Permissions, Instructions, Countdown } from "../components"
-import { useAudioController, useKaraokeController } from "../hooks";
-import { Bg, Button } from "../../../shared/components";
+import { useAudioController, useCameraController, useKaraokeController } from "../hooks";
+import { Bg } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/ice-bg.jpg';
 
 const KaraokeView = () => {
@@ -11,7 +11,6 @@ const KaraokeView = () => {
         statusMic,
         startRecording, 
         stopRecording,
-        audioUrl,
     } = useAudioController();
 
     const {
@@ -21,7 +20,13 @@ const KaraokeView = () => {
         handlePlaying
     } = useKaraokeController();
 
-    const permissions = statusMic.hasPermissions;
+    const {
+        videoRef, 
+        statusCam, 
+        requestPermissionsCamera
+    } = useCameraController();
+
+    const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
     return (
         <section className="animate-fadeIn">
@@ -36,11 +41,13 @@ const KaraokeView = () => {
                         />
                     }
                 {/* Permissions camera, mic and screen */}
-                {!statusMic.hasPermissions &&
+                {!permissions &&
                     <Permissions 
-                        key={ `key${statusMic.hasPermissions}` }
+                        key={ `key${permissions}` }
                         requestPermissionsMicrophone={ requestPermissionsMicrophone } 
                         statusMic={ statusMic } 
+                        requestPermissionsCamera={ requestPermissionsCamera } 
+                        statusCam={ statusCam } 
                     />
                 }
                 {/* CountDown */}
@@ -60,20 +67,13 @@ const KaraokeView = () => {
                         stopRecording={ stopRecording }
                     />
                 )}
-                {audioUrl && (
-                    <div className="fixed z-[999999] top-0 w-full left-0 flex items-center justify-center p-5 bg-white">
-                        <Button
-                            onClick={ ()=> { 
-                                if (!audioUrl) return;
-                                const link = document.createElement("a");
-                                link.href = audioUrl;
-                                link.download = "grabacion.webm"; 
-                                link.click();
-                            }}
-                            text="Descargar audio"
-                            style='primary'
-                        />
-                    </div>
+                {videoRef && (
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        playsInline
+                        className="rounded-2xl shadow-lg w-4/5 max-w-lg bg-red-50 relative z-10"
+                    />
                 )}
             </AnimatePresence>
         </section>

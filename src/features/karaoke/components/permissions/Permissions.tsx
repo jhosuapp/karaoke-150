@@ -5,15 +5,17 @@ import { PermissionsKaraoke } from '../../interfaces';
 import styles from './permissions.module.css';
 import iconAudio from '../../../../config/assets/icon-audio.svg';
 import iconCamera from '../../../../config/assets/icon-camera.svg';
-import iconScreen from '../../../../config/assets/icon-screen.svg';
+// import iconScreen from '../../../../config/assets/icon-screen.svg';
 import { PermissionsItem } from './PermissionsItem';
 
 type Props = {
     requestPermissionsMicrophone: ()=> void;
     statusMic: PermissionsKaraoke;
+    requestPermissionsCamera: ()=> void;
+    statusCam: PermissionsKaraoke;
 }
 
-const Permissions = ({ requestPermissionsMicrophone, statusMic }:Props) => {
+const Permissions = ({ requestPermissionsMicrophone, statusMic, requestPermissionsCamera, statusCam }:Props) => {
     return (
         <motion.section 
             {...fadeInMotion(0, 0)}
@@ -33,15 +35,15 @@ const Permissions = ({ requestPermissionsMicrophone, statusMic }:Props) => {
                 <PermissionsItem 
                     text='Permisos de camara'
                     icon={ iconCamera }
-                    status={ statusMic }
-                    requestPermissions={ requestPermissionsMicrophone }
+                    status={ statusCam }
+                    requestPermissions={ requestPermissionsCamera }
                 />
-                <PermissionsItem 
+                {/* <PermissionsItem 
                     text='Permisos de compartir pantalla'
                     icon={ iconScreen }
                     status={ statusMic }
                     requestPermissions={ requestPermissionsMicrophone }
-                />
+                /> */}
             </motion.article>
         </motion.section>
     )

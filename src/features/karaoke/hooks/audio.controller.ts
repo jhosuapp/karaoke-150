@@ -5,7 +5,6 @@ const useAudioController = () => {
     const [stream, setStream] = useState<MediaStream | null>(null);
     const [statusMic, setStatusMic] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false });
     const [isRecording, setIsRecording] = useState(false);
-    const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
@@ -53,8 +52,6 @@ const useAudioController = () => {
     
         mediaRecorder.onstop = () => {
             const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
-            const url = URL.createObjectURL(blob);
-            setAudioUrl(url);
             setAudioBlob(blob);
             audioChunksRef.current = [];
         };
@@ -70,7 +67,6 @@ const useAudioController = () => {
         statusMic,
         startRecording,
         stopRecording,
-        audioUrl,
         audioBlob
     }
 }

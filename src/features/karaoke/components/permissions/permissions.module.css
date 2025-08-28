@@ -41,3 +41,7 @@
 .permissions__item p{
     @apply text-left leading-none;
 }
+
+.permissions__item button{
+    @apply flex gap-1 items-center leading-none;
+}

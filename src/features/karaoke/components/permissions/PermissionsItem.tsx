@@ -29,11 +29,12 @@ const PermissionsItem = ({ icon, status, text, requestPermissions }:Props) => {
                 <Loader />
             ) : (
                 <button 
-                    onClick={  ()=> { !hasStatus && requestPermissions() } }
+                    onClick={  ()=> { !status.hasPermissions && requestPermissions() } }
                 >
                     {!hasStatus && 'Aceptar'}
                     { status.hasPermissions && <img src={ iconSuccess } alt="icon success" /> }  
                     { status.isError && <img src={ iconError } alt="icon error" /> }  
+                    {status.isError && 'Reintentar'}
                 </button>
             )}
         </div>
