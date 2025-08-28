@@ -4,7 +4,7 @@ import { Button, Wrapper } from '../../../../shared/components';
 import icon from '../../../../config/assets/tmp/icon-micro.png';
 
 type Props = {
-    handlePlaying: (value: boolean, delay: number)=> void;
+    handlePlaying: (value: boolean, resetCounter: boolean)=> void;
     startRecording: ()=> void;
 }
 
@@ -17,7 +17,7 @@ const Instructions = ({ handlePlaying, startRecording }:Props) => {
         >
             <Button
                 {...fadeInMotion(1, 1)}
-                onClick={ ()=> { startRecording(), handlePlaying(true, 3000)} } 
+                onClick={ ()=> { startRecording(), handlePlaying(true, true)} } 
                 text='¿Estás listo? a jugar'
                 style="secondary"
             />

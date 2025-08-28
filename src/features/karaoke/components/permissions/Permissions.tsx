@@ -18,7 +18,6 @@ const Permissions = ({ requestPermissionsMicrophone, statusMic }:Props) => {
         <motion.section 
             {...fadeInMotion(0, 0)}
             className={ styles.permissions }
-            // key={ `key${statusMic.hasPermissions}` }
         >
             <motion.article 
                 {...fadeUpMotion(0.2, 0.2)}

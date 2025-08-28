@@ -6,12 +6,10 @@ const useKaraokeController = () => {
     const [count, setCount] = useState(0);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-    const handlePlaying = (value: boolean, delay: number)=>{
-        if(delay){
-            setCount(3);
-            setTimeout(()=>{
-                setIsPlaying(value);
-            },delay);
+    const handlePlaying = (value: boolean, resetCounter: boolean)=>{
+        if(resetCounter){
+            setCount(4);
+            setIsPlaying(value);
         }else{
             setIsPlaying(value);
         }
