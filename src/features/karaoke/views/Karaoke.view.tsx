@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
-import { Audio, Permissions, Instructions } from "../components"
-import { useAudioController } from "../hooks";
+import { Audio, Permissions, Instructions, Countdown } from "../components"
+import { useAudioController, useKaraokeController } from "../hooks";
 import { Bg, Button } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/ice-bg.jpg';
 
@@ -9,22 +9,27 @@ const KaraokeView = () => {
     const { 
         requestPermissionsMicrophone, 
         statusMic,
-        // startRecording, 
+        startRecording, 
         stopRecording,
         audioUrl,
+    } = useAudioController();
+
+    const {
+        controls, 
+        count,
         isPlaying,
         handlePlaying
-    } = useAudioController();
+    } = useKaraokeController();
 
     const permissions = statusMic.hasPermissions;
 
     return (
         <section className="animate-fadeIn">
             <Bg src={ bg } />
-            {/* Button play */}
+            {/* Instructions */}
             <AnimatePresence mode='wait'>
-                {!isPlaying && permissions && 
-                    <Instructions handlePlaying={ handlePlaying } />
+                {!isPlaying && permissions && count === 0 && 
+                    <Instructions handlePlaying={ handlePlaying } startRecording={ startRecording } />
                 }
             </AnimatePresence>
             {/* Permissions camera, mic and screen */}
@@ -36,12 +41,25 @@ const KaraokeView = () => {
                     />
                 }
             </AnimatePresence>
+            {/* CountDown */}
+            <AnimatePresence mode='wait'>
+                {count > 0 && (
+                    <Countdown 
+                        controls={ controls }
+                        count={ count }
+                    />
+                )}
+            </AnimatePresence>
             {/* Audio */}
-            <Audio
-                isPlaying={ isPlaying }
-                handlePlaying={ handlePlaying }
-                stopRecording={ stopRecording }
-            />
+            <AnimatePresence mode='wait'>
+                {count === 0 && (
+                    <Audio
+                        isPlaying={ isPlaying }
+                        handlePlaying={ handlePlaying }
+                        stopRecording={ stopRecording }
+                    />
+                )}
+            </AnimatePresence>
             {audioUrl && (
                 <div className="fixed z-[999999] top-0 w-full left-0 flex items-center justify-center p-5 bg-white">
                     <Button

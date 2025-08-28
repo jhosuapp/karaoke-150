@@ -7,7 +7,7 @@
 }
 
 .permissions__content h2{
-    @apply text-[25px] uppercase text-secondary font-bold;
+    @apply text-[25px] uppercase text-primary font-bold;
 }
 
 .permissions__content picture{

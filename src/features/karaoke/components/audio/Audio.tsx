@@ -7,7 +7,7 @@ import { lyrics } from "./lyrics";
 
 type Props = {
     isPlaying: boolean;
-    handlePlaying: (value: boolean) => void;
+    handlePlaying: (value: boolean, delay: number) => void;
     stopRecording: () => void;
 }
 
@@ -33,7 +33,7 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording }:Props) => {
             if(now > 15){
                 audio.pause();
                 stopRecording();
-                handlePlaying(false);
+                handlePlaying(false, 0);
                 audio.currentTime = 0;
                 return () => {
                     clearInterval(interval);
@@ -45,7 +45,7 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording }:Props) => {
         
         audio.onended = () => {
             clearInterval(interval);
-            handlePlaying(false);
+            handlePlaying(false, 0);
             setCurrentTime(0);
         };
 

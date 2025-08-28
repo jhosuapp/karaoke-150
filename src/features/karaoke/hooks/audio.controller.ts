@@ -4,17 +4,12 @@ import { PermissionsKaraoke } from "../interfaces";
 const useAudioController = () => {
     const [stream, setStream] = useState<MediaStream | null>(null);
     const [statusMic, setStatusMic] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false });
-    const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [isRecording, setIsRecording] = useState(false);
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
     
-
-    const handlePlaying = (value: boolean)=>{
-        setIsPlaying(value);
-    }
 
     const requestPermissionsMicrophone = async () => {
         setStatusMic((prev) => ({ ...prev, isLoad: true }));
@@ -75,8 +70,6 @@ const useAudioController = () => {
         statusMic,
         startRecording,
         stopRecording,
-        handlePlaying,
-        isPlaying,
         audioUrl,
         audioBlob
     }
