@@ -13,3 +13,27 @@
 .permissions__content picture{
     @apply w-full max-w-[100px] my-3;
 }
+
+.permissions__description{
+    @apply text-description;
+}
+
+.permissions__item{
+    @apply flex w-full justify-between items-center;
+}
+
+.permissions__item button{
+    @apply border-none bg-transparent text-primary font-bold uppercase flex;
+}
+
+.permissions__item button img{
+    @apply w-6 block;
+}
+
+.permissions__item div{
+    @apply flex items-center gap-1;
+}
+
+.permissions__item picture{
+    @apply w-5;
+}

@@ -9,7 +9,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#00beff',
+                primary: '#002D6E',
                 secondary: '#001643',
                 tertiary: '#000000',
                 neutral: {
@@ -30,6 +30,7 @@ export default {
             fontSize: {
                 title: '40px',
                 button: '16px',
+                description: '16px',
                 buttonMobile: '14px',
 
             },

@@ -1,33 +1,54 @@
 import { useState } from "react";
+import { PermissionsKaraoke } from "../interfaces";
 
 const karaokeController = () => {
-    const [hasPermission, setHasPermission] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isLoad, setIsLoad] = useState(false);
+    const [stream, setStream] = useState<MediaStream | null>(null);
+    const [statusMic, setStatusMic] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false });
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
     const handlePlaying = (value: boolean)=>{
         setIsPlaying(value);
     }
 
-    const requestPermissions = async () => {
-        setIsLoad(true);
+    const requestPermissionsMicrophone = async () => {
+        setStatusMic((prev) => ({ ...prev, isLoad: true }));
+        
         try {
-            await navigator.mediaDevices.getUserMedia({ audio: true });
-            setHasPermission(true);
+            const newStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new MediaRecorder(newStream);
+            // Recorder
+            recorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    console.log("Chunk de audio", event.data);
+                }
+            };
+            recorder.start();
+            // Set states
+            setStream(newStream);
+            
+            setStatusMic((prev) => ({ ...prev, hasPermissions: true }));
         } catch (err) {
             console.error("Error al obtener permisos:", err);
-            alert("No se pudieron obtener los permisos necesarios");
+            setStatusMic((prev) => ({ ...prev, isError: true, isLoad: false }));
         } finally {
-            setIsLoad(false);
+            setStatusMic((prev) => ({ ...prev, isLoad: false }));
+        }
+    };
+
+    const stopMic = () => {
+        if (stream) {
+            stream.getTracks().forEach((track) => track.stop());
+            setStream(null);
+            setStatusMic({ ...statusMic, hasPermissions: false });
         }
     };
 
     return {
-        hasPermission,
-        requestPermissions,
-        isLoad,
+        requestPermissionsMicrophone,
+        statusMic,
         handlePlaying,
-        isPlaying
+        isPlaying,
+        stopMic
     }
 }
 

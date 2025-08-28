@@ -4,9 +4,8 @@ import { karaokeController } from "../hooks/karaoke.controller";
 
 const KaraokeView = () => {
     const { 
-        requestPermissions, 
-        isLoad, 
-        hasPermission,
+        requestPermissionsMicrophone, 
+        statusMic,
         handlePlaying,
         isPlaying
     } = karaokeController();
@@ -18,11 +17,14 @@ const KaraokeView = () => {
                     <Play handlePlaying={ handlePlaying } isPlaying={ isPlaying } />
                 }
             </AnimatePresence>
-            {/* <AnimatePresence mode='wait'>
-                {!hasPermission &&
-                <Permissions requestPermissions={ requestPermissions } isLoad={ isLoad } hasPermission={ hasPermission } />
+            <AnimatePresence mode='wait'>
+                {!statusMic.hasPermissions &&
+                    <Permissions 
+                        requestPermissionsMicrophone={ requestPermissionsMicrophone } 
+                        statusMic={ statusMic } 
+                    />
                 }
-            </AnimatePresence> */}
+            </AnimatePresence>
             <Video />
             <Audio
                 isPlaying={ isPlaying }

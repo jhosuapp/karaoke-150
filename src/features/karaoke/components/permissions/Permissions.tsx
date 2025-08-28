@@ -1,38 +1,38 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { fadeInMotion, fadeUpMotion } from '../../../../shared/motion/motion';
-import { Button } from '../../../../shared/components';
+import { PermissionsKaraoke } from '../../interfaces';
 
 import styles from './permissions.module.css';
 import iconAudio from '../../../../assets/icon-audio.svg';
+import iconCamera from '../../../../assets/icon-camera.svg';
+import { PermissionsItem } from './PermissionsItem';
 
 type Props = {
-    requestPermissions: ()=> any;
-    isLoad: boolean;
-    hasPermission: boolean;
+    requestPermissionsMicrophone: ()=> void;
+    statusMic: PermissionsKaraoke;
 }
 
-const Permissions = ({ requestPermissions, isLoad, hasPermission }:Props) => {
+const Permissions = ({ requestPermissionsMicrophone, statusMic }:Props) => {
     return (
         <motion.section 
             {...fadeInMotion(0.5)}
             className={ styles.permissions }
-            key={ `key${hasPermission}` }
+            // key={ `key${statusMic.hasPermissions}` }
         >
             <motion.article 
                 {...fadeUpMotion(0.6, 0.5)}
                 className={ styles.permissions__content }
             >
                 <h2>Dar permisos</h2>
-                <p>Da click en <b>aceptar</b> y luego en <b>permitir</b> para poder participar en el karaoke</p>
-                <picture>
-                    <img src={ iconAudio } alt="icon audio" />
-                </picture>
-                <Button 
-                    onClick={ requestPermissions }
-                    className={ styles.header__ctaMobile }
-                    text={ 'Aceptar' }
-                    style='primary'
-                    isLoad={ isLoad }
+                <PermissionsItem 
+                    icon={ iconAudio }
+                    status={ statusMic }
+                    requestPermissions={ requestPermissionsMicrophone }
+                />
+                <PermissionsItem 
+                    icon={ iconCamera }
+                    status={ statusMic }
+                    requestPermissions={ requestPermissionsMicrophone }
                 />
             </motion.article>
         </motion.section>
