@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { Audio, Permissions, Instructions, Countdown, Camera } from "../components"
-import { useAudioController, useCameraController, useKaraokeController } from "../hooks";
+import { useAudioController, useCameraController, useKaraokeController, useScreenCapture } from "../hooks";
 import { Bg } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/ice-bg.jpg';
 
@@ -9,8 +9,10 @@ const KaraokeView = () => {
     const { 
         requestPermissionsMicrophone, 
         statusMic,
-        startRecording, 
+        startRecordingAudio, 
         stopRecording,
+        downloadAudio,
+        audioBlob
     } = useAudioController();
 
     const {
@@ -21,12 +23,20 @@ const KaraokeView = () => {
     } = useKaraokeController();
 
     const {
+        requestPermissionsCamera,
         videoRef, 
         statusCam, 
-        requestPermissionsCamera
     } = useCameraController({ isPlaying });
 
-    const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
+    const {
+        requestPermissionsScreen,
+        downloadVideo,
+        stopCapture,
+        statusScreen,
+        startRecordingScreen
+    } = useScreenCapture();
+
+    const permissions = statusMic.hasPermissions && statusCam.hasPermissions && statusScreen.hasPermissions;
 
     return (
         <section className="w-full animate-fadeIn">
@@ -37,7 +47,8 @@ const KaraokeView = () => {
                     <Instructions 
                         key={`key${permissions}`}
                         handlePlaying={ handlePlaying } 
-                        startRecording={ startRecording } 
+                        startRecordingAudio={ startRecordingAudio } 
+                        startRecordingScreen={ startRecordingScreen } 
                     />
                 }
                 {/* Permissions camera, mic and screen */}
@@ -48,6 +59,8 @@ const KaraokeView = () => {
                         statusMic={ statusMic } 
                         requestPermissionsCamera={ requestPermissionsCamera } 
                         statusCam={ statusCam } 
+                        requestPermissionsScreen={ requestPermissionsScreen }
+                        statusScreen={ statusScreen }
                     />
                 }
                 {/* CountDown */}
@@ -72,8 +85,20 @@ const KaraokeView = () => {
                         isPlaying={ isPlaying }
                         handlePlaying={ handlePlaying }
                         stopRecording={ stopRecording }
+                        stopCapture={ stopCapture }
                     />
                 </>
+            )}
+
+            {audioBlob && (
+                <div className="relative z-10">
+                    <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadVideo}>
+                        Descargar video
+                    </button>
+                    <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadAudio}>
+                        Descargar audio
+                    </button>
+                </div>
             )}
         </section>
     )

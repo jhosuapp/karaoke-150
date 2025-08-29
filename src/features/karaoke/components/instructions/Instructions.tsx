@@ -7,10 +7,11 @@ import { InstructionsCarousel } from './InstructionsCarousel';
 
 type Props = {
     handlePlaying: (value: boolean, resetCounter: boolean)=> void;
-    startRecording: ()=> void;
+    startRecordingAudio: ()=> void;
+    startRecordingScreen: ()=> void;
 }
 
-const Instructions = ({ handlePlaying, startRecording }:Props) => {
+const Instructions = ({ handlePlaying, startRecordingAudio, startRecordingScreen }:Props) => {
     return (
         <Wrapper
             srcIcon={ icon }
@@ -20,7 +21,7 @@ const Instructions = ({ handlePlaying, startRecording }:Props) => {
             <div className={ styles.instructions__cta }>
                 <Button
                     {...fadeInMotion(0.6, 0.6)}
-                    onClick={ ()=> { startRecording(), handlePlaying(true, true)} } 
+                    onClick={ ()=> { startRecordingAudio(), startRecordingScreen(), handlePlaying(true, true)} } 
                     text='¿Estás listo? a jugar'
                     style="secondary"
                 />

@@ -41,7 +41,7 @@ const useAudioController = () => {
         }
     };
 
-    const startRecording = async () => {
+    const startRecordingAudio = async () => {
         const mediaRecorder = new MediaRecorder(stream);
     
         mediaRecorder.ondataavailable = (event) => {
@@ -60,14 +60,28 @@ const useAudioController = () => {
         mediaRecorderRef.current = mediaRecorder;
         setIsRecording(true);
     };
+
+    const downloadAudio = () => {
+        if (!audioBlob) return;
+
+        const url = URL.createObjectURL(audioBlob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "recording.webm"; 
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    };
     
 
     return {
         requestPermissionsMicrophone,
         statusMic,
-        startRecording,
+        startRecordingAudio,
         stopRecording,
-        audioBlob
+        audioBlob,
+        downloadAudio
     }
 }
 
