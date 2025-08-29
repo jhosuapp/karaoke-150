@@ -1,5 +1,5 @@
 .audio {
-    @apply flex justify-center items-end py-8 px-[30px] bg-black w-full;
+    @apply flex justify-center items-end py-6 px-[30px] bg-black w-full;
 }
 
 .lyricsScrollContainer {

@@ -32,21 +32,21 @@
     @apply w-[5px] h-[5px] rounded-full bg-white;
 }
 
-.button:hover span{
+/* .button:hover span{
     @apply  left-[20px];
-}
+} */
 
 .button:hover b{
     @apply  scale-0;
 }
 
-button:hover .button__iconSecondary{
+/* button:hover .button__iconSecondary{
     @apply right-[-15px];
 }
 
 .button:hover .button__icon{
     @apply absolute left-[15px];
-}
+} */
 
 @media(max-width: 768px){
     .button span{

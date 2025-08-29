@@ -7,25 +7,13 @@
 }
 
 .wrapper__content{
-    @apply relative z-10 mt-14;
-}
-
-.wrapper__content{
-    @apply relative z-10 flex flex-col justify-center items-center gap-10 w-full max-w-[90%];
-}
-
-.wrapper__content{
-    @apply relative z-10 flex flex-col justify-center items-center gap-10 w-full max-w-[90%];
-}
-
-.wrapper__icon{
-    @apply w-full block max-w-[140px];
-}
-
-.wrapper__icon img{
-    @apply w-full;
+    @apply relative z-10 flex flex-col justify-center items-center gap-10 w-[90%] max-w-limit mt-14;
 }
 
 .wrapper__dsc{
     @apply text-description text-white;
+}
+
+.wrapper__children{
+    @apply w-full mt-10;
 }

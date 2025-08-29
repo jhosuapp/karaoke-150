@@ -12,6 +12,7 @@ export default {
                 primary: '#002D6E',
                 secondary: '#FFEB00',
                 tertiary: '#028EC8',
+                cuartary: '#001E5A',
                 neutral: {
                 black: '#202020',
                 white: '#FAFAFA',
@@ -28,9 +29,10 @@ export default {
                 },
             },
             fontSize: {
-                title: '30px',
+                title: '32px',
+                titleb: '38px',
                 button: '20px',
-                description: '20px',
+                description: '22px',
                 buttonMobile: '18px',
 
             },
@@ -60,6 +62,9 @@ export default {
             width: {
                 limit: '1500px',
             },
+            maxWidth: {
+                limit: '576px'
+            }
         },
     },
     safelist: [

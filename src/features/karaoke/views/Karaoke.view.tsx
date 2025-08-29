@@ -65,7 +65,7 @@ const KaraokeView = () => {
                     videoRef={ videoRef } 
                 />
             )}
-            {count === 0 && (
+            {isPlaying && count === 0 && (
                 <>
                     <Audio
                         key={`audio`}

@@ -1,7 +1,9 @@
 import { fadeInMotion } from '../../../../shared/motion';
 import { Button, Wrapper } from '../../../../shared/components';
 
-import icon from '../../../../config/assets/tmp/icon-micro.png';
+import icon from '../../../../config/assets/tmp/micro.png';
+import styles from './instructions.module.css';
+import { InstructionsCarousel } from './InstructionsCarousel';
 
 type Props = {
     handlePlaying: (value: boolean, resetCounter: boolean)=> void;
@@ -15,12 +17,15 @@ const Instructions = ({ handlePlaying, startRecording }:Props) => {
             title='username. ha llegado el monento de ser una estrella'
             description1='Antes de comenzar, asegúrate de dar los permisos necesarios. Así podrás vivir la experiencia completa y mostrar tu mejor actuación.'
         >
-            <Button
-                {...fadeInMotion(1, 1)}
-                onClick={ ()=> { startRecording(), handlePlaying(true, true)} } 
-                text='¿Estás listo? a jugar'
-                style="secondary"
-            />
+            <div className={ styles.instructions__cta }>
+                <Button
+                    {...fadeInMotion(0.6, 0.6)}
+                    onClick={ ()=> { startRecording(), handlePlaying(true, true)} } 
+                    text='¿Estás listo? a jugar'
+                    style="secondary"
+                />
+            </div>
+            <InstructionsCarousel />
         </Wrapper>
     )
 }

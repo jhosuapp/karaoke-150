@@ -1,0 +1,39 @@
+.InstructionsCarousel{
+    @apply relative w-full flex flex-col items-center justify-center min-h-[500px];
+}
+
+.instructions__cta{
+    @apply max-w-limit w-[90%] mx-auto relative z-10;
+}
+
+.InstructionsCarousel__content{
+    @apply max-w-limit w-full mx-auto my-10 pt-10 flex flex-col justify-center items-center;
+}
+
+.InstructionsCarousel__bg{
+    @apply w-full absolute block sm:max-w-limit;
+}
+
+.InstructionsCarousel__bg img{
+    @apply w-full object-cover min-h-[600px] sm:object-top sm:max-h-[700px];
+}
+
+.InstructionsCarousel__swiper{
+    @apply w-[90%] max-w-limit my-10;
+}
+
+.InstructionsCarousel__swiper__item{
+    @apply !flex items-center flex-col justify-center gap-4;
+}
+
+.InstructionsCarousel__controls{
+    @apply relative z-10 flex gap-5;
+}
+
+.InstructionsCarousel__divider{
+    @apply w-full flex py-10 relative z-10;
+}
+
+.InstructionsCarousel__divider img{
+    @apply relative left-[-20px] w-[80px] rotate-12;
+}

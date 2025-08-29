@@ -7,7 +7,11 @@ body {
 }
 
 .global-dsc{
-    @apply text-white text-description font-futura;
+    @apply text-white text-description font-futura font-bold leading-7;
+}
+
+.global-dsc--secondary{
+    @apply text-cuartary;
 }
 
 .global-title{
@@ -20,6 +24,13 @@ body {
       0 0 15px #00c3ff;
 }
 
+.global-title--secondary{
+    -webkit-text-stroke-color: #377CA3 !important;
+    mix-blend-mode: darken;
+    text-shadow: 0 0 5px #00c3ff, 0 0 0px #00c3ff, 0 0 3px #00c3ff, 0 0 0px #00c3ff;
+    @apply text-titleb text-white;
+}
+
 @font-face {
     font-family: "FuturaStd";
     src: url("./config/typography/FuturaStdBook.otf") format("truetype");
@@ -30,6 +41,12 @@ body {
     font-family: "FuturaStd";
     src: url("./config/typography/FuturaStdMedium.otf") format("truetype");
     font-weight: 500;
+}
+
+@font-face {
+    font-family: "FuturaStd";
+    src: url("./config/typography/FuturaStdCondensedBold.otf") format("truetype");
+    font-weight: 700;
 }
 
 @font-face {

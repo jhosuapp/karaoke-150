@@ -1,6 +1,5 @@
 import { motion, MotionProps } from 'framer-motion';
 import styles from './button.module.css';
-import iconDefault from '../../../config/assets/icon-arrow.svg';
 import { ButtonHTMLAttributes } from 'react';
 
 type NativeProps = ButtonHTMLAttributes<HTMLButtonElement>;
@@ -26,11 +25,11 @@ const Button = ({ text, style, isLight, className, icon, iconRight, isLoad, ...p
             whileTap={{ scale: 0.95 }}
             {...props}
         >
-            <img 
+            {/* <img 
                 className={ styles.button__icon }
                 src={ icon ? icon : iconDefault } 
                 alt="icono blotcraft"
-            />
+            /> */}
             <span>{ isLoad ? 'Cargando' : text }</span>
         </motion.button>
     )
