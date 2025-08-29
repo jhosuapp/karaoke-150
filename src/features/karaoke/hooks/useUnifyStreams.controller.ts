@@ -1,41 +1,61 @@
 import { useRef, useState } from "react";
 
 type Props = {
-    audioStream: MediaStream;
-    mediaStream: MediaStream;
-}
+    audioStream: MediaStream; // micrófono
+    mediaStream: MediaStream; // cámara o pantalla
+    customAudioUrl?: string;  // música o audio custom (mp3, wav, etc.)
+};
 
-const useUnifyStreamsController = ( { audioStream, mediaStream }:Props ) => {
+const useUnifyStreamsController = ({ audioStream, mediaStream, customAudioUrl }: Props) => {
     const [videoUrl, setVideoUrl] = useState<string>("");
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
 
-    const startRecording = () => {
+    const startRecording = async () => {
         if (!mediaStream || !audioStream) {
-            alert("Debes permitir camára y micrófono antes de grabar");
+            alert("Debes permitir pantalla y micrófono antes de grabar");
             return;
         }
-    
-        // 🔥 combinamos aquí
+
+        // 🎵 Creamos un contexto de audio
+        const audioCtx = new AudioContext();
+        const destination = audioCtx.createMediaStreamDestination();
+
+        // 📌 1. Conectamos el micrófono
+        const micSource = audioCtx.createMediaStreamSource(audioStream);
+        micSource.connect(destination);
+
+        // 📌 2. Si hay audio custom, lo cargamos
+        if (customAudioUrl) {
+            const audioElement = new Audio(customAudioUrl);
+            audioElement.loop = true; // opcional
+            await audioElement.play();
+
+            const musicSource = audioCtx.createMediaElementSource(audioElement);
+            musicSource.connect(destination);
+        }
+
+        // 🔥 combinamos video + audios
         const combinedStream = new MediaStream([
             ...mediaStream.getVideoTracks(),
-            ...audioStream.getAudioTracks(),
+            ...destination.stream.getAudioTracks(),
         ]);
-    
+
+        // 🎥 grabamos
         const recorder = new MediaRecorder(combinedStream);
         recorderRef.current = recorder;
         chunksRef.current = [];
-    
+
         recorder.ondataavailable = (e) => {
-          if (e.data.size > 0) chunksRef.current.push(e.data);
+            if (e.data.size > 0) chunksRef.current.push(e.data);
         };
-    
+
         recorder.onstop = () => {
             const blob = new Blob(chunksRef.current, { type: "video/webm" });
             setVideoUrl(URL.createObjectURL(blob));
             chunksRef.current = [];
         };
-    
+
         recorder.start();
     };
 
@@ -46,8 +66,8 @@ const useUnifyStreamsController = ( { audioStream, mediaStream }:Props ) => {
     return {
         startRecording,
         videoUrl,
-        stopRecording
-    }
-}
+        stopRecording,
+    };
+};
 
-export { useUnifyStreamsController }
+export { useUnifyStreamsController };

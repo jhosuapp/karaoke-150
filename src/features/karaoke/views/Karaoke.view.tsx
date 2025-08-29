@@ -3,6 +3,7 @@ import { Audio, Permissions, Instructions, Countdown, Camera } from "../componen
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/ice-bg.jpg';
+// import audioMp3 from '../../../config/assets/audio-2.mp3';
 
 const KaraokeView = () => {
     // Principal controller
@@ -107,7 +108,9 @@ const KaraokeView = () => {
             )}
             {videoCameraUrl && (
                 <div className="relative z-10 bg-red-50">
-                    <p className="global-description">video usuario unificado con audio</p>
+                    <a download href={videoUrl} className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center">
+                        Descargar video unificado con audio
+                    </a>
                     <video className="w-full h-[500px] flex" src={videoUrl} controls />
                 </div>
             )}
