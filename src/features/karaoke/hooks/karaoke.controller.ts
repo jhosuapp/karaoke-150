@@ -1,10 +1,51 @@
 import { useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const useKaraokeController = () => {
+type Props = {
+    audioStream: MediaStream;
+    screenStream: MediaStream;
+}
+
+const useKaraokeController = ( { audioStream, screenStream }:Props ) => {
     const controls = useAnimation();
     const [count, setCount] = useState(0);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [videoUrl, setVideoUrl] = useState<string>("");
+    const recorderRef = useRef<MediaRecorder | null>(null);
+    const chunksRef = useRef<Blob[]>([]);
+
+    const startRecording = () => {
+        if (!screenStream || !audioStream) {
+          alert("Debes permitir pantalla y micrófono antes de grabar");
+          return;
+        }
+    
+        // 🔥 combinamos aquí
+        const combinedStream = new MediaStream([
+          ...screenStream.getVideoTracks(),
+          ...audioStream.getAudioTracks(),
+        ]);
+    
+        const recorder = new MediaRecorder(combinedStream);
+        recorderRef.current = recorder;
+        chunksRef.current = [];
+    
+        recorder.ondataavailable = (e) => {
+          if (e.data.size > 0) chunksRef.current.push(e.data);
+        };
+    
+        recorder.onstop = () => {
+          const blob = new Blob(chunksRef.current, { type: "video/webm" });
+          setVideoUrl(URL.createObjectURL(blob));
+          chunksRef.current = [];
+        };
+    
+        recorder.start();
+    };
+
+    const stopRecording = () => {
+        if (recorderRef.current) recorderRef.current.stop();
+    };
 
     const handlePlaying = (value: boolean, resetCounter: boolean)=>{
         if(resetCounter){
@@ -37,7 +78,10 @@ const useKaraokeController = () => {
         count,
         controls,
         isPlaying,
-        handlePlaying
+        handlePlaying,
+        startRecording,
+        videoUrl,
+        stopRecording
     }
 }
 

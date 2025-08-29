@@ -7,7 +7,6 @@ const useScreenCapture = () => {
     const [videoUrl, setVideoUrl] = useState<string>("");
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
-    const [isRecording, setIsRecording] = useState(false);
 
     const requestPermissionsScreen = async () => {
         setStatusScreen((prev) => ({ ...prev, isLoad: true }));
@@ -27,7 +26,6 @@ const useScreenCapture = () => {
         }
     };
 
-    // Paso 2: arrancar grabación cuando tu booleano lo diga
     const startRecordingScreen = () => {
             if (!screenStream) return;
     
@@ -48,22 +46,16 @@ const useScreenCapture = () => {
             };
     
             recorder.start();
-            setIsRecording(true);
     };
 
-    const stopRecording = () => {
-        if (recorderRef.current && isRecording) {
-            recorderRef.current.stop();
-            setIsRecording(false);
-        }
-    };
-
-    const stopCapture = () => {
-        stopRecording();
-        if (screenStream) {
-            screenStream.getTracks().forEach(track => track.stop());
-        }
-        setScreenStream(null);
+    const stopRecordingScreen = () => { 
+        if (recorderRef.current) { 
+            recorderRef.current.stop(); 
+        } 
+        if (screenStream) { 
+            screenStream.getTracks().forEach((track) => track.stop()); 
+        } 
+        setScreenStream(null); 
     };
 
     const downloadVideo = () => {
@@ -83,7 +75,7 @@ const useScreenCapture = () => {
         screenStream,
         requestPermissionsScreen,
         downloadVideo,
-        stopCapture,
+        stopRecordingScreen,
         startRecordingScreen,
     };
 }

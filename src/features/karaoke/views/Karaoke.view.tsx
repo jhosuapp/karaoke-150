@@ -10,31 +10,36 @@ const KaraokeView = () => {
         requestPermissionsMicrophone, 
         statusMic,
         startRecordingAudio, 
-        stopRecording,
+        stopRecordingAudio,
         downloadAudio,
-        audioBlob
+        audioBlob,
+        audioStream
     } = useAudioController();
+
+    const {
+        requestPermissionsScreen,
+        downloadVideo,
+        stopRecordingScreen,
+        statusScreen,
+        startRecordingScreen,
+        screenStream
+    } = useScreenCapture();
 
     const {
         controls, 
         count,
         isPlaying,
-        handlePlaying
-    } = useKaraokeController();
+        handlePlaying,
+        startRecording,
+        videoUrl,
+        stopRecording
+    } = useKaraokeController({ audioStream, screenStream });
 
     const {
         requestPermissionsCamera,
         videoRef, 
         statusCam, 
     } = useCameraController({ isPlaying });
-
-    const {
-        requestPermissionsScreen,
-        downloadVideo,
-        stopCapture,
-        statusScreen,
-        startRecordingScreen
-    } = useScreenCapture();
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions && statusScreen.hasPermissions;
 
@@ -49,6 +54,7 @@ const KaraokeView = () => {
                         handlePlaying={ handlePlaying } 
                         startRecordingAudio={ startRecordingAudio } 
                         startRecordingScreen={ startRecordingScreen } 
+                        startRecording={ startRecording }
                     />
                 }
                 {/* Permissions camera, mic and screen */}
@@ -85,7 +91,8 @@ const KaraokeView = () => {
                         isPlaying={ isPlaying }
                         handlePlaying={ handlePlaying }
                         stopRecording={ stopRecording }
-                        stopCapture={ stopCapture }
+                        stopRecordingScreen={ stopRecordingScreen }
+                        stopRecordingAudio={ stopRecordingAudio }
                     />
                 </>
             )}
@@ -98,6 +105,12 @@ const KaraokeView = () => {
                     <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadAudio}>
                         Descargar audio
                     </button>
+                </div>
+            )}
+            {videoUrl && (
+                <div className="relative z-10 bg-red-50">
+                    <p className="global-description">video unificado</p>
+                    <video className="w-full h-[500px] flex" src={videoUrl} controls />
                 </div>
             )}
         </section>

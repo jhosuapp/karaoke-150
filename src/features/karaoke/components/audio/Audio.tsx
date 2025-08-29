@@ -9,11 +9,12 @@ type Props = {
     isPlaying: boolean;
     handlePlaying: (value: boolean, resetCounter: boolean) => void;
     stopRecording: () => void;
-    stopCapture: () => void;
+    stopRecordingAudio: () => void;
+    stopRecordingScreen: () => void;
 }
 
 
-const Audio = ({ isPlaying, handlePlaying, stopRecording, stopCapture }:Props) => {
+const Audio = ({ isPlaying, handlePlaying, stopRecording, stopRecordingAudio, stopRecordingScreen }:Props) => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [currentTime, setCurrentTime] = useState(0);
 
@@ -34,7 +35,8 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording, stopCapture }:Props) =
             if(now > 15){
                 audio.pause();
                 stopRecording();
-                stopCapture();
+                stopRecordingAudio();
+                stopRecordingScreen();
                 handlePlaying(false, false);
                 audio.currentTime = 0;
                 return () => {

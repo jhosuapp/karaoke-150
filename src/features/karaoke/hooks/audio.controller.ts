@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { PermissionsKaraoke } from "../interfaces";
 
 const useAudioController = () => {
-    const [stream, setStream] = useState<MediaStream | null>(null);
+    const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
     const [statusMic, setStatusMic] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false });
     const [isRecording, setIsRecording] = useState(false);
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
@@ -24,7 +24,7 @@ const useAudioController = () => {
                 } 
             });
             
-            setStream(newStream);
+            setAudioStream(newStream);
             setStatusMic(prev => ({ ...prev, hasPermissions: true, isError: false }));
         } catch (err) {
             console.error("Error al obtener permisos:", err);
@@ -34,7 +34,7 @@ const useAudioController = () => {
         }
     };
 
-    const stopRecording = () => {
+    const stopRecordingAudio = () => {
         if (mediaRecorderRef.current && isRecording) {
             mediaRecorderRef.current.stop();
             setIsRecording(false);
@@ -42,7 +42,7 @@ const useAudioController = () => {
     };
 
     const startRecordingAudio = async () => {
-        const mediaRecorder = new MediaRecorder(stream);
+        const mediaRecorder = new MediaRecorder(audioStream);
     
         mediaRecorder.ondataavailable = (event) => {
             if (event.data.size > 0) {
@@ -79,9 +79,10 @@ const useAudioController = () => {
         requestPermissionsMicrophone,
         statusMic,
         startRecordingAudio,
-        stopRecording,
+        stopRecordingAudio,
         audioBlob,
-        downloadAudio
+        downloadAudio,
+        audioStream
     }
 }
 
