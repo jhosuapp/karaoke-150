@@ -1,9 +1,9 @@
 .audio {
-    @apply fixed w-full h-svh top-0 left-0 z-40 flex pointer-events-none justify-center items-end py-10 px-[5%];
+    @apply flex justify-center items-end py-8 px-[30px] bg-black w-full;
 }
 
 .lyricsScrollContainer {
-    @apply w-full whitespace-nowrap mt-10 relative flex flex-wrap justify-center gap-x-2;
+    @apply w-full whitespace-nowrap relative flex flex-wrap justify-center gap-x-2;
 }
 
 .lyricsScrollContainer::-webkit-scrollbar {
@@ -18,5 +18,5 @@
 }
 
 .lyricWordActive{
-    @apply text-red-400;
+    @apply !text-[#00E3FF];
 }

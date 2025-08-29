@@ -62,7 +62,7 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording }:Props) => {
                 controls={false}
             />
             {/* Contenedor de letras con scroll horizontal */}
-            {!isPlaying && (
+            {isPlaying && (
                 <div className={styles.lyricsScrollContainer}>
                     {lyrics.map((word, index) => {
                         const isActive = currentTime >= word.time && 
