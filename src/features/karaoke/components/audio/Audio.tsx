@@ -59,6 +59,8 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording }:Props) => {
             <audio
                 ref={audioRef}
                 src={audioMp3}
+                playsInline
+                preload="auto"
                 controls={false}
             />
             {/* Contenedor de letras con scroll horizontal */}
