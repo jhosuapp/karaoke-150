@@ -16,8 +16,8 @@ const useCameraController = ( { isPlaying }:Props ) => {
         try {
             const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { 
                 width: {ideal: window.innerWidth - 60}, 
-                height: {ideal: window.innerHeight - 150},
-                facingMode: "environment"
+                height: {ideal: window.innerHeight},
+                facingMode: "user"
             }});
 
             setMediaStream(mediaStream);
