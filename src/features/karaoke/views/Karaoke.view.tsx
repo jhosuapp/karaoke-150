@@ -1,10 +1,17 @@
 import { AnimatePresence } from "framer-motion";
 import { Audio, Permissions, Instructions, Countdown, Camera } from "../components"
-import { useAudioController, useCameraController, useKaraokeController, useScreenCapture } from "../hooks";
+import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/ice-bg.jpg';
 
 const KaraokeView = () => {
+    // Principal controller
+    const { 
+        count,
+        controls,
+        isPlaying,
+        handlePlaying,
+     } = useKaraokeController();
     // Audio hook
     const { 
         requestPermissionsMicrophone, 
@@ -13,35 +20,28 @@ const KaraokeView = () => {
         stopRecordingAudio,
         downloadAudio,
         audioBlob,
-        audioStream
+        audioStream,
     } = useAudioController();
-
-    const {
-        requestPermissionsScreen,
-        downloadVideo,
-        stopRecordingScreen,
-        statusScreen,
-        startRecordingScreen,
-        screenStream
-    } = useScreenCapture();
-
-    const {
-        controls, 
-        count,
-        isPlaying,
-        handlePlaying,
-        startRecording,
-        videoUrl,
-        stopRecording
-    } = useKaraokeController({ audioStream, screenStream });
-
+    // Camera hook
     const {
         requestPermissionsCamera,
-        videoRef, 
         statusCam, 
+        startRecordingCamera,
+        stopRecordingCamera,
+        downloadRecordingCamera,
+        videoRef, 
+        videoCameraUrl,
+        mediaStream
     } = useCameraController({ isPlaying });
+    // Unify streams hook
+    const {
+        startRecording,
+        stopRecording,
+        videoUrl
+    } = useUnifyStreamsController({ audioStream, mediaStream });
 
-    const permissions = statusMic.hasPermissions && statusCam.hasPermissions && statusScreen.hasPermissions;
+
+    const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
     return (
         <section className="w-full animate-fadeIn">
@@ -53,7 +53,7 @@ const KaraokeView = () => {
                         key={`key${permissions}`}
                         handlePlaying={ handlePlaying } 
                         startRecordingAudio={ startRecordingAudio } 
-                        startRecordingScreen={ startRecordingScreen } 
+                        startRecordingCamera={ startRecordingCamera }
                         startRecording={ startRecording }
                     />
                 }
@@ -65,8 +65,6 @@ const KaraokeView = () => {
                         statusMic={ statusMic } 
                         requestPermissionsCamera={ requestPermissionsCamera } 
                         statusCam={ statusCam } 
-                        requestPermissionsScreen={ requestPermissionsScreen }
-                        statusScreen={ statusScreen }
                     />
                 }
                 {/* CountDown */}
@@ -91,25 +89,25 @@ const KaraokeView = () => {
                         isPlaying={ isPlaying }
                         handlePlaying={ handlePlaying }
                         stopRecording={ stopRecording }
-                        stopRecordingScreen={ stopRecordingScreen }
                         stopRecordingAudio={ stopRecordingAudio }
+                        stopRecordingCamera={ stopRecordingCamera }
                     />
                 </>
             )}
 
             {audioBlob && (
                 <div className="relative z-10">
-                    <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadVideo}>
-                        Descargar video
+                    <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadRecordingCamera}>
+                        Descargar video camara
                     </button>
                     <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadAudio}>
                         Descargar audio
                     </button>
                 </div>
             )}
-            {videoUrl && (
+            {videoCameraUrl && (
                 <div className="relative z-10 bg-red-50">
-                    <p className="global-description">video unificado</p>
+                    <p className="global-description">video usuario unificado con audio</p>
                     <video className="w-full h-[500px] flex" src={videoUrl} controls />
                 </div>
             )}

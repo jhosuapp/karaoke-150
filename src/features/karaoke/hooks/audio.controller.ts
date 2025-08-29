@@ -8,7 +8,6 @@ const useAudioController = () => {
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
-    
 
     const requestPermissionsMicrophone = async () => {
         setStatusMic((prev) => ({ ...prev, isLoad: true }));
@@ -73,7 +72,6 @@ const useAudioController = () => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     };
-    
 
     return {
         requestPermissionsMicrophone,
