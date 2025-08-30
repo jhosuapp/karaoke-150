@@ -17,31 +17,31 @@ const useUnifyStreamsController = ({ audioStream, mediaStream, customAudioUrl }:
             return;
         }
 
-        // 🎵 Creamos un contexto de audio
         const audioCtx = new AudioContext();
+        await audioCtx.resume();
         const destination = audioCtx.createMediaStreamDestination();
 
-        // 📌 1. Conectamos el micrófono
         const micSource = audioCtx.createMediaStreamSource(audioStream);
         micSource.connect(destination);
 
-        // 📌 2. Si hay audio custom, lo cargamos
         if (customAudioUrl) {
             const audioElement = new Audio(customAudioUrl);
-            audioElement.loop = true; // opcional
+            audioElement.loop = true;
             await audioElement.play();
-
+        
             const musicSource = audioCtx.createMediaElementSource(audioElement);
-            musicSource.connect(destination);
+        
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.value = 0.3; 
+        
+            musicSource.connect(gainNode).connect(destination);
         }
 
-        // 🔥 combinamos video + audios
         const combinedStream = new MediaStream([
             ...mediaStream.getVideoTracks(),
             ...destination.stream.getAudioTracks(),
         ]);
 
-        // 🎥 grabamos
         const recorder = new MediaRecorder(combinedStream);
         recorderRef.current = recorder;
         chunksRef.current = [];

@@ -13,6 +13,16 @@ type Props = {
 }
 
 const Instructions = ({ handlePlaying, startRecordingAudio, startRecordingCamera, startRecording }:Props) => {
+
+    const handleStartRecording = () => {
+        setTimeout(() => {
+            startRecording(); 
+            startRecordingAudio(); 
+            startRecordingCamera();
+        }, 4000);
+        handlePlaying(true, true);
+    }
+
     return (
         <Wrapper
             srcIcon={ icon }
@@ -22,7 +32,7 @@ const Instructions = ({ handlePlaying, startRecordingAudio, startRecordingCamera
             <div className={ styles.instructions__cta }>
                 <Button
                     {...fadeInMotion(0.6, 0.6)}
-                    onClick={ ()=> { startRecording(), startRecordingAudio(), startRecordingCamera(), handlePlaying(true, true)} } 
+                    onClick={ handleStartRecording } 
                     text='¿Estás listo? a jugar'
                     style="secondary"
                 />

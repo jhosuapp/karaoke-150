@@ -3,7 +3,7 @@ import { Audio, Permissions, Instructions, Countdown, Camera } from "../componen
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/ice-bg.jpg';
-// import audioMp3 from '../../../config/assets/audio-2.mp3';
+import audioMp3 from '../../../config/assets/audio-2.mp3';
 
 const KaraokeView = () => {
     // Principal controller
@@ -39,7 +39,7 @@ const KaraokeView = () => {
         startRecording,
         stopRecording,
         videoUrl
-    } = useUnifyStreamsController({ audioStream, mediaStream });
+    } = useUnifyStreamsController({ audioStream, mediaStream, customAudioUrl: audioMp3 });
 
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
@@ -77,23 +77,23 @@ const KaraokeView = () => {
                     />
                 )}
             </AnimatePresence>
+
             {videoRef && isPlaying && (
                 <Camera 
                     key={'camera'}
                     videoRef={ videoRef } 
                 />
             )}
-            {isPlaying && count === 0 && (
-                <>
-                    <Audio
-                        key={`audio`}
-                        isPlaying={ isPlaying }
-                        handlePlaying={ handlePlaying }
-                        stopRecording={ stopRecording }
-                        stopRecordingAudio={ stopRecordingAudio }
-                        stopRecordingCamera={ stopRecordingCamera }
-                    />
-                </>
+
+            {isPlaying && (
+                <Audio
+                    key={`audio`}
+                    isPlaying={ isPlaying }
+                    handlePlaying={ handlePlaying }
+                    stopRecording={ stopRecording }
+                    stopRecordingAudio={ stopRecordingAudio }
+                    stopRecordingCamera={ stopRecordingCamera }
+                />
             )}
 
             {audioBlob && (

@@ -9,11 +9,11 @@ type Props = {
 const Camera = ({ videoRef }:Props) => {
     return (
         <motion.div 
-            {...fadeInMotion(4,0)}
+            {...fadeInMotion(0,0)}
             className={ styles.camera }
             >
             <motion.video
-                {...fadeInMotion(4,0)}
+                {...fadeInMotion(0,0)}
                 key={'video'}
                 ref={videoRef}
                 autoPlay
