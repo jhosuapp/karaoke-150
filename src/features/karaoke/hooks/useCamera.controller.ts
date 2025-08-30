@@ -19,7 +19,7 @@ const useCameraController = ({ isPlaying }: Props) => {
         try {
             const newStream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: "user" },
-                audio: false, // 🔊 Si también quieres grabar el audio del micrófono
+                audio: true,
             });
 
             setMediaStream(newStream);
