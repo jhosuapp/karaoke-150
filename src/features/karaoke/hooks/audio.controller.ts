@@ -50,7 +50,7 @@ const useAudioController = () => {
         };
     
         mediaRecorder.onstop = () => {
-            const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+            const blob = new Blob(audioChunksRef.current, { type: "audio/mp4" });
             setAudioBlob(blob);
             audioChunksRef.current = [];
         };

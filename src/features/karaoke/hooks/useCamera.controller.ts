@@ -52,7 +52,7 @@ const useCameraController = ({ isPlaying }: Props) => {
     const startRecordingCamera = () => {
         if (!mediaStream) return;
 
-        const recorder = new MediaRecorder(mediaStream, { mimeType: "video/webm" });
+        const recorder = new MediaRecorder(mediaStream, { mimeType: "video/mp4" });
         recorderRef.current = recorder;
         chunksRef.current = [];
 
@@ -63,7 +63,7 @@ const useCameraController = ({ isPlaying }: Props) => {
         };
 
         recorder.onstop = () => {
-            const blob = new Blob(chunksRef.current, { type: "video/webm" });
+            const blob = new Blob(chunksRef.current, { type: "video/mp4" });
             setVideoCameraUrl(URL.createObjectURL(blob));
             chunksRef.current = [];
         };

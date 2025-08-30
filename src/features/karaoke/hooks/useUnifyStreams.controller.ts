@@ -51,7 +51,7 @@ const useUnifyStreamsController = ({ audioStream, mediaStream, customAudioUrl }:
         };
 
         recorder.onstop = () => {
-            const blob = new Blob(chunksRef.current, { type: "video/webm" });
+            const blob = new Blob(chunksRef.current, { type: "video/mp4" });
             setVideoUrl(URL.createObjectURL(blob));
             chunksRef.current = [];
         };
