@@ -48,15 +48,15 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     };
 
     const handlePlaying = (value: boolean, resetCounter: boolean)=>{
+        const audioTest = new Audio(audioMp3);
 
         if(resetCounter){
             setCount(4);
             setTimeout(() => {
                 setIsPlaying(value);
-                const audioTest = new Audio(audioMp3);
                 audioTest.loop = true;
                 audioTest.play();
-                playMusic();
+                // playMusic();
             }, 4000);
         }else{
             setIsPlaying(value);
