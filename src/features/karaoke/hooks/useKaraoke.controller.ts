@@ -59,7 +59,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 audioTest?.play().catch(err => {
                     alert(err);
                 });
-                // playMusic();
+                playMusic();
             }, 4000);
         }else{
             setIsPlaying(value);
