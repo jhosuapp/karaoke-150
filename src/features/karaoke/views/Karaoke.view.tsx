@@ -38,7 +38,6 @@ const KaraokeView = () => {
         count,
         controls,
         handlePlaying,
-        audioRef,
         currentTime,
         isPlaying
     } = useKaraokeController({ stopRecordingAudio, stopRecordingCamera, stopRecording });
@@ -86,13 +85,6 @@ const KaraokeView = () => {
                 />
             )}
 
-            <audio
-                ref={audioRef}
-                src={audioMp3}
-                playsInline
-                preload="auto"
-                controls={false}
-            />
             {isPlaying && (
                 <Subtitles
                     key={`audio`}
@@ -100,7 +92,7 @@ const KaraokeView = () => {
                     currentTime={ currentTime }
                 />
             )}
-            
+
             {audioBlob && (
                 <div className="relative z-10">
                     <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadRecordingCamera}>

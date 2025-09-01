@@ -1,5 +1,5 @@
 import { useAnimation } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useKaraokeStore } from "../stores";
 import audioMp3 from '/assets/audio-2.mp3';
 
@@ -13,53 +13,42 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const controls = useAnimation();
     const [count, setCount] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    const audioRef = useRef<HTMLAudioElement>(null);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
 
-    const playMusic = () => {
-        if (!audioRef.current) return;
-    
-        const audio = audioRef.current;
-        audio.play();
-    
-        const updatePosition = () => {
-            const now = audio.currentTime;
-            setCurrentTime(now);
-        
-            if (now > 15) {
-                audio.pause();
-                stopRecording();
-                stopRecordingAudio();
-                stopRecordingCamera();
-                setIsPlaying(false);
-                audio.currentTime = 0;
-                clearInterval(interval); 
-            }
-        };
-    
-        const interval = setInterval(updatePosition, 100);
-    
-        audio.onended = () => {
-            clearInterval(interval);
-            setIsPlaying(false);
-            setCurrentTime(0);
-        };
-    };
-
     const handlePlaying = (value: boolean, resetCounter: boolean)=>{
-        const audioTest = new Audio(audioMp3);
-        audioTest.loop = true;
+        const audio = new Audio(audioMp3);
+        audio.loop = true;
 
         if(resetCounter){
             setCount(4);
             setTimeout(() => {
                 setIsPlaying(value);
-                audioTest.loop = true;
-                audioTest?.play().catch(err => {
-                    alert(err);
-                });
-                playMusic();
+                audio.loop = true;
+                audio.play();
+    
+                const updatePosition = () => {
+                    const now = audio.currentTime;
+                    setCurrentTime(now);
+                
+                    if (now > 15) {
+                        audio.pause();
+                        stopRecording();
+                        stopRecordingAudio();
+                        stopRecordingCamera();
+                        setIsPlaying(false);
+                        audio.currentTime = 0;
+                        clearInterval(interval); 
+                    }
+                };
+            
+                const interval = setInterval(updatePosition, 100);
+            
+                audio.onended = () => {
+                    clearInterval(interval);
+                    setIsPlaying(false);
+                    setCurrentTime(0);
+                };
             }, 4000);
         }else{
             setIsPlaying(value);
@@ -87,7 +76,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         count,
         controls,
         handlePlaying,
-        audioRef,
         currentTime,
         isPlaying
     }
