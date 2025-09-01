@@ -1,17 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { PermissionsKaraoke } from "../interfaces";
+import { useKaraokeStore } from "../stores";
 
-type Props = {
-    isPlaying: boolean;
-};
-
-const useCameraController = ({ isPlaying }: Props) => {
+const useCameraController = () => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
     const [statusCam, setStatusCam] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false, });
+    const [videoCameraUrl, setVideoCameraUrl] = useState<string>("");
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
-    const [videoCameraUrl, setVideoCameraUrl] = useState<string>("");
+    const isPlaying = useKaraokeStore(state => state.isPlaying);
 
     const requestPermissionsCamera = async () => {
         setStatusCam((prev) => ({ ...prev, isLoad: true }));
@@ -74,6 +72,10 @@ const useCameraController = ({ isPlaying }: Props) => {
     const stopRecordingCamera = () => {
         if (recorderRef.current) {
             recorderRef.current.stop();
+        }
+        if (mediaStream) {
+            mediaStream.getTracks().forEach(track => track.stop()); 
+            setMediaStream(null); 
         }
     };
 

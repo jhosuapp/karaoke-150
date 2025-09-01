@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 
 type Props = {
-    audioStream: MediaStream; // micrófono
-    mediaStream: MediaStream; // cámara o pantalla
-    customAudioUrl?: string;  // música o audio custom (mp3, wav, etc.)
+    audioStream: MediaStream; 
+    mediaStream: MediaStream; 
+    customAudioUrl?: string; 
 };
 
 const useUnifyStreamsController = ({ audioStream, mediaStream, customAudioUrl }: Props) => {

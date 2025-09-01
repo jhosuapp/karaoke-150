@@ -1,17 +1,57 @@
 import { useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useKaraokeStore } from "../stores";
 
-const useKaraokeController = () => {
+type Props = {
+    stopRecording: ()=> void;
+    stopRecordingAudio: ()=> void;
+    stopRecordingCamera: ()=> void;
+}
+
+const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera }:Props) => {
     const controls = useAnimation();
     const [count, setCount] = useState(0);
-    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [currentTime, setCurrentTime] = useState(0);
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const isPlaying = useKaraokeStore(state => state.isPlaying);
+    const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
 
+    const playMusic = () => {
+        if (!audioRef.current) return;
+    
+        const audio = audioRef.current;
+        audio.play();
+    
+        const updatePosition = () => {
+            const now = audio.currentTime;
+            setCurrentTime(now);
+        
+            if (now > 15) {
+                audio.pause();
+                stopRecording();
+                stopRecordingAudio();
+                stopRecordingCamera();
+                setIsPlaying(false);
+                audio.currentTime = 0;
+                clearInterval(interval); 
+            }
+        };
+    
+        const interval = setInterval(updatePosition, 100);
+    
+        audio.onended = () => {
+            clearInterval(interval);
+            setIsPlaying(false);
+            setCurrentTime(0);
+        };
+    };
 
     const handlePlaying = (value: boolean, resetCounter: boolean)=>{
         if(resetCounter){
             setCount(4);
             setTimeout(() => {
                 setIsPlaying(value);
+                playMusic();
             }, 4000);
         }else{
             setIsPlaying(value);
@@ -38,8 +78,10 @@ const useKaraokeController = () => {
     return {
         count,
         controls,
-        isPlaying,
         handlePlaying,
+        audioRef,
+        currentTime,
+        isPlaying
     }
 }
 

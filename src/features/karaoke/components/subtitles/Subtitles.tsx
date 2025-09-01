@@ -1,69 +1,20 @@
-import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
-
-import styles from './audio.module.css';
-import audioMp3 from '../../../../config/assets/audio-2.mp3'
+import { useKaraokeStore } from '../../stores';
 import { lyrics } from "./lyrics";
 
+import styles from './subtitles.module.css';
+
 type Props = {
-    isPlaying: boolean;
+    currentTime: number;
     handlePlaying: (value: boolean, resetCounter: boolean) => void;
-    stopRecording: () => void;
-    stopRecordingAudio: () => void;
-    stopRecordingCamera: () => void;
 }
 
 
-const Audio = ({ isPlaying, handlePlaying, stopRecording, stopRecordingAudio, stopRecordingCamera }:Props) => {
-    const audioRef = useRef<HTMLAudioElement>(null);
-    const [currentTime, setCurrentTime] = useState(0);
-
-    useEffect(() => {
-        if (!isPlaying || !audioRef.current) return;
-
-        const audio = audioRef.current;
-        audio.play();
-
-        const updatePosition = () => {
-            const now = audio.currentTime;
-            setCurrentTime(now);
-
-            if(now > 15){
-                audio.pause();
-                stopRecording();
-                stopRecordingAudio();
-                stopRecordingCamera();
-                handlePlaying(false, false);
-                audio.currentTime = 0;
-                return () => {
-                    clearInterval(interval);
-                };
-            }
-        };
-
-        const interval = setInterval(updatePosition, 100);
-        
-        audio.onended = () => {
-            clearInterval(interval);
-            handlePlaying(false, false);
-            setCurrentTime(0);
-        };
-
-        return () => {
-            clearInterval(interval);
-        };
-    }, [isPlaying]);
+const Subtitles = ({ currentTime }:Props) => {
+    const isPlaying = useKaraokeStore(state => state.isPlaying);
 
     return (
-        <section className={styles.audio}>
-            <audio
-                ref={audioRef}
-                src={audioMp3}
-                playsInline
-                preload="auto"
-                controls={false}
-            />
-            {/* Contenedor de letras con scroll horizontal */}
+        <section className={styles.subtitles}>
             {isPlaying && (
                 <div className={styles.lyricsScrollContainer}>
                     {lyrics.map((word, index) => {
@@ -109,4 +60,4 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording, stopRecordingAudio, st
     )
 }
 
-export { Audio }
+export { Subtitles }

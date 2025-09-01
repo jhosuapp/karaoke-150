@@ -4,7 +4,6 @@ import { PermissionsKaraoke } from "../interfaces";
 const useAudioController = () => {
     const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
     const [statusMic, setStatusMic] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false });
-    const [isRecording, setIsRecording] = useState(false);
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
@@ -34,9 +33,12 @@ const useAudioController = () => {
     };
 
     const stopRecordingAudio = () => {
-        if (mediaRecorderRef.current && isRecording) {
+        if (mediaRecorderRef.current) {
             mediaRecorderRef.current.stop();
-            setIsRecording(false);
+        }
+        if (audioStream) {
+            audioStream.getTracks().forEach(track => track.stop()); 
+            setAudioStream(null); 
         }
     };
 
@@ -57,7 +59,6 @@ const useAudioController = () => {
     
         mediaRecorder.start();
         mediaRecorderRef.current = mediaRecorder;
-        setIsRecording(true);
     };
 
     const downloadAudio = () => {

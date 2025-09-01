@@ -1,7 +1,11 @@
 .countDown{
-    @apply flex items-center justify-center h-screen bg-black bg-opacity-50 text-white z-10 fixed top-0 left-0 w-full h-svh;
+    @apply flex flex-col items-center justify-center text-white z-10 fixed top-0 left-0 w-full h-svh gap-10;
 }
 
-.countDown__text{
-    @apply text-6xl font-bold;
+.countDown picture{
+    @apply block w-full max-w-[250px];
+}
+
+.countDown picture img{
+    @apply block w-full;
 }

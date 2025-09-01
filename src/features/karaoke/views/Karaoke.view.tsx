@@ -1,18 +1,11 @@
 import { AnimatePresence } from "framer-motion";
-import { Audio, Permissions, Instructions, Countdown, Camera } from "../components"
+import { Subtitles, Permissions, Instructions, Countdown, Camera } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg } from "../../../shared/components";
 import bg from '../../../config/assets/tmp/bg-general.png';
 import audioMp3 from '../../../config/assets/audio-2.mp3';
 
 const KaraokeView = () => {
-    // Principal controller
-    const { 
-        count,
-        controls,
-        isPlaying,
-        handlePlaying,
-     } = useKaraokeController();
     // Audio hook
     const { 
         requestPermissionsMicrophone, 
@@ -33,14 +26,22 @@ const KaraokeView = () => {
         videoRef, 
         videoCameraUrl,
         mediaStream
-    } = useCameraController({ isPlaying });
+    } = useCameraController();
     // Unify streams hook
     const {
         startRecording,
         stopRecording,
         videoUrl
     } = useUnifyStreamsController({ audioStream, mediaStream, customAudioUrl: audioMp3 });
-
+    // Principal controller
+    const { 
+        count,
+        controls,
+        handlePlaying,
+        audioRef,
+        currentTime,
+        isPlaying
+    } = useKaraokeController({ stopRecordingAudio, stopRecordingCamera, stopRecording });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
@@ -71,7 +72,7 @@ const KaraokeView = () => {
                 {/* CountDown */}
                 {count > 0 && (
                     <Countdown 
-                        key={ `key${count}` }
+                        key={ `countdown` }
                         controls={ controls }
                         count={ count }
                     />
@@ -85,14 +86,18 @@ const KaraokeView = () => {
                 />
             )}
 
+            <audio
+                ref={audioRef}
+                src={audioMp3}
+                playsInline
+                preload="auto"
+                controls={false}
+            />
             {isPlaying && (
-                <Audio
+                <Subtitles
                     key={`audio`}
-                    isPlaying={ isPlaying }
                     handlePlaying={ handlePlaying }
-                    stopRecording={ stopRecording }
-                    stopRecordingAudio={ stopRecordingAudio }
-                    stopRecordingCamera={ stopRecordingCamera }
+                    currentTime={ currentTime }
                 />
             )}
 
