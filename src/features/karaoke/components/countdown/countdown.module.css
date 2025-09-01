@@ -3,7 +3,7 @@
 }
 
 .countDown picture{
-    @apply block w-full max-w-[250px];
+    @apply block w-full max-w-[250px] min-h-[250px];
 }
 
 .countDown picture img{
