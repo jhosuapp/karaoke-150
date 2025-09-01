@@ -32,13 +32,16 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     setCurrentTime(now);
                 
                     if (now > 15) {
-                        audio.pause();
-                        stopRecording();
-                        stopRecordingAudio();
-                        stopRecordingCamera();
-                        setIsPlaying(false);
-                        audio.currentTime = 0;
-                        clearInterval(interval); 
+                        audio.muted = true;
+                        setTimeout(()=>{
+                            audio.pause();
+                            stopRecording();
+                            stopRecordingAudio();
+                            stopRecordingCamera();
+                            setIsPlaying(false);
+                            audio.currentTime = 0;
+                            clearInterval(interval); 
+                        },1000);
                     }
                 };
             
