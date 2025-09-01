@@ -46,9 +46,11 @@ const KaraokeView = () => {
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
     const hanldeClickSound = () => {
-        const audio = new Audio(audioMp3);
-        audio.loop = true;
-        audio.play();
+        setTimeout(()=>{
+            const audio = new Audio(audioMp3);
+            audio.loop = true;
+            audio.play();
+        },4000);
     };
 
     return (
