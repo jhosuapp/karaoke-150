@@ -1,5 +1,5 @@
 .bg{
-    @apply fixed top-0 left-0 flex justify-center items-center w-full h-[105vh];
+    @apply absolute top-0 bg-no-repeat bg-contain bg-top flex justify-center items-center w-full;
 }
 
 .bg img{

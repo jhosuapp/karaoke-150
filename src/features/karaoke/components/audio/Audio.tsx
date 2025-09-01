@@ -19,48 +19,38 @@ const Audio = ({ isPlaying, handlePlaying, stopRecording, stopRecordingAudio, st
     const [currentTime, setCurrentTime] = useState(0);
 
     useEffect(() => {
-        if (!isPlaying) return;
-    
-        if (!audioRef.current) {
-            audioRef.current = new window.Audio(audioMp3);
-            audioRef.current.loop = false;
-        }
-    
+        if (!isPlaying || !audioRef.current) return;
+
         const audio = audioRef.current;
         audio.play();
-    
+
         const updatePosition = () => {
             const now = audio.currentTime;
             setCurrentTime(now);
-    
-            if (now > 15) {
+
+            if(now > 15){
                 audio.pause();
-                audio.currentTime = 0;
-    
                 stopRecording();
                 stopRecordingAudio();
                 stopRecordingCamera();
                 handlePlaying(false, false);
-    
-                clearInterval(interval);
+                audio.currentTime = 0;
+                return () => {
+                    clearInterval(interval);
+                };
             }
         };
-    
+
         const interval = setInterval(updatePosition, 100);
-    
+        
         audio.onended = () => {
             clearInterval(interval);
             handlePlaying(false, false);
             setCurrentTime(0);
         };
-    
+
         return () => {
             clearInterval(interval);
-            // opcional: resetear audio si se desmonta
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current.currentTime = 0;
-            }
         };
     }, [isPlaying]);
 

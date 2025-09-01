@@ -7,7 +7,7 @@ body {
 }
 
 .global-dsc{
-    @apply text-white text-description font-futura font-bold leading-7;
+    @apply text-white text-description font-futura font-medium leading-7;
 }
 
 .global-dsc--secondary{
@@ -15,20 +15,11 @@ body {
 }
 
 .global-title{
-    @apply text-transparent text-title uppercase leading-none font-futura font-extrabold;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #FFF;
-    mix-blend-mode: plus-lighter;
-    /* 🔹 Glow azul */
-    text-shadow: 
-      0 0 15px #00c3ff;
+    @apply text-white text-title uppercase leading-10 font-futura font-extrabold;
 }
 
 .global-title--secondary{
-    -webkit-text-stroke-color: #377CA3 !important;
-    mix-blend-mode: darken;
-    text-shadow: 0 0 5px #00c3ff, 0 0 0px #00c3ff, 0 0 3px #00c3ff, 0 0 0px #00c3ff;
-    @apply text-titleb text-white;
+    @apply text-titleb;
 }
 
 @font-face {

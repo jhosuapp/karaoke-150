@@ -7,33 +7,25 @@
 }
 
 .InstructionsCarousel__content{
-    @apply max-w-limit w-full mx-auto my-10 pt-10 flex flex-col justify-center items-center;
-}
-
-.InstructionsCarousel__bg{
-    @apply w-full absolute block sm:max-w-limit;
-}
-
-.InstructionsCarousel__bg img{
-    @apply w-full object-cover min-h-[600px] sm:object-top sm:max-h-[700px];
+    @apply max-w-limit w-full mx-auto my-16 pt-10 flex flex-col justify-center items-center;
 }
 
 .InstructionsCarousel__swiper{
-    @apply w-[90%] max-w-limit my-10;
+    @apply w-[90%] max-w-limit mt-14 mb-16;
 }
 
 .InstructionsCarousel__swiper__item{
-    @apply !flex items-center flex-col justify-center gap-4;
+    @apply !flex items-center flex-col justify-center gap-6;
 }
 
 .InstructionsCarousel__controls{
     @apply relative z-10 flex gap-5;
 }
 
-.InstructionsCarousel__divider{
-    @apply w-full flex py-10 relative z-10;
+.InstructionsCarousel__swiper__item picture{
+    @apply max-w-icon w-full block;
 }
 
-.InstructionsCarousel__divider img{
-    @apply relative left-[-20px] w-[80px] rotate-12;
+.InstructionsCarousel__swiper__item img{
+    @apply w-full block;
 }

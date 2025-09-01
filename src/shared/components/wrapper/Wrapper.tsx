@@ -3,10 +3,8 @@ import { motion } from 'framer-motion';
 import { Bg } from '../bg/Bg';
 
 import styles from './wrapper.module.css';
-import bg from '../../../config/assets/tmp/ice-bg.jpg';
-import ice from '../../../config/assets/tmp/ice.png';
+import bg from '../../../config/assets/tmp/bg-general.png';
 import { fadeInMotion } from '../../motion';
-import { WrapperIcon } from '../wrapperIcon/WrapperIcon';
 
 type Props = {
     children: ReactNode;
@@ -19,19 +17,14 @@ type Props = {
 const Wrapper = ({ children, srcIcon, title, description1, description2 }:Props) => {
     return (
         <motion.section className={ styles.wrapper }>
-            <motion.picture 
-                {...fadeInMotion(0.1,0.1)}
-                className={ styles.wrapper__ice }
-            >
-                <img src={ ice } alt="" />
-            </motion.picture>
             <Bg src={bg} />
             <article  className={ styles.wrapper__content }>
-                <WrapperIcon 
+                <motion.picture
+                    className={ styles.wrapper__icon }
                     {...fadeInMotion(0.2, 0.2)}
-                    style={'primary'}
-                    src={ srcIcon } 
-                />
+                >
+                    <img src={ srcIcon } alt="" />
+                </motion.picture>
                 <div>
                     <motion.h1 
                         {...fadeInMotion(0.3, 0.3)}

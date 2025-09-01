@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Keyboard, A11y, EffectFade } from 'swiper/modules';
-import { WrapperIcon } from '../../../../shared/components';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -9,11 +8,9 @@ import 'swiper/css/pagination';
 import "swiper/css/effect-fade";
 
 import styles from './instructions.module.css';
-import bg from '../../../../config/assets/tmp/bg-steps-update.png';
-import icon from '../../../../config/assets/tmp/icon-inst.png';
+import icon from '../../../../config/assets/tmp/icon-2.png';
 import iconLeft from '../../../../config/assets/icon-arrow-left.svg';
 import iconRight from '../../../../config/assets/icon-arrow-right.svg';
-import iconMicro from '../../../../config/assets/tmp/micro.png';
 import { fadeInMotion } from '../../../../shared/motion';
 
 const InstructionsCarousel = () => {
@@ -25,12 +22,6 @@ const InstructionsCarousel = () => {
                 {...fadeInMotion(0.7, 0.7)}
                 className={ styles.InstructionsCarousel }
             >
-                <motion.picture 
-                    {...fadeInMotion(0.8, 0.8)}
-                    className={ styles.InstructionsCarousel__bg }
-                >
-                    <img src={ bg } alt="" />
-                </motion.picture>
                 <motion.article 
                     {...fadeInMotion(0.9, 0.9)}
                     className={ styles.InstructionsCarousel__content }
@@ -53,9 +44,11 @@ const InstructionsCarousel = () => {
                     >
                     {slides.map((n) => (
                         <SwiperSlide key={n} className={ styles.InstructionsCarousel__swiper__item }>
-                            <WrapperIcon style={'secondary'} src={ icon } />
-                            <p className="global-dsc global-dsc--secondary">
-                                Habilita los permisos de tu cámara y micrófono {n}
+                            <picture>
+                                <img src={ icon } alt="" />
+                            </picture>
+                            <p className="global-dsc">
+                                Alístate para grabar tu video en un lugar sin ruido. { n }
                             </p>
                         </SwiperSlide>
                     ))}
@@ -70,12 +63,6 @@ const InstructionsCarousel = () => {
                         </button>
                     </div>
                 </motion.article>
-            </motion.section>
-            <motion.section 
-                {...fadeInMotion(1, 1)}
-                className={ styles.InstructionsCarousel__divider }
-            >
-                <img src={ iconMicro } alt="" />
             </motion.section>
         </>
     );

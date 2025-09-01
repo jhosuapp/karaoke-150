@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { Audio, Permissions, Instructions, Countdown, Camera } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg } from "../../../shared/components";
-import bg from '../../../config/assets/tmp/ice-bg.jpg';
+import bg from '../../../config/assets/tmp/bg-general.png';
 import audioMp3 from '../../../config/assets/audio-2.mp3';
 
 const KaraokeView = () => {

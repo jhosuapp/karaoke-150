@@ -2,10 +2,6 @@
     @apply flex flex-col items-center justify-center;
 }
 
-.wrapper__ice{
-    @apply relative z-10 w-[90%] max-w-[440px];
-}
-
 .wrapper__content{
     @apply relative z-10 flex flex-col justify-center items-center gap-10 w-[90%] max-w-limit mt-14;
 }
@@ -16,4 +12,12 @@
 
 .wrapper__children{
     @apply w-full mt-10;
+}
+
+.wrapper__icon{
+    @apply max-w-icon w-full block;
+}
+
+.wrapper__icon img{
+    @apply w-full block;
 }

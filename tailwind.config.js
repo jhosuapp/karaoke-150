@@ -29,8 +29,8 @@ export default {
                 },
             },
             fontSize: {
-                title: '32px',
-                titleb: '38px',
+                title: '34px',
+                titleb: '40px',
                 button: '20px',
                 description: '22px',
                 buttonMobile: '18px',
@@ -63,7 +63,8 @@ export default {
                 limit: '1500px',
             },
             maxWidth: {
-                limit: '576px'
+                limit: '576px',
+                icon: '140px'
             }
         },
     },
