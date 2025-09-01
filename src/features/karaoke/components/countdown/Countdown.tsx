@@ -22,7 +22,7 @@ const Countdown = ({ count, controls }:Props) => {
                     animate={controls}
                     {...fadeInMotion(0,0)}
                 >
-                    <img src={`/src/config/assets/icon-counter-${count}.png`} alt="" />
+                    <img src={`/assets/icon-counter-${count}.png`} alt="" />
                 </motion.picture>
             </AnimatePresence>
         </motion.section>

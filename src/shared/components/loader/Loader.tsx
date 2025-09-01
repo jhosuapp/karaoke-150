@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import IconSpinner from '../../../config/assets/icon-spinner.svg';
+import IconSpinner from '/assets/icon-spinner.svg';
 import styles from './loader.module.css';
 import { fadeInMotion } from '../../motion';
 

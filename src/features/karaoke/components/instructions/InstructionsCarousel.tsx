@@ -8,9 +8,9 @@ import 'swiper/css/pagination';
 import "swiper/css/effect-fade";
 
 import styles from './instructions.module.css';
-import icon from '../../../../config/assets/tmp/icon-2.png';
-import iconLeft from '../../../../config/assets/icon-arrow-left.svg';
-import iconRight from '../../../../config/assets/icon-arrow-right.svg';
+import icon from '/assets/tmp/icon-2.png';
+import iconLeft from '/assets/icon-arrow-left.svg';
+import iconRight from '/assets/icon-arrow-right.svg';
 import { fadeInMotion } from '../../../../shared/motion';
 
 const InstructionsCarousel = () => {

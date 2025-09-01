@@ -2,8 +2,8 @@ import { AnimatePresence } from "framer-motion";
 import { Subtitles, Permissions, Instructions, Countdown, Camera } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg } from "../../../shared/components";
-import bg from '../../../config/assets/tmp/bg-general.png';
-import audioMp3 from '../../../config/assets/audio-2.mp3';
+import bg from '/assets/tmp/bg-general.png';
+import audioMp3 from '/assets/audio-2.mp3';
 
 const KaraokeView = () => {
     // Audio hook
@@ -44,6 +44,12 @@ const KaraokeView = () => {
     } = useKaraokeController({ stopRecordingAudio, stopRecordingCamera, stopRecording });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
+
+    const hanldeClickSound = () => {
+        const audio = new Audio(audioMp3);
+        audio.loop = true;
+        audio.play();
+    };
 
     return (
         <section className="w-full animate-fadeIn">
@@ -100,6 +106,12 @@ const KaraokeView = () => {
                     currentTime={ currentTime }
                 />
             )}
+
+            <div className="relative z-10">
+                <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={hanldeClickSound}>
+                    Descargar video camara
+                </button>
+            </div>
 
             {audioBlob && (
                 <div className="relative z-10">

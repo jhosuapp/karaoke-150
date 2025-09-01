@@ -3,8 +3,8 @@ import { fadeInMotion, fadeUpMotion } from '../../../../shared/motion/motion';
 import { PermissionsKaraoke } from '../../interfaces';
 
 import styles from './permissions.module.css';
-import iconAudio from '../../../../config/assets/icon-audio.svg';
-import iconCamera from '../../../../config/assets/icon-camera.svg';
+import iconAudio from '/assets/icon-audio.svg';
+import iconCamera from '/assets/icon-camera.svg';
 import { PermissionsItem } from './PermissionsItem';
 
 type Props = {
@@ -30,7 +30,7 @@ const Permissions = ({ requestPermissionsMicrophone, statusMic, requestPermissio
                     icon={ iconAudio }
                     status={ statusMic }
                     requestPermissions={ requestPermissionsMicrophone }
-                    />
+                />
                 <PermissionsItem 
                     text='Permisos de camara'
                     icon={ iconCamera }

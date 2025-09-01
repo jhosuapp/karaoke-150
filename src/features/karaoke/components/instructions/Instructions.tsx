@@ -1,7 +1,7 @@
 import { fadeInMotion } from '../../../../shared/motion';
 import { Button, Wrapper } from '../../../../shared/components';
 
-import icon from '../../../../config/assets/tmp/icon-1.png';
+import icon from '/assets/tmp/icon-1.png';
 import styles from './instructions.module.css';
 import { InstructionsCarousel } from './InstructionsCarousel';
 

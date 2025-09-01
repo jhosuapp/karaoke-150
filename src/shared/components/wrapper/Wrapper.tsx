@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Bg } from '../bg/Bg';
 
 import styles from './wrapper.module.css';
-import bg from '../../../config/assets/tmp/bg-general.png';
+import bg from '/assets/tmp/bg-general.png';
 import { fadeInMotion } from '../../motion';
 
 type Props = {

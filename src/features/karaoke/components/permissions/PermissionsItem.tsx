@@ -2,8 +2,8 @@ import { Loader } from '../../../../shared/components';
 import { PermissionsKaraoke } from '../../interfaces';
 
 import styles from './permissions.module.css';
-import iconSuccess from '../../../../config/assets/icon-check.svg';
-import iconError from '../../../../config/assets/icon-error.svg';
+import iconSuccess from '/assets/icon-check.svg';
+import iconError from '/assets/icon-error.svg';
 
 type Props = {
     icon: string;
