@@ -45,14 +45,6 @@ const KaraokeView = () => {
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
-    const hanldeClickSound = () => {
-        setTimeout(()=>{
-            const audio = new Audio(audioMp3);
-            audio.loop = true;
-            audio.play();
-        },4000);
-    };
-
     return (
         <section className="w-full animate-fadeIn">
             <Bg src={ bg } />
@@ -108,13 +100,7 @@ const KaraokeView = () => {
                     currentTime={ currentTime }
                 />
             )}
-
-            <div className="relative z-10">
-                <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={hanldeClickSound}>
-                    Descargar video camara
-                </button>
-            </div>
-
+            
             {audioBlob && (
                 <div className="relative z-10">
                     <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadRecordingCamera}>

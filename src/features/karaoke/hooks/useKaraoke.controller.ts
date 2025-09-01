@@ -1,6 +1,7 @@
 import { useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useKaraokeStore } from "../stores";
+import audioMp3 from '/assets/audio-2.mp3';
 
 type Props = {
     stopRecording: ()=> void;
@@ -17,6 +18,9 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
 
     const playMusic = () => {
+        const audioTest = new Audio(audioMp3);
+        audioTest.loop = true;
+        audioTest.play();
         if (!audioRef.current) return;
     
         const audio = audioRef.current;
