@@ -61,18 +61,6 @@ const useAudioController = () => {
         mediaRecorderRef.current = mediaRecorder;
     };
 
-    const downloadAudio = () => {
-        if (!audioBlob) return;
-
-        const url = URL.createObjectURL(audioBlob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "recording.webm"; 
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    };
 
     return {
         requestPermissionsMicrophone,
@@ -80,7 +68,6 @@ const useAudioController = () => {
         startRecordingAudio,
         stopRecordingAudio,
         audioBlob,
-        downloadAudio,
         audioStream
     }
 }

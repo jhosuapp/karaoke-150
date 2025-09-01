@@ -6,22 +6,10 @@ import styles from './instructions.module.css';
 import { InstructionsCarousel } from './InstructionsCarousel';
 
 type Props = {
-    handlePlaying: (value: boolean, resetCounter: boolean)=> void;
-    startRecording: ()=> void;
-    startRecordingAudio: ()=> void;
-    startRecordingCamera: ()=> void;
+    handlePlaying: ()=> void;
 }
 
-const Instructions = ({ handlePlaying, startRecordingAudio, startRecordingCamera, startRecording }:Props) => {
-
-    const handleStartRecording = () => {
-        setTimeout(() => {
-            startRecording(); 
-            startRecordingAudio(); 
-            startRecordingCamera();
-        }, 4000);
-        handlePlaying(true, true);
-    }
+const Instructions = ({ handlePlaying }:Props) => {
 
     return (
         <Wrapper
@@ -33,7 +21,7 @@ const Instructions = ({ handlePlaying, startRecordingAudio, startRecordingCamera
                 <Button
                     {...fadeInMotion(0.6, 0.6)}
                     className='mt-20'
-                    onClick={ handleStartRecording } 
+                    onClick={ handlePlaying } 
                     text='¿Estás listo? a jugar'
                     style="secondary"
                 />

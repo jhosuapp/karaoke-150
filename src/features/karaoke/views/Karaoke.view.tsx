@@ -12,7 +12,6 @@ const KaraokeView = () => {
         statusMic,
         startRecordingAudio, 
         stopRecordingAudio,
-        downloadAudio,
         audioBlob,
         audioStream,
     } = useAudioController();
@@ -22,7 +21,6 @@ const KaraokeView = () => {
         statusCam, 
         startRecordingCamera,
         stopRecordingCamera,
-        downloadRecordingCamera,
         videoRef, 
         videoCameraUrl,
         mediaStream
@@ -40,9 +38,18 @@ const KaraokeView = () => {
         handlePlaying,
         currentTime,
         isPlaying
-    } = useKaraokeController({ stopRecordingAudio, stopRecordingCamera, stopRecording });
+    } = useKaraokeController({ 
+        stopRecordingAudio, 
+        stopRecordingCamera, 
+        stopRecording,
+        startRecordingAudio, 
+        startRecordingCamera, 
+        startRecording
+    });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
+
+    console.log(audioBlob, videoUrl, videoCameraUrl);
 
     return (
         <section className="w-full animate-fadeIn">
@@ -53,9 +60,6 @@ const KaraokeView = () => {
                     <Instructions 
                         key={`key${permissions}`}
                         handlePlaying={ handlePlaying } 
-                        startRecordingAudio={ startRecordingAudio } 
-                        startRecordingCamera={ startRecordingCamera }
-                        startRecording={ startRecording }
                     />
                 }
                 {/* Permissions camera, mic and screen */}
@@ -88,21 +92,10 @@ const KaraokeView = () => {
             {isPlaying && (
                 <Subtitles
                     key={`audio`}
-                    handlePlaying={ handlePlaying }
                     currentTime={ currentTime }
                 />
             )}
 
-            {audioBlob && (
-                <div className="relative z-10">
-                    <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadRecordingCamera}>
-                        Descargar video camara
-                    </button>
-                    <button className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center" onClick={downloadAudio}>
-                        Descargar audio
-                    </button>
-                </div>
-            )}
             {videoCameraUrl && (
                 <div className="relative z-10 bg-red-50">
                     <a download href={videoUrl} className="bg-red-50 h-[40px] w-full mt-5 flex items-center justify-center">

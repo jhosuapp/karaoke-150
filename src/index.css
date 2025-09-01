@@ -18,6 +18,10 @@ body {
     @apply text-white text-title uppercase leading-10 font-futura font-extrabold;
 }
 
+.global-title-s{
+    @apply text-titles;
+}
+
 .global-title--secondary{
     @apply text-titleb;
 }

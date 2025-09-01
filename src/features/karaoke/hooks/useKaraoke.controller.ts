@@ -7,55 +7,47 @@ type Props = {
     stopRecording: ()=> void;
     stopRecordingAudio: ()=> void;
     stopRecordingCamera: ()=> void;
+    startRecording: ()=> void;
+    startRecordingAudio: ()=> void;
+    startRecordingCamera: ()=> void;
 }
 
-const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera }:Props) => {
+const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera }:Props) => {
     const controls = useAnimation();
     const [count, setCount] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
 
-    const handlePlaying = (value: boolean, resetCounter: boolean)=>{
+    const handlePlaying = ()=>{
         const audio = new Audio(audioMp3);
         audio.loop = true;
+        setCount(4);
+        setTimeout(() => {
+            startRecording();
+            startRecordingAudio();
+            startRecordingCamera();
+            setIsPlaying(true);
+            audio.play();
 
-        if(resetCounter){
-            setCount(4);
-            setTimeout(() => {
-                setIsPlaying(value);
-                audio.loop = true;
-                audio.play();
-    
-                const updatePosition = () => {
-                    const now = audio.currentTime;
-                    setCurrentTime(now);
-                
-                    if (now > 15) {
-                        audio.muted = true;
-                        setTimeout(()=>{
-                            audio.pause();
-                            stopRecording();
-                            stopRecordingAudio();
-                            stopRecordingCamera();
-                            setIsPlaying(false);
-                            audio.currentTime = 0;
-                            clearInterval(interval); 
-                        },1000);
-                    }
-                };
-            
-                const interval = setInterval(updatePosition, 100);
-            
-                audio.onended = () => {
+            const updatePosition = () => {
+                const now = audio.currentTime;
+                setCurrentTime(now);
+
+                if(now > 100){
+                    audio.loop = false;
+                    audio.pause();
                     clearInterval(interval);
                     setIsPlaying(false);
                     setCurrentTime(0);
-                };
-            }, 4000);
-        }else{
-            setIsPlaying(value);
-        }
+                    stopRecording();
+                    stopRecordingAudio();
+                    stopRecordingCamera();
+                }
+            };
+        
+            const interval = setInterval(updatePosition, 100);        
+        }, 4000);
     }
 
     useEffect(() => {

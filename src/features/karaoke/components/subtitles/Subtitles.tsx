@@ -6,7 +6,6 @@ import styles from './subtitles.module.css';
 
 type Props = {
     currentTime: number;
-    handlePlaying: (value: boolean, resetCounter: boolean) => void;
 }
 
 
@@ -45,7 +44,7 @@ const Subtitles = ({ currentTime }:Props) => {
                                     }
                                 }}
                                 className={`
-                                    global-title
+                                    global-title global-title-s
                                     ${styles.lyricWord}
                                     ${word.sing ? styles.lyricWordActive : ''}
                                 `}

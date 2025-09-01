@@ -79,13 +79,6 @@ const useCameraController = () => {
         }
     };
 
-    const downloadRecordingCamera = () => {
-        if (!videoCameraUrl) return;
-        const a = document.createElement("a");
-        a.href = videoCameraUrl;
-        a.download = "camera-recording.webm";
-        a.click();
-    };
 
     return {
         videoRef,
@@ -93,7 +86,6 @@ const useCameraController = () => {
         requestPermissionsCamera,
         startRecordingCamera,
         stopRecordingCamera,
-        downloadRecordingCamera,
         videoCameraUrl,
         mediaStream
     };
