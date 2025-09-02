@@ -16,6 +16,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const controls = useAnimation();
     const [count, setCount] = useState<number>(0);
     const [isLoad, setIsLoad] = useState<boolean>(false);
+    const [isMyTurn, setIsMyTurn] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [isRecorderFinished, setIsRecorderFinished] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
@@ -36,7 +37,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 const now = audio.currentTime;
                 setCurrentTime(now);
 
-                if(now > 10){
+                if(now > 30){
                     audio.loop = false;
                     audio.pause();
                     clearInterval(interval);
@@ -51,9 +52,15 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                         setIsLoad(false);
                     },2000);
                 }
+
+                if(now > 7 && now < 20){
+                    setIsMyTurn(true);
+                }else{
+                    setIsMyTurn(false);
+                }
             };
         
-            const interval = setInterval(updatePosition, 100);        
+            const interval = setInterval(updatePosition, 500);        
         }, 4000);
     }
 
@@ -81,7 +88,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         currentTime,
         isPlaying,
         isRecorderFinished,
-        isLoad
+        isLoad, 
+        isMyTurn
     }
 }
 

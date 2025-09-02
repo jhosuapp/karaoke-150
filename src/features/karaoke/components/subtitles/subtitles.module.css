@@ -1,5 +1,5 @@
 .subtitles {
-    @apply flex justify-center items-end py-6 px-[30px] bg-black w-full;
+    @apply flex justify-center items-end py-6 px-[30px] w-full;
 }
 
 .lyricsScrollContainer {
@@ -19,4 +19,24 @@
 
 .lyricWordActive{
     @apply !text-[#00E3FF];
+}
+
+.turn{
+    @apply relative z-10;
+}
+
+.turn__beer{
+    @apply absolute h-svh max-h-[15svh] top-[-4svh] first:right-[2svh] first:rotate-[20deg] last:left-[7.5svh] last:z-[-1] last:rotate-[-10deg];
+}
+
+.turn__beer img{
+    @apply h-full;
+}
+
+.turn__text{
+    @apply max-h-[8svh] h-svh block relative;
+}
+
+.turn__text img{
+    @apply h-full;
 }

@@ -1,4 +1,4 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Subtitles, Permissions, Instructions, Countdown, Camera } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg, LoaderSecondary } from "../../../shared/components";
@@ -40,7 +40,8 @@ const KaraokeView = () => {
         currentTime,
         isPlaying,
         isRecorderFinished,
-        isLoad
+        isLoad,
+        isMyTurn
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -89,7 +90,7 @@ const KaraokeView = () => {
             </AnimatePresence>
 
             {/* Second step flux */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
                 {/* Camera preview */}
                 {videoRef && isPlaying && (
                     <Camera 
@@ -102,35 +103,39 @@ const KaraokeView = () => {
                     <Subtitles
                         key={`audio`}
                         currentTime={ currentTime }
+                        isMyTurn={ isMyTurn }
                     />
                 )}
                 {isRecorderFinished && isLoad && (
                     <LoaderSecondary 
-                        key={`loader-${isLoad}`}
+                        key={`loader-${isLoad}-${isRecorderFinished}`}
                     />
+                )}
+                {videoCameraUrl && !isLoad && (
+                    <motion.div 
+                        key={`preview-${videoCameraUrl}`}
+                        className="relative z-10 bg-primary"
+                    >
+                        <a download href={audioUrl} className="bg-secondary h-[40px] w-full mt-5 flex items-center justify-center">
+                            Descargar audio de usuario completo
+                        </a>
+                        <audio
+                            className="w-full my-5"
+                            src={audioUrl}
+                            controls
+                        />
+                        <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                            Descargar video unificado con audio
+                        </a>
+                        <video className="w-full h-[300px] flex" src={videoUrl} controls />
+                        <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                            Descargar video solo
+                        </a>
+                        <video className="w-full h-[300px] flex" src={videoCameraUrl} controls />
+                    </motion.div>
                 )}
             </AnimatePresence>
             
-            {videoCameraUrl && (
-                <div className="relative z-10 bg-primary">
-                    <a download href={audioUrl} className="bg-secondary h-[40px] w-full mt-5 flex items-center justify-center">
-                        Descargar audio de usuario completo
-                    </a>
-                    <audio
-                        className="w-full my-5"
-                        src={audioUrl}
-                        controls
-                    />
-                    <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
-                        Descargar video unificado con audio
-                    </a>
-                    <video className="w-full h-[300px] flex" src={videoUrl} controls />
-                    <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
-                        Descargar video solo
-                    </a>
-                    <video className="w-full h-[300px] flex" src={videoCameraUrl} controls />
-                </div>
-            )}
         </section>
     )
 }
