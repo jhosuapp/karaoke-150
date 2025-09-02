@@ -2,6 +2,7 @@ import { useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useKaraokeStore } from "../stores";
 import audioMp3 from '/assets/audio-2.mp3';
+import { useAudioQuery } from "./useAudio.query";
 
 type Props = {
     stopRecording: ()=> void;
@@ -22,6 +23,10 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const [showFeedback, setShowFeedback] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
+    // Queries
+    const audioQuery = useAudioQuery();
+
+    console.log(audioQuery.data);
 
     const handlePlaying = ()=>{
         const audio = new Audio(audioMp3);
@@ -92,7 +97,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         isRecorderFinished,
         isLoad, 
         isMyTurn,
-        showFeedback
+        showFeedback,
+        audioQuery
     }
 }
 
