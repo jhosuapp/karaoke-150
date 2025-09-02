@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.heroSection {
+  @apply w-full min-h-[600px] bg-gradient-to-b from-[#0a1a3a] to-[#1a2d5a] flex flex-col items-center px-4 py-8;
+    background-image: url('/assets/tmp/bg-general.png');
+    background-size: cover;
+    background-position-y: -190px;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heroTitle {
+  @apply text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-lg mb-4 tracking-wider;
+}
+.heroImageTitle {
+  @apply  max-w-[300px] pb-[40px];
+}
+
+.heroImageWrapper {
+  @apply relative w-full max-w-md flex justify-center mb-4;
+}
+
+.heroImage {
+  @apply  w-full object-cover shadow-lg;
+}
+
+.heroPlayButton {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition;
+}
+
+.heroPlayIcon {
+  @apply w-12 h-12;
+}
+
+.heroDescription {
+  @apply text-white text-center text-lg md:text-xl mb-6 flex flex-col items-center gap-2;
+}
+
+.heroEmojis {
+  @apply flex items-center justify-center gap-2;
+}
+
+.heroForm {
+  @apply w-full max-w-md flex flex-col gap-3;
+}
+
+.heroInput {
+  @apply w-full text-center py-3 px-4 border border-white text-white placeholder-white placeholder-opacity-80 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-lg shadow;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.heroButton {
+  @apply w-full py-3  bg-yellow-400 text-[#0a1a3a] font-bold text-lg tracking-wide shadow hover:bg-yellow-300 transition;
+}
+
+
+.floaty{ 
+    animation: floaty 3s ease-in-out infinite; 
+}
+
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+        transform: translateY(-6px);
+  }
+}

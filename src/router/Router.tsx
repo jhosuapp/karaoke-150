@@ -1,7 +1,7 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { Layout } from '../shared';
 import { anonymous } from '../guards';
-import { KaraokeView } from '../features';
+import { KaraokeView, HomeView } from '../features';
 import { HOME_PATH } from './routes.constant';
 
 const Router = () => {
@@ -24,7 +24,7 @@ const Router = () => {
                         id: 'home',
                         path: HOME_PATH,
                         loader: anonymous(),
-                        element: <KaraokeView />,
+                        element: <HomeView />,
                     },
                 ],
             },
