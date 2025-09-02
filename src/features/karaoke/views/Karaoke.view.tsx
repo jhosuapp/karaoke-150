@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Subtitles, Permissions, Instructions, Countdown, Camera } from "../components"
+import { Subtitles, Permissions, Instructions, Countdown, Camera, Feedback } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg, LoaderSecondary } from "../../../shared/components";
-import bg from '/assets/tmp/bg-general.png';
+import bg from '/assets/tmp/bg-general.jpg';
 import audioMp3 from '/assets/audio-2.mp3';
 
 const KaraokeView = () => {
@@ -41,7 +41,8 @@ const KaraokeView = () => {
         isPlaying,
         isRecorderFinished,
         isLoad,
-        isMyTurn
+        isMyTurn,
+        showFeedback
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -111,6 +112,13 @@ const KaraokeView = () => {
                         key={`loader-${isLoad}-${isRecorderFinished}`}
                     />
                 )}
+
+                {isRecorderFinished && showFeedback && (
+                    <Feedback 
+                        key={`feedback-${showFeedback}-${isRecorderFinished}`}
+                    />
+                )}
+
                 {videoCameraUrl && !isLoad && (
                     <motion.div 
                         key={`preview-${videoCameraUrl}`}

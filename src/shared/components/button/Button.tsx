@@ -6,17 +6,17 @@ type NativeProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 type CustomProps = {
     text?: string;
-    style?: 'primary' | 'secondary';
+    style?: 'primary' | 'secondary' | 'tiktok';
     isLight?: boolean;
     className?: string;
-    icon?: string;
+    iconLeft?: string;
     iconRight?: string;
     isLoad?: boolean;
 }
 
 type Props = CustomProps & NativeProps & MotionProps;
 
-const Button = ({ text, style, isLight, className, icon, iconRight, isLoad, ...props }:Props) => {
+const Button = ({ text, style, isLight, className, iconLeft, iconRight, isLoad, ...props }:Props) => {
     const isWhite = isLight;
 
     return (
@@ -25,11 +25,9 @@ const Button = ({ text, style, isLight, className, icon, iconRight, isLoad, ...p
             whileTap={{ scale: 0.95 }}
             {...props}
         >
-            {/* <img 
-                className={ styles.button__icon }
-                src={ icon ? icon : iconDefault } 
-                alt="icono blotcraft"
-            /> */}
+            {iconLeft && (
+                <img className={ styles.button__icon } src={ iconLeft } alt="Icon left" />
+            )}
             <span>{ isLoad ? 'Cargando' : text }</span>
         </motion.button>
     )

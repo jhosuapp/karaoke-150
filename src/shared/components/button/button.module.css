@@ -3,50 +3,13 @@
 }
 
 .button__icon{
-    @apply max-w-[17px] block w-full;
+    @apply max-w-[40px] block w-full;
 }
 
 .button span{
     transition: .3s ease left;
     @apply uppercase text-button relative left-0 font-extrabold leading-none;
 }
-
-.button__icon {
-    filter: brightness(0) invert(1);
-    transition: .3s ease left;
-    @apply absolute left-[-20px];
-}
-
-.button__iconSecondary{
-    transition: .3s ease all;
-    @apply w-[22.5px] relative right-0;
-}
-
-.button b{
-    transition: .3s ease transform;
-    @apply flex items-center justify-center w-[5px] h-[10px] relative overflow-hidden;
-}
-
-.button b::before{
-    content: "";
-    @apply w-[5px] h-[5px] rounded-full bg-white;
-}
-
-/* .button:hover span{
-    @apply  left-[20px];
-} */
-
-.button:hover b{
-    @apply  scale-0;
-}
-
-/* button:hover .button__iconSecondary{
-    @apply right-[-15px];
-}
-
-.button:hover .button__icon{
-    @apply absolute left-[15px];
-} */
 
 @media(max-width: 768px){
     .button span{
@@ -81,22 +44,13 @@
     @apply text-cuartary top-[2px];
 }
 
-/* White */
+/* Tiktok */
 
-.button--white{
-    @apply bg-white;
+.button--tiktok{
+    @apply bg-black border-2 border-b-[#FF48CB] border-r-[#FF48CB] border-l-[#00D4FF] border-t-[#00D4FF];
 }
 
-.button--white span{
-    @apply text-tertiary;
-}
-
-
-.button--white b::before{
-    @apply bg-tertiary;
-}
-
-.button--white:hover span{
+.button--tiktok span{
     @apply text-white;
 }
 

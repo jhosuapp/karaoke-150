@@ -19,12 +19,21 @@ body {
     @apply text-white text-title uppercase leading-10 font-futura font-extrabold;
 }
 
+.global-subtitle{
+    @apply text-white text-subtitle uppercase leading-10 font-futura font-extrabold;
+}
+
 .global-title-s{
     @apply text-titles;
 }
 
 .global-title--secondary{
     @apply text-titleb;
+}
+
+.global-points{
+    text-shadow: 0 0 19px #3EC5FF;
+    @apply text-white text-center text-points uppercase leading-10 font-futura font-extrabold;
 }
 
 @font-face {

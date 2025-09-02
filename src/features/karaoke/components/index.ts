@@ -3,3 +3,4 @@ export * from './instructions/Instructions';
 export * from './subtitles/Subtitles';
 export * from './countdown/Countdown';
 export * from './camera/Camera';
+export * from './feedback/Feedback';

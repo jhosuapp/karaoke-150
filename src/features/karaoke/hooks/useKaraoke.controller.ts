@@ -19,6 +19,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const [isMyTurn, setIsMyTurn] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [isRecorderFinished, setIsRecorderFinished] = useState<boolean>(false);
+    const [showFeedback, setShowFeedback] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
 
@@ -50,6 +51,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     setIsLoad(true);
                     setTimeout(()=>{
                         setIsLoad(false);
+                        setShowFeedback(true)
                     },2000);
                 }
 
@@ -89,7 +91,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         isPlaying,
         isRecorderFinished,
         isLoad, 
-        isMyTurn
+        isMyTurn,
+        showFeedback
     }
 }
 

@@ -32,10 +32,11 @@ export default {
                 titles: '30px',
                 title: '34px',
                 titleb: '40px',
+                subtitle: '20px',
                 button: '20px',
                 description: '22px',
                 buttonMobile: '18px',
-
+                points: '59px',
             },
             fontFamily: {
                 futura: ["FuturaStd", "sans-serif"],
@@ -65,6 +66,9 @@ export default {
             },
             maxWidth: {
                 limit: '576px',
+                icon: '140px'
+            },
+            minHeight: {
                 icon: '140px'
             }
         },

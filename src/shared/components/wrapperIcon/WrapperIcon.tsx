@@ -1,19 +1,24 @@
+import { ReactNode } from 'react';
 import { motion, MotionProps } from 'framer-motion';
+
 import styles from './wrapperIcon.module.css';
+import iconDefault from '/assets/icon-wrapper-icon.png';
 
 type Props = {
-    src: string;
-    style: 'primary' | 'secondary';
+    src?: string;
+    className?: string;
+    children: ReactNode;
 } & MotionProps;
 
-const WrapperIcon = ({ src, style, ...props }: Props) => {
+const WrapperIcon = ({ src = iconDefault, children, className, ...props }: Props) => {
     return (
         <motion.div 
-            className={ `${styles.WrapperIcon} ${styles[`WrapperIcon--${style}`]}` }
+            className={ `${styles.wrapperIcon} ${className}` }
             {...props}
         >
-            <div className={ styles.WrapperIcon__content }>
-                <img src={ src } alt="" />
+            <img className={ styles.wrapperIcon__bg } src={ src } alt="" />
+            <div className={ styles.wrapperIcon__content }>
+                { children }
             </div>
         </motion.div>
     )
