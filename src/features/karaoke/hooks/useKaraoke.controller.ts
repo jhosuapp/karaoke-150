@@ -14,8 +14,10 @@ type Props = {
 
 const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera }:Props) => {
     const controls = useAnimation();
-    const [count, setCount] = useState(0);
-    const [currentTime, setCurrentTime] = useState(0);
+    const [count, setCount] = useState<number>(0);
+    const [isLoad, setIsLoad] = useState<boolean>(false);
+    const [currentTime, setCurrentTime] = useState<number>(0);
+    const [isRecorderFinished, setIsRecorderFinished] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
 
@@ -34,7 +36,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 const now = audio.currentTime;
                 setCurrentTime(now);
 
-                if(now > 100){
+                if(now > 10){
                     audio.loop = false;
                     audio.pause();
                     clearInterval(interval);
@@ -43,6 +45,11 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     stopRecording();
                     stopRecordingAudio();
                     stopRecordingCamera();
+                    setIsRecorderFinished(true);
+                    setIsLoad(true);
+                    setTimeout(()=>{
+                        setIsLoad(false);
+                    },2000);
                 }
             };
         
@@ -72,7 +79,9 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         controls,
         handlePlaying,
         currentTime,
-        isPlaying
+        isPlaying,
+        isRecorderFinished,
+        isLoad
     }
 }
 

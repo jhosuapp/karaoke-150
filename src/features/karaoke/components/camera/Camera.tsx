@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import styles from './camera.module.css';
 import { fadeInMotion } from '../../../../shared/motion';
 
+import logo from '/assets/logo.png';
+
 type Props = {
     videoRef:  React.RefObject<HTMLVideoElement>;
 }
@@ -12,8 +14,13 @@ const Camera = ({ videoRef }:Props) => {
             {...fadeInMotion(0,0)}
             className={ styles.camera }
             >
-            <motion.video
-                {...fadeInMotion(0,0)}
+            <motion.picture 
+                {...fadeInMotion(0.1,0.1)}
+                className={ styles.camera__logo }
+            >
+                <img src={ logo } alt="Logo aguila light" />
+            </motion.picture>
+            <video
                 key={'video'}
                 ref={videoRef}
                 autoPlay

@@ -7,6 +7,39 @@
     @apply w-full block;
 }
 
+.loaderSecondary{
+    @apply flex fixed items-center justify-center w-full h-svh z-[9999] top-0 left-0;
+}
+
+.loaderSecondary__bg{
+    @apply absolute w-full h-[100vh];
+}
+
+.loaderSecondary__bg img{
+    @apply w-full object-cover object-bottom h-full;
+}
+
+.loaderSecondary__content{
+    @apply relative z-10 w-full block;
+}
+
+.loaderSecondary__icon{
+    @apply relative flex justify-center items-center;
+}
+
+.loaderSecondary__icon img:first-child{
+    animation: rotateLoop 1s linear infinite;
+    @apply relative w-full max-w-[105px];
+}
+
+.loaderSecondary__icon img:last-child{
+    @apply absolute w-full max-w-[150px];
+}
+
+.loaderSecondary__text{
+    @apply text-lg uppercase font-bold mt-5 text-white;
+}
+
 @keyframes rotateLoop {
     from{
         transform: rotate(0deg);

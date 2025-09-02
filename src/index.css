@@ -7,6 +7,7 @@ body {
 }
 
 .global-dsc{
+    text-shadow: 0 0 8px #001E5A, 0 0 8px #001E5A;
     @apply text-white text-description font-futura font-medium leading-7;
 }
 

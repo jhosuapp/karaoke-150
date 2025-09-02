@@ -1,5 +1,5 @@
 .camera{
-    max-height: calc(100svh - 150px);
+    max-height: calc(100svh - 160px);
     max-width: calc(100% - 60px);
     @apply relative w-full h-svh flex items-center justify-center mt-[30px] left-[30px] overflow-hidden rounded-md;
 }
@@ -7,4 +7,8 @@
     min-height: 110vh;
     min-width: 110vw;
     object-fit: cover;
+}
+
+.camera__logo{
+    @apply absolute z-10 top-5 max-w-[120px] w-[90%];
 }

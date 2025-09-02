@@ -5,8 +5,10 @@ const useAudioController = () => {
     const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
     const [statusMic, setStatusMic] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false });
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+    const [audioUrl, setAudioUrl] = useState<string>('');
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
+    const mimeTypeRef = useRef<string>("");
 
     const requestPermissionsMicrophone = async () => {
         setStatusMic((prev) => ({ ...prev, isLoad: true }));
@@ -43,7 +45,13 @@ const useAudioController = () => {
     };
 
     const startRecordingAudio = async () => {
-        const mediaRecorder = new MediaRecorder(audioStream);
+        const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+            ? "audio/webm;codecs=opus"
+            : "audio/mp4";
+
+        mimeTypeRef.current = mimeType;
+
+        const mediaRecorder = new MediaRecorder(audioStream, { mimeType });
     
         mediaRecorder.ondataavailable = (event) => {
             if (event.data.size > 0) {
@@ -52,8 +60,9 @@ const useAudioController = () => {
         };
     
         mediaRecorder.onstop = () => {
-            const blob = new Blob(audioChunksRef.current, { type: "audio/mp4" });
+            const blob = new Blob(audioChunksRef.current, { type: mimeTypeRef.current });
             setAudioBlob(blob);
+            setAudioUrl(URL.createObjectURL(blob));
             audioChunksRef.current = [];
         };
     
@@ -68,6 +77,7 @@ const useAudioController = () => {
         startRecordingAudio,
         stopRecordingAudio,
         audioBlob,
+        audioUrl,
         audioStream
     }
 }

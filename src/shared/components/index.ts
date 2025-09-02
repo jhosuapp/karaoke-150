@@ -1,5 +1,6 @@
 export * from './button/Button'
 export * from './loader/Loader'
+export * from './loader/LoaderSecondary'
 export * from './bg/Bg'
 export * from './wrapper/Wrapper'
 export * from './wrapperIcon/WrapperIcon'
