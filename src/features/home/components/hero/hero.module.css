@@ -58,6 +58,14 @@
   @apply w-full py-3  bg-yellow-400 text-[#0a1a3a] font-bold text-lg tracking-wide shadow hover:bg-yellow-300 transition;
 }
 
+.heroInputError {
+  @apply bg-[rgba(255,85,85,0.50)] border-red-500 placeholder-white text-white;
+}
+
+.heroMsgError {
+  @apply w-full max-w-md text-center text-white  py-2 mt-2;
+}
+
 
 .floaty{ 
     animation: floaty 3s ease-in-out infinite; 
