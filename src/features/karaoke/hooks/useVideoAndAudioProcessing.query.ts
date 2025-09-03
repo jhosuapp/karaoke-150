@@ -10,7 +10,7 @@ const useVideoAndAudioProcessing = () => {
     const processAudioPython = useMutation({
         mutationFn: (file: File) => postAudioPythonAction(file),
         onSuccess: (audioResponse) => {
-            if (audioResponse?.score) {
+            if (audioResponse) {
                 processVideoShotstackMutation.mutate({
                     id: "93716852-d463-4886-a279-386202a9c7c3",
                     merge: [
