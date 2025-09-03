@@ -1,18 +1,19 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { fadeInMotion } from '../../../../shared/motion';
-import { lyrics } from "./lyrics";
 
 import styles from './subtitles.module.css';
 import beer from '/assets/beer.png';
 import text from '/assets/text-turn.png';
+import { Lyric } from '../../interfaces';
 
 type Props = {
     currentTime: number;
     isMyTurn: boolean;
+    lyrics: Lyric[];
 }
 
 
-const Subtitles = ({ currentTime, isMyTurn }:Props) => {
+const Subtitles = ({ currentTime, isMyTurn, lyrics }:Props) => {
 
     return (
         <motion.section 
@@ -61,8 +62,8 @@ const Subtitles = ({ currentTime, isMyTurn }:Props) => {
                         key={`subitles-${isMyTurn}`}
                     >
                         {lyrics.map((word, index) => {
-                            const isActive = currentTime >= word.time && 
-                                            currentTime < word.time + word.duration;
+                            const isActive = currentTime >= word.start && 
+                                            currentTime < word.start + word.duration;
                             if (!isActive) return null;
                             
                             return (
@@ -90,7 +91,6 @@ const Subtitles = ({ currentTime, isMyTurn }:Props) => {
                                     className={`
                                         global-title global-title-s
                                         ${styles.lyricWord}
-                                        ${word.sing ? styles.lyricWordActive : ''}
                                     `}
                                 >
                                     {word.text}

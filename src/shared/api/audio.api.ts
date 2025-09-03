@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const audioApi = axios.create({
-    baseURL: "https://datadots.desarrollopr.com/karaoke/api/",
+    baseURL: `${import.meta.env.VITE_API_AUDIO_URL}/karaoke/api/`,
     headers: {
-        Authorization: "Token a65ac86f0947bb6aff6035039398a1b0480e8b38",
+        Authorization: `Token ${import.meta.env.VITE_TOKEN_AUDIO}`,
         redirect: "follow"
     },
 });

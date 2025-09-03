@@ -1,7 +1,6 @@
 import { useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useKaraokeStore } from "../stores";
-import audioMp3 from '/assets/audio-2.mp3';
 import { useAudioQuery } from "./useAudio.query";
 
 type Props = {
@@ -23,13 +22,21 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const [showFeedback, setShowFeedback] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
+    const setResponseAudio = useKaraokeStore(state => state.setResponseAudio);
+    const responseAudio = useKaraokeStore(state => state.responseAudio);
     // Queries
     const audioQuery = useAudioQuery();
 
-    console.log(audioQuery.data);
+    useEffect(()=>{
+        if(audioQuery.data){
+            setResponseAudio(audioQuery.data);
+        }
+    },[audioQuery.data, setResponseAudio]);
 
     const handlePlaying = ()=>{
-        const audio = new Audio(audioMp3);
+        if(!responseAudio.song) return;
+        const { challenge_start, challenge_end, audio_duration, audio_file_url } = responseAudio.song;
+        const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
         audio.loop = true;
         setCount(4);
         setTimeout(() => {
@@ -42,8 +49,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
             const updatePosition = () => {
                 const now = audio.currentTime;
                 setCurrentTime(now);
-
-                if(now > 30){
+                
+                if(now >= (audio_duration - 0.1)){
                     audio.loop = false;
                     audio.pause();
                     clearInterval(interval);
@@ -60,14 +67,14 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     },2000);
                 }
 
-                if(now > 7 && now < 20){
+                if(now > challenge_start && now < challenge_end){
                     setIsMyTurn(true);
                 }else{
                     setIsMyTurn(false);
                 }
             };
         
-            const interval = setInterval(updatePosition, 500);        
+            const interval = setInterval(updatePosition, 100);        
         }, 4000);
     }
 
@@ -98,7 +105,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         isLoad, 
         isMyTurn,
         showFeedback,
-        audioQuery
+        audioQuery,
+        responseAudio
     }
 }
 

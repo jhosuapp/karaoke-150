@@ -3,7 +3,6 @@ import { Subtitles, Permissions, Instructions, Countdown, Camera, Feedback } fro
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg, LoaderSecondary } from "../../../shared/components";
 import bg from '/assets/tmp/bg-general.jpg';
-import audioMp3 from '/assets/audio-2.mp3';
 
 const KaraokeView = () => {
     // Audio hook
@@ -12,7 +11,7 @@ const KaraokeView = () => {
         statusMic,
         startRecordingAudio, 
         stopRecordingAudio,
-        audioBlob,
+        // audioBlob,
         audioStream,
         audioUrl
     } = useAudioController();
@@ -31,7 +30,7 @@ const KaraokeView = () => {
         startRecording,
         stopRecording,
         videoUrl
-    } = useUnifyStreamsController({ audioStream, mediaStream, customAudioUrl: audioMp3 });
+    } = useUnifyStreamsController({ audioStream, mediaStream });
     // Principal controller
     const { 
         count,
@@ -42,7 +41,8 @@ const KaraokeView = () => {
         isRecorderFinished,
         isLoad,
         isMyTurn,
-        showFeedback
+        showFeedback,
+        responseAudio
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -53,8 +53,6 @@ const KaraokeView = () => {
     });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
-
-    console.log(audioBlob, videoUrl, videoCameraUrl);
 
     return (
         <section className="w-full animate-fadeIn">
@@ -105,6 +103,7 @@ const KaraokeView = () => {
                         key={`audio`}
                         currentTime={ currentTime }
                         isMyTurn={ isMyTurn }
+                        lyrics={ responseAudio.song.lyrics }
                     />
                 )}
                 {isRecorderFinished && isLoad && (

@@ -1,15 +1,16 @@
 import { useRef, useState } from "react";
+import { useKaraokeStore } from "../stores";
 
 type Props = {
     audioStream: MediaStream; 
     mediaStream: MediaStream; 
-    customAudioUrl?: string; 
 };
 
-const useUnifyStreamsController = ({ audioStream, mediaStream, customAudioUrl }: Props) => {
+const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
     const [videoUrl, setVideoUrl] = useState<string>("");
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
+    const responseAudio = useKaraokeStore(state => state.responseAudio);
 
     const startRecording = async () => {
         if (!mediaStream || !audioStream) {
@@ -24,18 +25,17 @@ const useUnifyStreamsController = ({ audioStream, mediaStream, customAudioUrl }:
         const micSource = audioCtx.createMediaStreamSource(audioStream);
         micSource.connect(destination);
 
-        if (customAudioUrl) {
-            const audioElement = new Audio(customAudioUrl);
-            audioElement.loop = true;
-            await audioElement.play();
-        
-            const musicSource = audioCtx.createMediaElementSource(audioElement);
-        
-            const gainNode = audioCtx.createGain();
-            gainNode.gain.value = 0.3; 
-        
-            musicSource.connect(gainNode).connect(destination);
-        }
+        const audioElement = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${responseAudio.song.audio_file_url}`);
+        audioElement.crossOrigin = "anonymous";
+        audioElement.loop = true;
+        await audioElement.play();
+    
+        const musicSource = audioCtx.createMediaElementSource(audioElement);
+    
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.value = 0.3; 
+    
+        musicSource.connect(gainNode).connect(destination);
 
         const combinedStream = new MediaStream([
             ...mediaStream.getVideoTracks(),
