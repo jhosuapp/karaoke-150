@@ -48,7 +48,7 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
             if (e.data.size > 0) chunksRef.current.push(e.data);
         };
 
-        recorder.onstop = () => {
+        recorder.onstop = async () => {
             const blob = new Blob(chunksRef.current, { type: "video/mp4" });
             setVideoUrl(URL.createObjectURL(blob));
             chunksRef.current = [];
@@ -61,12 +61,7 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
         if (recorderRef.current) recorderRef.current.stop();
     };
 
-    const shareVideo = async () => {
-        if (!videoUrl) {
-          alert("No hay video para compartir");
-          return;
-        }
-      
+    const shareVideo = async () => {      
         const res = await fetch(videoUrl);
         const blob = await res.blob();
         const file = new File([blob], "video.mp4", { type: "video/mp4" });
@@ -77,13 +72,6 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
             } catch (err) {
                 console.warn("Share cancelado", err);
             }
-        } else {
-            // Fallback
-            const a = document.createElement("a");
-            a.href = videoUrl;
-            a.download = "video.mp4";
-            a.click();
-            alert("Descarga el video y súbelo a TikTok manualmente.");
         }
     };
 
@@ -91,7 +79,7 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
         startRecording,
         videoUrl,
         stopRecording,
-        shareVideo
+        shareVideo,
     };
 };
 

@@ -13,7 +13,7 @@ type Props = {
 const LoaderSecondary = ( { text = "cargando" }:Props ) => {
     return (
         <motion.section 
-            {...fadeInMotion(0, 1)}
+            {...fadeInMotion(0, 0)}
             className={styles.loaderSecondary}
         >
             <picture className={styles.loaderSecondary__bg}>

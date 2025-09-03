@@ -1,7 +1,11 @@
-import { useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useAnimation } from "framer-motion";
+
 import { useKaraokeStore } from "../stores";
 import { useAudioQuery } from "./useAudio.query";
+import { defaultPropsSwalUnexpected } from "../../../shared/constants";
+import { useVideoMutation } from "./useVideo.query";
 
 type Props = {
     stopRecording: ()=> void;
@@ -15,24 +19,71 @@ type Props = {
 const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera }:Props) => {
     const controls = useAnimation();
     const [count, setCount] = useState<number>(0);
-    const [isLoad, setIsLoad] = useState<boolean>(false);
     const [isMyTurn, setIsMyTurn] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [isRecorderFinished, setIsRecorderFinished] = useState<boolean>(false);
-    const [showFeedback, setShowFeedback] = useState<boolean>(false);
+    const [loaderText, setLoaderText] = useState<string>('Cargando');
+    const [isLoadVideo, setIsLoadVideo] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
     const setResponseAudio = useKaraokeStore(state => state.setResponseAudio);
     const responseAudio = useKaraokeStore(state => state.responseAudio);
     // Queries
     const audioQuery = useAudioQuery();
+    const { videoMutation, videoQuery } = useVideoMutation();
 
+    // Validate video generate
+    useEffect(()=>{
+        if(videoQuery?.data && videoQuery?.data?.response?.status === 'done' && videoMutation.isSuccess){
+            setIsLoadVideo(false);
+        }else{
+            setIsLoadVideo(true);
+            if(videoMutation.isPending){
+                return setLoaderText("Subiendo video");
+            }
+            if(videoQuery.isFetching || videoQuery.isLoading || videoQuery.isPending || !videoQuery?.data?.response?.url){
+                return setLoaderText("Generando video");
+            }
+            setLoaderText("Cargando");
+        }
+    },[ videoQuery.data, videoMutation ]);
+
+    // Get audio, lyrics and times
     useEffect(()=>{
         if(audioQuery.data){
             setResponseAudio(audioQuery.data);
         }
-    },[audioQuery.data, setResponseAudio]);
+        if(audioQuery.isError){
+            Swal.fire({
+                ...defaultPropsSwalUnexpected,
+                title: 'Ocurrio un error al obtener el audio',
+                text: 'Intenta nuevamente más tarde.',
+            }).then(()=>{
+                window.location.reload();
+            });
+        }
+    },[audioQuery.data, audioQuery.isError, setResponseAudio]);
 
+    // Generate Video in shotstack
+    useEffect(()=>{
+        const arrowFunction = async () => {
+            await videoMutation.mutateAsync({
+                id: "93716852-d463-4886-a279-386202a9c7c3",
+                merge: [
+                    {
+                        find: "MY_VIDEO",
+                        replace: 'https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/oyzkyyfsci/zzz01k48-3n3xr-rekat-a1wn0-y8m6y4/source.mp4'
+                    }
+                ]
+            });
+        }
+
+        if(isRecorderFinished){
+            arrowFunction();
+        }
+    },[isRecorderFinished]);
+
+    // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
         if(!responseAudio.song) return;
         const { challenge_start, challenge_end, audio_duration, audio_file_url } = responseAudio.song;
@@ -60,11 +111,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     stopRecordingAudio();
                     stopRecordingCamera();
                     setIsRecorderFinished(true);
-                    setIsLoad(true);
-                    setTimeout(()=>{
-                        setIsLoad(false);
-                        setShowFeedback(true)
-                    },2000);
                 }
 
                 if(now > challenge_start && now < challenge_end){
@@ -78,6 +124,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         }, 4000);
     }
 
+    // Countdown animation
     useEffect(() => {
         if (count > 0) {
             const timer = setTimeout(() => {
@@ -102,11 +149,12 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         currentTime,
         isPlaying,
         isRecorderFinished,
-        isLoad, 
         isMyTurn,
-        showFeedback,
         audioQuery,
-        responseAudio
+        responseAudio,
+        loaderText,
+        isLoadVideo, 
+        videoQuery
     }
 }
 

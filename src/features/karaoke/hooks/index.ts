@@ -4,3 +4,4 @@ export * from './useUnifyStreams.controller';
 export * from './useKaraoke.controller';
 // Queries
 export * from './useAudio.query';
+export * from './useVideo.query';

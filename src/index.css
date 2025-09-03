@@ -6,7 +6,8 @@ body {
     @apply flex h-[100vh] justify-center text-center font-futura;
 }
 
-.global-dsc{
+.global-dsc,
+.swal2-html-container{
     text-shadow: 0 0 8px #001E5A, 0 0 8px #001E5A;
     @apply text-white text-description font-futura font-medium leading-7;
 }
@@ -15,7 +16,8 @@ body {
     @apply text-cuartary;
 }
 
-.global-title{
+.global-title,
+.swal2-title{
     @apply text-white text-title uppercase leading-10 font-futura font-extrabold;
 }
 
@@ -34,6 +36,29 @@ body {
 .global-points{
     text-shadow: 0 0 19px #3EC5FF;
     @apply text-white text-center text-points uppercase leading-10 font-futura font-extrabold;
+}
+
+/* Swal */
+div:where(.swal2-icon).swal2-error{
+    @apply !border-primary !text-primary;
+}
+
+div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{
+    @apply !bg-primary;
+}
+
+.swal2-title{
+    @apply !text-primary text-titles;
+}
+
+.swal2-confirm{
+    text-shadow: 0 1px 0 #FFEB00;
+    @apply w-full min-h-[65px] bg-secondary flex justify-center items-center gap-[15px] relative overflow-hidden px-5 uppercase text-button left-0 font-extrabold leading-none text-cuartary;
+}
+
+.swal2-html-container{
+    text-shadow: none;
+    @apply text-cuartary;
 }
 
 @font-face {

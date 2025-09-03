@@ -30,7 +30,7 @@ const KaraokeView = () => {
         startRecording,
         stopRecording,
         videoUrl,
-        shareVideo
+        shareVideo,
     } = useUnifyStreamsController({ audioStream, mediaStream });
     // Principal controller
     const { 
@@ -40,10 +40,11 @@ const KaraokeView = () => {
         currentTime,
         isPlaying,
         isRecorderFinished,
-        isLoad,
         isMyTurn,
-        showFeedback,
-        responseAudio
+        responseAudio,
+        isLoadVideo,
+        videoQuery,
+        loaderText
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -109,20 +110,22 @@ const KaraokeView = () => {
                         lyrics={ responseAudio.song.lyrics }
                     />
                 )}
-                {isRecorderFinished && isLoad && (
+                
+                {isRecorderFinished && isLoadVideo && (
                     <LoaderSecondary 
-                        key={`loader-${isLoad}-${isRecorderFinished}`}
+                        key={`loader-${isLoadVideo}`}
+                        text={ loaderText }
                     />
                 )}
 
-                {isRecorderFinished && showFeedback && (
+                {isRecorderFinished && !isLoadVideo && (
                     <Feedback 
-                        key={`feedback-${showFeedback}-${isRecorderFinished}`}
+                        key={`feedback-${isLoadVideo}-${isRecorderFinished}`}
                         shareVideo={ shareVideo }
                     />
                 )}
 
-                {videoCameraUrl && !isLoad && (
+                {videoCameraUrl && !isLoadVideo && (
                     <motion.div 
                         key={`preview-${videoCameraUrl}`}
                         className="relative z-10 bg-primary"
@@ -135,14 +138,20 @@ const KaraokeView = () => {
                             src={audioUrl}
                             controls
                         />
-                        <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
-                            Descargar video unificado con audio
+                        <div className="hidden">
+                            <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                                Descargar video unificado con audio
+                            </a>
+                            <video className="w-full h-[300px] flex" src={videoUrl} controls />
+                            <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                                Descargar video solo
+                            </a>
+                            <video className="w-full h-[300px] flex" src={videoCameraUrl} controls />
+                        </div>
+                        <a download href={videoQuery?.data?.response?.url} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                            Descargar video generado por shotstack
                         </a>
-                        <video className="w-full h-[300px] flex" src={videoUrl} controls />
-                        <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
-                            Descargar video solo
-                        </a>
-                        <video className="w-full h-[300px] flex" src={videoCameraUrl} controls />
+                        <video className="w-full h-[300px] flex" src={videoQuery?.data?.response?.url} controls />
                     </motion.div>
                 )}
             </AnimatePresence>
