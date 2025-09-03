@@ -7,53 +7,9 @@
 }
 
 .rankingTitle {
-  @apply text-4xl md:text-5xl font-extrabold text-white text-center mb-4 tracking-wider;
+  @apply text-[48px] font-extrabold font-futura text-white text-center mb-4 tracking-wider;
 }
 
 .rankingSubtitle {
-  @apply text-white text-center text-lg md:text-xl mb-6 leading-tight;
-}
-
-.rankingTableWrapper {
-  @apply w-full max-w-md bg-[#07122a]  py-2 shadow-lg border-2 border-[#00eaff] mt-4;
-}
-
-.rankingTable {
-  @apply w-full;
-}
-
-.rankingTableHead {
-  @apply flex justify-between w-full  max-w-md gap-3 text-white  text-base md:text-lg font-bold;
-}
-
-.rankingTableRow {
-  @apply flex items-center justify-between py-2 px-2 border-b-2 border-[#00eaff] last:border-b-0;
-}
-
-.rankingTableCell {
-  @apply flex-1 text-white text-center text-base md:text-lg;
-}
-
-.rankingTableCellPos {
-  @apply flex-[0_0_60px] text-left font-bold text-yellow-400 text-lg md:text-xl;
-}
-
-.rankingTableCellScore {
-  @apply flex-[0_0_90px] text-right font-bold text-cyan-300 text-lg md:text-xl;
-}
-
-
-.neonBox {
-  border: 2px solid #00ffff;
-  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-  animation: pulseBorder 2s infinite ease-in-out;
-}
-
-@keyframes pulseBorder {
-  0%, 100% {
-    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-  }
-  50% {
-    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-  }
+  @apply text-white text-center text-[24px] font-futura font-medium  mb-10 leading-tight;
 }

@@ -26,7 +26,7 @@ const Hero = () => {
     <section className={styles.heroSection}>
       <h1 style={{ display: 'none' }}> LOS CRACKS DEL KARAOKE </h1>
       <img
-        src="/public/assets/logo-text-single.png"
+        src="/public/assets/logo-text.png"
         alt="Cracks del Karaoke"
         className={`${styles.heroImageTitle} ${styles.floaty}`}
       />
@@ -44,10 +44,11 @@ const Hero = () => {
           <img src="/public/assets/icon-play.png" alt="Play" className={styles.heroPlayIcon} />
         </button>
       </div>
-      <p className={styles.heroDescription}>
-        🍺🎤 Ingresa los códigos de tus Águila Light, súbete al Karaoke y conviértete en el crack del escenario.  
-      </p>
+      
       <form className={styles.heroForm} onSubmit={handleCodeSubmit}>
+        <p className={styles.heroDescription}>
+          🍺🎤 Ingresa los códigos de tus Águila Light, súbete al Karaoke y conviértete en el crack del escenario.  
+        </p>
         <input
           type="text"
           placeholder="Escribe tu código aquí"
