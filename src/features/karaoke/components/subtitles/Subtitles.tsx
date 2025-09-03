@@ -69,7 +69,7 @@ const Subtitles = ({ currentTime, isMyTurn, lyrics }:Props) => {
                             return (
 
                                 <motion.span
-                                    key={`${word}-${index}-${isActive}`}
+                                    key={`${word.start}-${index}-${isActive}`}
                                     initial={{ 
                                         opacity: 0, y: 20,
                                         transition: {

@@ -1,15 +1,15 @@
 import { create, type StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
-import { ResponseAudio } from "../interfaces";
+import { GetResponseAudioInterface } from "../interfaces";
 
 interface KaraokeState {
     isPlaying: boolean;
-    responseAudio: ResponseAudio | null;
+    responseAudio: GetResponseAudioInterface | null;
 }
 
 interface Actions {
     setIsPlaying: (value: boolean) => void;
-    setResponseAudio: (value: ResponseAudio) => void;
+    setResponseAudio: (value: GetResponseAudioInterface) => void;
 }
 
 const storeAPI: StateCreator<KaraokeState & Actions, [["zustand/devtools", never]]> = (set) =>({

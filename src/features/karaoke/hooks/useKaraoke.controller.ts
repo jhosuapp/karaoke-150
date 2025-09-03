@@ -14,9 +14,11 @@ type Props = {
     startRecording: (audioElement: HTMLAudioElement)=> void;
     startRecordingAudio: ()=> void;
     startRecordingCamera: ()=> void;
+    // Files and items
+    audioBlob: Blob;
 }
 
-const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera }:Props) => {
+const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera, audioBlob }:Props) => {
     const controls = useAnimation();
     const [count, setCount] = useState<number>(0);
     const [isMyTurn, setIsMyTurn] = useState<boolean>(false);
@@ -32,24 +34,41 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const audioPythonQuery = useAudioPhytonQuery();
     const { 
         processVideoShotstackMutation, 
-        processStatusVideoQuery 
+        processStatusVideoQuery,
+        processAudioPython
     } = useVideoAndAudioProcessing();
 
     // Validate video generate
     useEffect(()=>{
-        if(processStatusVideoQuery?.data && processStatusVideoQuery?.data?.response?.status === 'done' && processVideoShotstackMutation.isSuccess){
+        const errorProcessVideo = processStatusVideoQuery.isError || processVideoShotstackMutation.isError;
+
+        if(errorProcessVideo || processAudioPython.isError){
+            Swal.fire({
+                ...defaultPropsSwalUnexpected,
+                title: errorProcessVideo ? 'Error en el procesamiento del video' : 'Error en el procesamiento del audio',
+                text: 'Intenta nuevamente más tarde.',
+            }).then(()=>{
+                window.location.reload();
+            });
+            return;
+        }
+
+        if(processStatusVideoQuery?.data && processStatusVideoQuery?.data?.response?.status === 'done' && processVideoShotstackMutation.isSuccess && processAudioPython.isSuccess){
             setIsLoadVideo(false);
         }else{
             setIsLoadVideo(true);
+            if(processAudioPython.isPending){
+                return setLoaderText("Subiendo el audio");
+            }
             if(processVideoShotstackMutation.isPending){
                 return setLoaderText("Subiendo video");
             }
-            if(processStatusVideoQuery.isFetching || processStatusVideoQuery.isLoading || processStatusVideoQuery.isPending || !processStatusVideoQuery?.data?.response?.url){
+            if(!processStatusVideoQuery?.data?.response?.url){
                 return setLoaderText("Generando video");
             }
             setLoaderText("Cargando");
         }
-    },[ processStatusVideoQuery.data, processVideoShotstackMutation ]);
+    },[ processStatusVideoQuery, processVideoShotstackMutation, processAudioPython]);
 
     // Get audio, lyrics and times
     useEffect(()=>{
@@ -69,22 +88,23 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
 
     // Generate Video in shotstack
     useEffect(()=>{
-        const arrowFunction = async () => {
-            await processVideoShotstackMutation.mutateAsync({
-                id: "93716852-d463-4886-a279-386202a9c7c3",
-                merge: [
-                    {
-                        find: "MY_VIDEO",
-                        replace: 'https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/oyzkyyfsci/zzz01k48-3n3xr-rekat-a1wn0-y8m6y4/source.mp4'
-                    }
-                ]
+        const processAudio = async () => {
+            if (!audioBlob) {
+                console.error("No hay audio grabado");
+                return;
+            }
+
+            const audioFile = new File([audioBlob], "recording.webm", {
+                type: audioBlob.type || "audio/webm",
             });
+            
+            await processAudioPython.mutateAsync(audioFile);
         }
 
         if(isRecorderFinished){
-            arrowFunction();
+            processAudio();
         }
-    },[isRecorderFinished]);
+    },[isRecorderFinished, audioBlob]);
 
     // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
@@ -99,12 +119,12 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
             startRecordingCamera();
             startRecording(audio);
             setIsPlaying(true);
-
+            
             const updatePosition = () => {
                 const now = audio.currentTime;
                 setCurrentTime(now);
                 
-                if(now >= (audio_duration - 0.1)){
+                if(now >= (audio_duration - 0.05)){
                     audio.loop = false;
                     audio.pause();
                     clearInterval(interval);
@@ -123,7 +143,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 }
             };
         
-            const interval = setInterval(updatePosition, 100);        
+            const interval = setInterval(updatePosition, 50);        
         }, 4000);
     }
 

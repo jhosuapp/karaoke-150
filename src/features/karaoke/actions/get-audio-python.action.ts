@@ -1,8 +1,8 @@
 import { audioApi } from "../../../shared/api";
-import { ResponseAudio } from "../interfaces";
+import { GetResponseAudioInterface } from "../interfaces";
 
-const getAudioPythonAction = async ( ):Promise<ResponseAudio> => {
-    const { data } = await audioApi.get<ResponseAudio>('/song-info/');
+const getAudioPythonAction = async ( ):Promise<GetResponseAudioInterface> => {
+    const { data } = await audioApi.get<GetResponseAudioInterface>('/song-info/');
 
     return data;
 }

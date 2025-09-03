@@ -11,7 +11,7 @@ const KaraokeView = () => {
         statusMic,
         startRecordingAudio, 
         stopRecordingAudio,
-        // audioBlob,
+        audioBlob,
         audioStream,
         audioUrl
     } = useAudioController();
@@ -51,7 +51,8 @@ const KaraokeView = () => {
         stopRecording,
         startRecordingAudio, 
         startRecordingCamera, 
-        startRecording
+        startRecording,
+        audioBlob
     });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
@@ -140,14 +141,14 @@ const KaraokeView = () => {
                         />
                         <div className="hidden">
                             <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
-                                Descargar video unificado con audio
-                            </a>
-                            <video className="w-full h-[300px] flex" src={videoUrl} controls />
-                            <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
                                 Descargar video solo
                             </a>
                             <video className="w-full h-[300px] flex" src={videoCameraUrl} controls />
                         </div>
+                        <a download href={videoUrl} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                            Descargar video unificado con audio
+                        </a>
+                        <video className="w-full h-[300px] flex" src={videoUrl} controls />
                         <a download href={processStatusVideoQuery?.data?.response?.url} className="bg-secondary h-[40px] w-full flex items-center justify-center">
                             Descargar video generado por shotstack
                         </a>

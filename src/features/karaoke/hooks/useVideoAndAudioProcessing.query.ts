@@ -1,14 +1,27 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { PostVideoBodyInterface } from "../interfaces";
-import { getVideoShotstackAction, postVideoShotstackAction } from "../actions";
+import { getVideoShotstackAction, postAudioPythonAction, postVideoShotstackAction } from "../actions";
 
 const useVideoAndAudioProcessing = () => {
-    // const processAudioMutation = useMutation({
-    //     mutationFn: (body: PostVideoBodyInterface) => postVideoShotstackAction(body),
-    // });
-
     const processVideoShotstackMutation = useMutation({
         mutationFn: (body: PostVideoBodyInterface) => postVideoShotstackAction(body),
+    });
+
+    const processAudioPython = useMutation({
+        mutationFn: (file: File) => postAudioPythonAction(file),
+        onSuccess: (audioResponse) => {
+            if (audioResponse?.score) {
+                processVideoShotstackMutation.mutate({
+                    id: "93716852-d463-4886-a279-386202a9c7c3",
+                    merge: [
+                        {
+                            find: "MY_VIDEO",
+                            replace: 'https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/oyzkyyfsci/zzz01k48-3n3xr-rekat-a1wn0-y8m6y4/source.mp4'
+                        }
+                    ]
+                });
+            }
+        },
     });
   
     const processStatusVideoQuery = useQuery({
@@ -27,8 +40,8 @@ const useVideoAndAudioProcessing = () => {
     return {
         processVideoShotstackMutation,
         processStatusVideoQuery,
-        // processAudioMutation
+        processAudioPython
     };
 };
   
-  export { useVideoAndAudioProcessing };
+export { useVideoAndAudioProcessing };

@@ -1,9 +1,15 @@
-export interface ResponseAudio {
+export interface GetResponseAudioInterface {
     status: string;
     song:   Song;
 }
 
-export interface Song {
+export interface PostResponseAudioInterface {
+    recognized_text: string;
+    score: number;
+    coincidences: number;
+}
+
+interface Song {
     audio_duration:     number;
     lyrics:             Lyric[];
     challenge_start:    number;

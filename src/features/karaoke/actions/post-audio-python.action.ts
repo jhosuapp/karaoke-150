@@ -1,9 +1,17 @@
 import { audioApi } from "../../../shared/api";
+import { PostResponseAudioInterface } from "../interfaces";
 
-const postProcessAudioAction = async ():Promise<any> => {
-    const { data } = await audioApi.get<any>('/process-audio/');
+const postAudioPythonAction = async (file: File): Promise<PostResponseAudioInterface> => {
+    const formData = new FormData();
+    formData.append("audio", file);
+
+    const { data } = await audioApi.post<PostResponseAudioInterface>("/process-audio/", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 
     return data;
-}
+};
 
-export { postProcessAudioAction }
+export { postAudioPythonAction };
