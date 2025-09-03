@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { useKaraokeStore } from "../stores";
 
 type Props = {
     audioStream: MediaStream; 
@@ -10,9 +9,8 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
     const [videoUrl, setVideoUrl] = useState<string>("");
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
-    const responseAudio = useKaraokeStore(state => state.responseAudio);
 
-    const startRecording = async () => {
+    const startRecording = async (audioElement: HTMLAudioElement) => {
         if (!mediaStream || !audioStream) {
             alert("Debes permitir pantalla y micrófono antes de grabar");
             return;
@@ -20,23 +18,23 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
 
         const audioCtx = new AudioContext();
         await audioCtx.resume();
+        
         const destination = audioCtx.createMediaStreamDestination();
-
+        
         const micSource = audioCtx.createMediaStreamSource(audioStream);
         micSource.connect(destination);
-
-        const audioElement = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${responseAudio.song.audio_file_url}`);
-        audioElement.crossOrigin = "anonymous";
-        audioElement.loop = true;
-        await audioElement.play();
-    
+        
+        await audioElement.play(); 
+        
         const musicSource = audioCtx.createMediaElementSource(audioElement);
-    
         const gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.3; 
-    
-        musicSource.connect(gainNode).connect(destination);
-
+        gainNode.gain.value = 0.3;
+        
+        musicSource.connect(gainNode);
+        
+        gainNode.connect(destination);
+        gainNode.connect(audioCtx.destination);
+        
         const combinedStream = new MediaStream([
             ...mediaStream.getVideoTracks(),
             ...destination.stream.getAudioTracks(),

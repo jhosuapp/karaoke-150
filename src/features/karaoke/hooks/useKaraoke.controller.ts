@@ -7,7 +7,7 @@ type Props = {
     stopRecording: ()=> void;
     stopRecordingAudio: ()=> void;
     stopRecordingCamera: ()=> void;
-    startRecording: ()=> void;
+    startRecording: (audioElement: HTMLAudioElement)=> void;
     startRecordingAudio: ()=> void;
     startRecordingCamera: ()=> void;
 }
@@ -38,13 +38,13 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         const { challenge_start, challenge_end, audio_duration, audio_file_url } = responseAudio.song;
         const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
         audio.loop = true;
+        audio.crossOrigin = "anonymous";
         setCount(4);
-        setTimeout(() => {
-            startRecording();
+        setTimeout(async () => {
             startRecordingAudio();
             startRecordingCamera();
+            startRecording(audio);
             setIsPlaying(true);
-            audio.play();
 
             const updatePosition = () => {
                 const now = audio.currentTime;
