@@ -3,9 +3,9 @@ import Swal from "sweetalert2";
 import { useAnimation } from "framer-motion";
 
 import { useKaraokeStore } from "../stores";
-import { useAudioQuery } from "./useAudio.query";
+import { useAudioPhytonQuery } from "./useAudioPhyton.query";
 import { defaultPropsSwalUnexpected } from "../../../shared/constants";
-import { useVideoMutation } from "./useVideo.query";
+import { useVideoAndAudioProcessing } from "./useVideoAndAudioProcessing.query";
 
 type Props = {
     stopRecording: ()=> void;
@@ -29,31 +29,34 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const setResponseAudio = useKaraokeStore(state => state.setResponseAudio);
     const responseAudio = useKaraokeStore(state => state.responseAudio);
     // Queries
-    const audioQuery = useAudioQuery();
-    const { videoMutation, videoQuery } = useVideoMutation();
+    const audioPythonQuery = useAudioPhytonQuery();
+    const { 
+        processVideoShotstackMutation, 
+        processStatusVideoQuery 
+    } = useVideoAndAudioProcessing();
 
     // Validate video generate
     useEffect(()=>{
-        if(videoQuery?.data && videoQuery?.data?.response?.status === 'done' && videoMutation.isSuccess){
+        if(processStatusVideoQuery?.data && processStatusVideoQuery?.data?.response?.status === 'done' && processVideoShotstackMutation.isSuccess){
             setIsLoadVideo(false);
         }else{
             setIsLoadVideo(true);
-            if(videoMutation.isPending){
+            if(processVideoShotstackMutation.isPending){
                 return setLoaderText("Subiendo video");
             }
-            if(videoQuery.isFetching || videoQuery.isLoading || videoQuery.isPending || !videoQuery?.data?.response?.url){
+            if(processStatusVideoQuery.isFetching || processStatusVideoQuery.isLoading || processStatusVideoQuery.isPending || !processStatusVideoQuery?.data?.response?.url){
                 return setLoaderText("Generando video");
             }
             setLoaderText("Cargando");
         }
-    },[ videoQuery.data, videoMutation ]);
+    },[ processStatusVideoQuery.data, processVideoShotstackMutation ]);
 
     // Get audio, lyrics and times
     useEffect(()=>{
-        if(audioQuery.data){
-            setResponseAudio(audioQuery.data);
+        if(audioPythonQuery.data){
+            setResponseAudio(audioPythonQuery.data);
         }
-        if(audioQuery.isError){
+        if(audioPythonQuery.isError){
             Swal.fire({
                 ...defaultPropsSwalUnexpected,
                 title: 'Ocurrio un error al obtener el audio',
@@ -62,12 +65,12 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 window.location.reload();
             });
         }
-    },[audioQuery.data, audioQuery.isError, setResponseAudio]);
+    },[audioPythonQuery.data, audioPythonQuery.isError, setResponseAudio]);
 
     // Generate Video in shotstack
     useEffect(()=>{
         const arrowFunction = async () => {
-            await videoMutation.mutateAsync({
+            await processVideoShotstackMutation.mutateAsync({
                 id: "93716852-d463-4886-a279-386202a9c7c3",
                 merge: [
                     {
@@ -150,11 +153,11 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         isPlaying,
         isRecorderFinished,
         isMyTurn,
-        audioQuery,
+        audioPythonQuery,
         responseAudio,
         loaderText,
         isLoadVideo, 
-        videoQuery
+        processStatusVideoQuery
     }
 }
 

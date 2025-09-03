@@ -43,7 +43,7 @@ const KaraokeView = () => {
         isMyTurn,
         responseAudio,
         isLoadVideo,
-        videoQuery,
+        processStatusVideoQuery,
         loaderText
     } = useKaraokeController({ 
         stopRecordingAudio, 
@@ -148,10 +148,10 @@ const KaraokeView = () => {
                             </a>
                             <video className="w-full h-[300px] flex" src={videoCameraUrl} controls />
                         </div>
-                        <a download href={videoQuery?.data?.response?.url} className="bg-secondary h-[40px] w-full flex items-center justify-center">
+                        <a download href={processStatusVideoQuery?.data?.response?.url} className="bg-secondary h-[40px] w-full flex items-center justify-center">
                             Descargar video generado por shotstack
                         </a>
-                        <video className="w-full h-[300px] flex" src={videoQuery?.data?.response?.url} controls />
+                        <video className="w-full h-[300px] flex" src={processStatusVideoQuery?.data?.response?.url} controls />
                     </motion.div>
                 )}
             </AnimatePresence>

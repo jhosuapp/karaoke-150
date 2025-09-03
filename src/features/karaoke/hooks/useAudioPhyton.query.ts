@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { getAudioAction } from "../actions";
+import { getAudioPythonAction } from "../actions";
 
-const useAudioQuery = () => {
+const useAudioPhytonQuery = () => {
     const audioQuery = useQuery({
         queryKey: ['audioDetail'],
-        queryFn:  ()=> getAudioAction(),
+        queryFn:  ()=> getAudioPythonAction(),
         staleTime: 60 * 1000 * 1000,
         refetchOnWindowFocus: false,
         retry: false
@@ -14,4 +14,4 @@ const useAudioQuery = () => {
     return audioQuery;
 }
 
-export { useAudioQuery }
+export { useAudioPhytonQuery }

@@ -3,5 +3,5 @@ export * from './useCamera.controller';
 export * from './useUnifyStreams.controller';
 export * from './useKaraoke.controller';
 // Queries
-export * from './useAudio.query';
-export * from './useVideo.query';
+export * from './useAudioPhyton.query';
+export * from './useVideoAndAudioProcessing.query';
