@@ -17,7 +17,7 @@ const Subtitles = ({ currentTime, isMyTurn, lyrics }:Props) => {
 
     return (
         <motion.section 
-            {...fadeInMotion(0.1, 0.1)}
+            {...fadeInMotion(0.1, 0)}
             className={styles.subtitles}
         >
             <AnimatePresence mode='wait'>

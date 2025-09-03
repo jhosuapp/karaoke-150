@@ -44,7 +44,8 @@ const KaraokeView = () => {
         responseAudio,
         isLoadVideo,
         processStatusVideoQuery,
-        loaderText
+        loaderText,
+        processAudioPython
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -131,6 +132,9 @@ const KaraokeView = () => {
                         key={`preview-${videoCameraUrl}`}
                         className="relative z-10 bg-primary"
                     >
+                        <code>
+                            {JSON.stringify(processAudioPython.data)}
+                        </code>
                         <a download href={audioUrl} className="bg-secondary h-[40px] w-full mt-5 flex items-center justify-center">
                             Descargar audio de usuario completo
                         </a>

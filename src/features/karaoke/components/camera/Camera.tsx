@@ -11,7 +11,7 @@ type Props = {
 const Camera = ({ videoRef }:Props) => {
     return (
         <motion.div 
-            {...fadeInMotion(0,0.1)}
+            {...fadeInMotion(0,0)}
             className={ styles.camera }
             >
             <motion.picture 

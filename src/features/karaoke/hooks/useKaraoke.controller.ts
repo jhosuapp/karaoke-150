@@ -177,7 +177,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         responseAudio,
         loaderText,
         isLoadVideo, 
-        processStatusVideoQuery
+        processStatusVideoQuery,
+        processAudioPython
     }
 }
 
