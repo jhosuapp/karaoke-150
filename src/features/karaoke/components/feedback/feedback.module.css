@@ -1,3 +1,3 @@
 .feedback{
-    @apply pt-20 pb-10 relative z-10 w-[90%] max-w-limit mx-auto min-h-svh flex flex-col justify-between items-center gap-10;
+    @apply pt-20 pb-10 relative z-10 min-h-svh flex flex-col justify-between items-center gap-10;
 }

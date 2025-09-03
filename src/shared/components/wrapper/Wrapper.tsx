@@ -5,6 +5,7 @@ import { Bg } from '../bg/Bg';
 import styles from './wrapper.module.css';
 import bg from '/assets/tmp/bg-general.jpg';
 import { fadeInMotion } from '../../motion';
+import { Container } from '../container/Container';
 
 type Props = {
     children: ReactNode;
@@ -18,7 +19,7 @@ const Wrapper = ({ children, srcIcon, title, description1, description2 }:Props)
     return (
         <motion.section className={ styles.wrapper }>
             <Bg src={bg} />
-            <article  className={ styles.wrapper__content }>
+            <Container  className={ styles.wrapper__content }>
                 <motion.picture
                     className={ styles.wrapper__icon }
                     {...fadeInMotion(0.2, 0.2)}
@@ -51,10 +52,10 @@ const Wrapper = ({ children, srcIcon, title, description1, description2 }:Props)
                         </>
                     )}
                 </div>
-            </article>
-            <article className={ styles.wrapper__children }>
+            </Container>
+            <Container className={ styles.wrapper__children }>
                 { children }
-            </article>
+            </Container>
         </motion.section>
     )
 }

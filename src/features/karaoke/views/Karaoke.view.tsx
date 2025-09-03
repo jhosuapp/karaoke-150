@@ -29,7 +29,8 @@ const KaraokeView = () => {
     const {
         startRecording,
         stopRecording,
-        videoUrl
+        videoUrl,
+        shareVideo
     } = useUnifyStreamsController({ audioStream, mediaStream });
     // Principal controller
     const { 
@@ -59,33 +60,35 @@ const KaraokeView = () => {
             {/* Bg */}
             <Bg key={'bg'} src={ bg } />
             
+            {/* <Register /> */}
+
             {/* First step flux */}
             <AnimatePresence mode='wait'>
-                    {/* Instructions */}
-                    {!isPlaying && permissions && count === 0 && !isRecorderFinished &&
-                        <Instructions 
-                            key={`key${permissions}`}
-                            handlePlaying={ handlePlaying } 
-                        />
-                    }
-                    {/* Permissions camera, mic and screen */}
-                    {!permissions && !isRecorderFinished &&
-                        <Permissions 
-                            key={ `key${permissions}` }
-                            requestPermissionsMicrophone={ requestPermissionsMicrophone } 
-                            statusMic={ statusMic } 
-                            requestPermissionsCamera={ requestPermissionsCamera } 
-                            statusCam={ statusCam } 
-                        />
-                    }
-                    {/* CountDown */}
-                    {count > 0 && (
-                        <Countdown 
-                            key={ `countdown` }
-                            controls={ controls }
-                            count={ count }
-                        />
-                    )}
+                {/* Instructions */}
+                {!isPlaying && permissions && count === 0 && !isRecorderFinished &&
+                    <Instructions 
+                        key={`key${permissions}`}
+                        handlePlaying={ handlePlaying } 
+                    />
+                }
+                {/* Permissions camera, mic and screen */}
+                {!permissions && !isRecorderFinished &&
+                    <Permissions 
+                        key={ `key${permissions}` }
+                        requestPermissionsMicrophone={ requestPermissionsMicrophone } 
+                        statusMic={ statusMic } 
+                        requestPermissionsCamera={ requestPermissionsCamera } 
+                        statusCam={ statusCam } 
+                    />
+                }
+                {/* CountDown */}
+                {count > 0 && (
+                    <Countdown 
+                        key={ `countdown` }
+                        controls={ controls }
+                        count={ count }
+                    />
+                )}
             </AnimatePresence>
 
             {/* Second step flux */}
@@ -115,6 +118,7 @@ const KaraokeView = () => {
                 {isRecorderFinished && showFeedback && (
                     <Feedback 
                         key={`feedback-${showFeedback}-${isRecorderFinished}`}
+                        shareVideo={ shareVideo }
                     />
                 )}
 

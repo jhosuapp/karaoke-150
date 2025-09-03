@@ -2,12 +2,8 @@
     @apply relative w-full flex flex-col items-center justify-center min-h-[500px];
 }
 
-.instructions__cta{
-    @apply max-w-limit w-[90%] mx-auto relative z-10;
-}
-
 .InstructionsCarousel__content{
-    @apply max-w-limit w-full mx-auto my-16 pt-10 flex flex-col justify-center items-center;
+    @apply my-16 pt-10 flex flex-col justify-center items-center;
 }
 
 .InstructionsCarousel__swiper{

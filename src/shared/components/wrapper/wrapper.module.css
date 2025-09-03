@@ -3,7 +3,7 @@
 }
 
 .wrapper__content{
-    @apply relative z-10 flex flex-col justify-center items-center gap-10 w-[90%] max-w-limit mt-14;
+    @apply flex flex-col justify-center items-center gap-10 w-[90%] mt-14;
 }
 
 .wrapper__dsc{

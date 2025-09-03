@@ -1,13 +1,17 @@
 import { motion } from 'framer-motion';
-import { Button, WrapperIcon } from '../../../../shared/components';
+import { Button, Container, WrapperIcon } from '../../../../shared/components';
 
 import styles from './feedback.module.css';
 import icon from '/assets/icon-tik-tok.jpg';
 import { fadeInMotion } from '../../../../shared/motion';
 
-const Feedback = () => {
+type Props = {
+    shareVideo: ()=> void;
+}
+
+const Feedback = ({ shareVideo }:Props) => {
     return (
-        <motion.section 
+        <Container 
             {...fadeInMotion(0,0)}
             className={ styles.feedback }
         >
@@ -40,8 +44,9 @@ const Feedback = () => {
                 text='INICIA SESIÓN CON TIKTOK'
                 style='tiktok'
                 iconLeft={ icon }
+                onClick={ shareVideo }
             />
-        </motion.section>
+        </Container>
     )
 }
 

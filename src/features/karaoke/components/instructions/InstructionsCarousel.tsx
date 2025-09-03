@@ -7,11 +7,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "swiper/css/effect-fade";
 
+import { fadeInMotion } from '../../../../shared/motion';
+import { Container } from '../../../../shared/components';
+
 import styles from './instructions.module.css';
 import icon from '/assets/tmp/icon-2.png';
 import iconLeft from '/assets/icon-arrow-left-update.svg';
 import iconRight from '/assets/icon-arrow-right-update.svg';
-import { fadeInMotion } from '../../../../shared/motion';
 
 const InstructionsCarousel = () => {
     const slides = [1, 2, 3, 4, 5];
@@ -22,7 +24,7 @@ const InstructionsCarousel = () => {
                 {...fadeInMotion(0.7, 0.7)}
                 className={ styles.InstructionsCarousel }
             >
-                <motion.article 
+                <Container 
                     {...fadeInMotion(0.9, 0.9)}
                     className={ styles.InstructionsCarousel__content }
                 >
@@ -62,7 +64,7 @@ const InstructionsCarousel = () => {
                             <img src={ iconRight } alt="" />
                         </button>
                     </div>
-                </motion.article>
+                </Container>
             </motion.section>
         </>
     );

@@ -37,6 +37,8 @@ export default {
                 description: '22px',
                 buttonMobile: '18px',
                 points: '59px',
+                input: '20px',
+                error: '14px'
             },
             fontFamily: {
                 futura: ["FuturaStd", "sans-serif"],
