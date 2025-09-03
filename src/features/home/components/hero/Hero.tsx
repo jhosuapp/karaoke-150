@@ -49,6 +49,7 @@ const Hero = () => {
         <p className={styles.heroDescription}>
           🍺🎤 Ingresa los códigos de tus Águila Light, súbete al Karaoke y conviértete en el crack del escenario.  
         </p>
+
         <input
           type="text"
           placeholder="Escribe tu código aquí"
