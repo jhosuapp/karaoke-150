@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAnimation } from "framer-motion";
 
@@ -6,6 +7,7 @@ import { useKaraokeStore } from "../stores";
 import { useAudioPhytonQuery } from "./useAudioPhyton.query";
 import { defaultPropsSwalUnexpected } from "../../../shared/constants";
 import { useVideoAndAudioProcessing } from "./useVideoAndAudioProcessing.query";
+import { REGISTER_PATH } from "../../../router/routes.constant";
 
 type Props = {
     stopRecording: ()=> void;
@@ -20,6 +22,7 @@ type Props = {
 
 const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera, audioBlob }:Props) => {
     const controls = useAnimation();
+    const navigate = useNavigate();
     const [count, setCount] = useState<number>(0);
     const [isMyTurn, setIsMyTurn] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
@@ -29,6 +32,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
     const setResponseAudio = useKaraokeStore(state => state.setResponseAudio);
+    const setResponseProcessVideo = useKaraokeStore(state => state.setResponseProcessVideo);
     const responseAudio = useKaraokeStore(state => state.responseAudio);
     // Queries
     const audioPythonQuery = useAudioPhytonQuery();
@@ -67,6 +71,10 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 return setLoaderText("Generando video");
             }
             setLoaderText("Cargando");
+        }
+
+        if(processStatusVideoQuery?.data?.response?.url){
+            setResponseProcessVideo(processStatusVideoQuery?.data);
         }
     },[ processStatusVideoQuery, processVideoShotstackMutation, processAudioPython]);
 
@@ -165,6 +173,10 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     }, [count, controls]);
 
 
+    const redirectRegister = () => {      
+        navigate(REGISTER_PATH);
+    };
+
     return {
         count,
         controls,
@@ -178,7 +190,8 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         loaderText,
         isLoadVideo, 
         processStatusVideoQuery,
-        processAudioPython
+        processAudioPython,
+        redirectRegister
     }
 }
 

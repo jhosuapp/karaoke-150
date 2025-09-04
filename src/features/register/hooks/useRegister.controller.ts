@@ -6,8 +6,16 @@ import { RegisterInterface, registerValidation } from '../validations/register.v
 import { defaultPropsSwalUnexpected } from '../../../shared/constants';
 import { isAlegalAge } from '../../../shared/utilities';
 import { useEffect } from 'react';
+import { useRegisterStore } from '../stores/register.store';
+import { useKaraokeStore } from '../../karaoke/stores';
+import { useNavigate } from 'react-router-dom';
+import { RANKING_PATH } from '../../../router/routes.constant';
 
 const useRegisterController = () => {
+    const setRegisterData = useRegisterStore( state => state.setRegisterData);
+    const setIsSendRegisterForm = useRegisterStore( state => state.setIsSendRegisterForm);
+    const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
+    const navigate = useNavigate();
 
     // Form config
     const {
@@ -58,7 +66,13 @@ const useRegisterController = () => {
     // Async 
     const onSubmit = async (formData: RegisterInterface) => {
         try {
-            console.log(formData);
+            setRegisterData(formData);
+            
+            if(!responseProcessVideo.response.url){
+                navigate(RANKING_PATH);
+            }
+            
+            setIsSendRegisterForm(true);
         } catch (error:any) {
             Swal.fire(defaultPropsSwalUnexpected);
         }

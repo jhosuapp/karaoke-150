@@ -2,15 +2,14 @@ import { motion } from 'framer-motion';
 import { AnimatedCounter, Button, Container, WrapperIcon } from '../../../../shared/components';
 
 import styles from './feedback.module.css';
-import icon from '/assets/icon-tik-tok.jpg';
 import { fadeInMotion } from '../../../../shared/motion';
 import { Header } from '../../../../shared/layout/header/Header';
 
 type Props = {
-    shareVideo: ()=> void;
+    redirectRegister: ()=> void;
 }
 
-const Feedback = ({ shareVideo }:Props) => {
+const Feedback = ({ redirectRegister }:Props) => {
     return (
         <>
             <Header />
@@ -44,10 +43,9 @@ const Feedback = ({ shareVideo }:Props) => {
                 </article>
                 <Button
                     {...fadeInMotion(0.5, 0.5)}
-                    text='INICIA SESIÓN CON TIKTOK'
-                    style='tiktok'
-                    iconLeft={ icon }
-                    onClick={ shareVideo }
+                    text='Registrarme'
+                    style='secondary'
+                    onClick={ redirectRegister }
                 />
             </Container>
         </>

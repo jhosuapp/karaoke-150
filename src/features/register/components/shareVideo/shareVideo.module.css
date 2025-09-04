@@ -1,0 +1,11 @@
+.shareVideo{
+    @apply pb-5;
+}
+
+.shareVideo__video{
+    @apply w-[90%] max-w-[200px] mx-auto mb-5 rounded-md;
+}
+
+.shareVideo__ctas{
+    @apply flex flex-col gap-5;
+}

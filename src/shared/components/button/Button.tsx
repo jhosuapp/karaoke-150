@@ -1,6 +1,7 @@
 import { motion, MotionProps } from 'framer-motion';
 import styles from './button.module.css';
 import { ButtonHTMLAttributes } from 'react';
+import { Loader } from '../loader/Loader';
 
 type NativeProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -26,6 +27,9 @@ const Button = ({ text, style, className, iconLeft, iconRight, isLoad, disabled,
                 <img className={ styles.button__icon } src={ iconLeft } alt="Icon left" />
             )}
             <span>{ isLoad ? 'Cargando' : text }</span>
+            {isLoad && (
+                <Loader />
+            )}
         </motion.button>
     )
 }

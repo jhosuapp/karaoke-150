@@ -1,13 +1,13 @@
 import { Controller } from "react-hook-form";
 import { motion } from 'framer-motion';
 
-import styles from './form.module.css';
+import styles from './formRegister.module.css';
 import { useRegisterController } from "../../hooks";
 import { Button, CheckboxField, Dropwdown, TextField } from "../../../../shared/components";
 import { fadeInMotion } from "../../../../shared/motion";
 import { renderDate } from "../../../../shared/utilities";
 
-const Form = () => {
+const FormRegister = () => {
     const { 
         control,
         errors,
@@ -19,10 +19,7 @@ const Form = () => {
     const { day, month, year } = renderDate();
 
     return (
-        <motion.form 
-            className={ styles.form } onSubmit={ handleSubmit(onSubmit) } noValidate
-            {...fadeInMotion(0.1,0.1)}
-        >
+        <form className={ styles.formRegister } onSubmit={ handleSubmit(onSubmit) } noValidate >
             <motion.h1 
                 className="global-title"
                 {...fadeInMotion(0.2, 0.2)}
@@ -234,8 +231,8 @@ const Form = () => {
                 style="secondary"
                 {...fadeInMotion(1, 1)}
             />
-        </motion.form>
+        </form>
     )
 }
 
-export { Form }
+export { FormRegister }

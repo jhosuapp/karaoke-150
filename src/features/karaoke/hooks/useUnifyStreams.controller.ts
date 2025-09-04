@@ -61,25 +61,10 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
         if (recorderRef.current) recorderRef.current.stop();
     };
 
-    const shareVideo = async () => {      
-        const res = await fetch(videoUrl);
-        const blob = await res.blob();
-        const file = new File([blob], "video.mp4", { type: "video/mp4" });
-      
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            try {
-                await navigator.share({ files: [file], text: '#Aguila' });
-            } catch (err) {
-                console.warn("Share cancelado", err);
-            }
-        }
-    };
-
     return {
         startRecording,
         videoUrl,
-        stopRecording,
-        shareVideo,
+        stopRecording
     };
 };
 

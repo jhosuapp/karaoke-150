@@ -1,1 +1,2 @@
-export * from './form/Form';
+export * from './formRegister/FormRegister';
+export * from './shareVideo/ShareVideo';

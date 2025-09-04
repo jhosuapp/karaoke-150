@@ -29,7 +29,6 @@ const KaraokeView = () => {
         startRecording,
         stopRecording,
         videoUrl,
-        shareVideo,
     } = useUnifyStreamsController({ audioStream, mediaStream });
     // Principal controller
     const { 
@@ -44,7 +43,8 @@ const KaraokeView = () => {
         isLoadVideo,
         processStatusVideoQuery,
         loaderText,
-        processAudioPython
+        processAudioPython,
+        redirectRegister
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -120,7 +120,7 @@ const KaraokeView = () => {
                 {isRecorderFinished && !isLoadVideo && (
                     <Feedback 
                         key={`feedback-${isLoadVideo}-${isRecorderFinished}`}
-                        shareVideo={ shareVideo }
+                        redirectRegister={ redirectRegister }
                     />
                 )}
 
