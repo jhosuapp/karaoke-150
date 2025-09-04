@@ -3,5 +3,5 @@
 }
 
 .bg img{
-    @apply w-full h-[100vh] object-cover;
+    @apply w-full object-cover;
 }

@@ -71,8 +71,7 @@ const FormRegister = () => {
                 )}
             />
 
-            <motion.div 
-                {...fadeInMotion(0.5, 0.5)}
+            <div 
                 className="flex gap-2"
             >
                 <Controller
@@ -94,6 +93,7 @@ const FormRegister = () => {
                             value={value}
 
                             required
+                            {...fadeInMotion(0.5, 0.5)}
                         />
                     )}
                 />
@@ -116,6 +116,7 @@ const FormRegister = () => {
                             value={value}
 
                             required
+                            {...fadeInMotion(0.5, 0.5)}
                         />
                     )}
                 />
@@ -138,10 +139,11 @@ const FormRegister = () => {
                             value={value}
 
                             required
+                            {...fadeInMotion(0.5, 0.5)}
                         />
                     )}
                 />
-            </motion.div>
+            </div>
 
             <Controller
                 name="gender"
