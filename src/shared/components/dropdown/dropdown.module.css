@@ -1,0 +1,12 @@
+.dropwdown select{
+    @apply appearance-none !bg-no-repeat pr-5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url(/assets/icon-dropdown.svg) !important;
+    background-position: right 15px center !important;
+    background-size: 10px;
+}
+
+.dropwdown img{
+    @apply right-8;
+}

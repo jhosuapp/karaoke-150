@@ -1,0 +1,63 @@
+.checkboxFieldContent{
+    @apply flex items-center gap-[10px];
+}
+
+.checkboxFieldContent label{
+    @apply text-checkbox text-white text-left;
+}
+
+.checkboxFieldContent label a{
+    @apply underline hover:no-underline;
+}
+
+.checkboxFieldContent input{
+    transition: .5s ease all;
+    @apply appearance-none min-w-[28px] min-h-[28px] border-2 rounded-[4px] flex items-center justify-center relative overflow-hidden border-white bg-white checked:bg-primary;
+}
+
+.checkboxFieldContent input::before{
+    background-image: url('/assets/icon-checkbox.svg');
+    @apply content-[''] absolute w-[18px] h-[20px] block bg-no-repeat bg-contain opacity-0 pointer-events-none translate-y-3 transition-all;
+}
+
+.checkboxFieldContent input:checked:before{
+    @apply opacity-100 translate-y-0;
+}
+
+.checkboxField__feedback {
+    @apply text-error;
+}
+
+.checkboxFieldError .checkboxFieldContent input{
+    @apply !border-feedback-error-dark-01;
+}
+
+/* Variants */
+
+/* 
+.checkboxField--primary .checkboxFieldContent label{
+    @apply ;
+}
+
+.checkboxField--primary .checkboxField__feedback {
+    @apply text-feedback-error-primary;
+} */
+
+/* Variants */
+/* 
+.checkboxField--secondary .checkboxFieldContent input{
+    @apply border-grayLighten checked:bg-primary checked:border-primary;
+}
+
+.checkboxField--secondary .checkboxFieldContent input::before{
+    background-image: url('../../../config/assets/svg/icon-check-secondary.svg');
+    background-position: center;
+}
+
+.checkboxField--secondary .checkboxFieldContent label{
+    @apply text-grayDarken;
+}
+
+.checkboxField--secondary .checkboxField__feedback {
+    @apply text-feedback-error-secondary;
+} */

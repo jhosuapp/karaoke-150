@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Subtitles, Permissions, Instructions, Countdown, Camera, Feedback } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg, LoaderSecondary } from "../../../shared/components";
-import bg from '/assets/tmp/bg-general.jpg';
 
 const KaraokeView = () => {
     // Audio hook
@@ -61,9 +60,7 @@ const KaraokeView = () => {
     return (
         <section className="w-full animate-fadeIn">
             {/* Bg */}
-            <Bg key={'bg'} src={ bg } />
-            
-            {/* <Register /> */}
+            <Bg key={'bg'} />
 
             {/* First step flux */}
             <AnimatePresence mode='wait'>

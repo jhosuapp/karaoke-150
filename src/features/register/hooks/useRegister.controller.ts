@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Swal from 'sweetalert2';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterInterface, registerValidation } from '../validations/register.validation';
-import { defaultPropsSwalUnexpected } from '../constants';
+import { defaultPropsSwalUnexpected } from '../../../shared/constants';
 
 const useRegisterController = () => {
     // Form config
@@ -25,6 +25,8 @@ const useRegisterController = () => {
             pyp: false
         },
     });
+
+    console.log(errors);
 
     // Async 
     const onSubmit = async (formData: RegisterInterface) => {

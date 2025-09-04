@@ -19,7 +19,7 @@ export default {
                 },
                 feedback: {
                     error: {
-                        'dark-01': '#C9201D',
+                        'dark-01': '#FF5555',
                         'dark-02': '#FF6F71',
                         'dark-03': '#FFE3E7',
                     },
@@ -38,7 +38,8 @@ export default {
                 buttonMobile: '18px',
                 points: '59px',
                 input: '20px',
-                error: '14px'
+                error: '14px',
+                checkbox: '14px'
             },
             fontFamily: {
                 futura: ["FuturaStd", "sans-serif"],

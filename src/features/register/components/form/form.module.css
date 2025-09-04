@@ -1,0 +1,11 @@
+.form{
+    @apply pt-20 pb-2 flex flex-col gap-4;
+}
+
+.form h1{
+    @apply block mb-5;
+}
+
+.form button{
+    @apply mt-8;
+}

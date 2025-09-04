@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Bg } from '../bg/Bg';
 
 import styles from './wrapper.module.css';
-import bg from '/assets/tmp/bg-general.jpg';
 import { fadeInMotion } from '../../motion';
 import { Container } from '../container/Container';
 
@@ -18,7 +17,7 @@ type Props = {
 const Wrapper = ({ children, srcIcon, title, description1, description2 }:Props) => {
     return (
         <motion.section className={ styles.wrapper }>
-            <Bg src={bg} />
+            <Bg />
             <Container  className={ styles.wrapper__content }>
                 <motion.picture
                     className={ styles.wrapper__icon }

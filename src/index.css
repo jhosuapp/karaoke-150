@@ -38,6 +38,39 @@ body {
     @apply text-white text-center text-points uppercase leading-10 font-futura font-extrabold;
 }
 
+/* Fields */
+
+.global-field {
+    @apply flex flex-col w-full;
+}
+.global-field input,
+.global-field select {
+    background: rgba(0, 30, 90, 0.24);
+    box-shadow: 0 0 24px 0 #3EC5FF inset, 0 0 14px 0 #3EC5FF;
+    backdrop-filter: blur(7.5px);
+    @apply px-5 py-2 min-h-[72px] w-full block outline-none text-input transition-all text-white placeholder:text-white border-2 border-white;
+}
+
+.global-field__content{
+    @apply relative flex flex-col justify-center;
+}
+
+.global-field__icon{
+    @apply absolute right-[16px] flex items-center gap-[10px] pointer-events-none w-[25px];
+}
+
+.global-field.global-error-field input,
+.global-field.global-error-field select{
+    box-shadow: 0 0 20px 0 #00D4FF;
+    backdrop-filter: blur(7.5px);
+    @apply border-feedback-error-dark-01 bg-feedback-error-dark-01 bg-opacity-50;
+}
+
+.global-field__error{
+    @apply bg-feedback-error-dark-01 px-3 py-1 text-error text-white text-left relative z-10;
+}
+
+
 /* Swal */
 div:where(.swal2-icon).swal2-error{
     @apply !border-primary !text-primary;
