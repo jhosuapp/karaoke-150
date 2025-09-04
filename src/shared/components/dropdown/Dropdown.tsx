@@ -9,13 +9,14 @@ type NativeProps = InputHTMLAttributes<HTMLSelectElement>;
 type CustomProps = {
     feedback?: string;
     placeholder: string;
+    removeIcon?: boolean;
     options: { value: string, name: string }[]
 }
 
 type Props = NativeProps & CustomProps & MotionProps;
 
 
-const Dropwdown = ({ feedback, style, placeholder, options, ...props }:Props) => {
+const Dropwdown = ({ feedback, style, placeholder, options, removeIcon = false, ...props }:Props) => {
     return (
         <motion.div 
             className={ `global-field ${styles.dropwdown} ${feedback && 'global-error-field'}` }
@@ -29,7 +30,7 @@ const Dropwdown = ({ feedback, style, placeholder, options, ...props }:Props) =>
                         <option key={value} value={value}>{name}</option>
                     ))}
                 </motion.select>
-                {feedback && <img className='global-field__icon' src={ DangerIcon } alt="" />}
+                {feedback && !removeIcon && <img className='global-field__icon' src={ DangerIcon } alt="" />}
             </div>
             {/* Feedback */}
             {feedback && <span className='global-field__error' role='alert'>{ feedback }</span>}

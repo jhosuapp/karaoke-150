@@ -7,7 +7,6 @@ type NativeProps = ButtonHTMLAttributes<HTMLButtonElement>;
 type CustomProps = {
     text?: string;
     style?: 'primary' | 'secondary' | 'tiktok';
-    isLight?: boolean;
     className?: string;
     iconLeft?: string;
     iconRight?: string;
@@ -16,12 +15,10 @@ type CustomProps = {
 
 type Props = CustomProps & NativeProps & MotionProps;
 
-const Button = ({ text, style, isLight, className, iconLeft, iconRight, isLoad, ...props }:Props) => {
-    const isWhite = isLight;
-
+const Button = ({ text, style, className, iconLeft, iconRight, isLoad, disabled, ...props }:Props) => {
     return (
         <motion.button 
-            className={ `${styles.button} ${styles[`button--${style}`]} ${isWhite ? styles['button--white'] : ''} ${isLoad && styles.button__load} ${className ?? ''}` }
+            className={ `${styles.button} ${styles[`button--${style}`]} ${isLoad && styles.button__load} ${disabled == false && styles.button__disabled} ${className ?? ''}` }
             whileTap={{ scale: 0.95 }}
             {...props}
         >

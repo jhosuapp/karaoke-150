@@ -5,6 +5,7 @@ import styles from './form.module.css';
 import { useRegisterController } from "../../hooks";
 import { Button, CheckboxField, Dropwdown, TextField } from "../../../../shared/components";
 import { fadeInMotion } from "../../../../shared/motion";
+import { renderDate } from "../../../../shared/utilities";
 
 const Form = () => {
     const { 
@@ -13,8 +14,9 @@ const Form = () => {
         handleSubmit,
         onSubmit,
         // isValid,
-        // setError,
     } = useRegisterController();
+    // Data date
+    const { day, month, year } = renderDate();
 
     return (
         <motion.form 
@@ -71,6 +73,78 @@ const Form = () => {
                     />
                 )}
             />
+
+            <motion.div 
+                {...fadeInMotion(0.2, 0.2)}
+                className="flex gap-2"
+            >
+                <Controller
+                    name="day_birthday"
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <Dropwdown
+                            type="text"
+                            name="day_birthday"
+                            id="day_birthday"
+                            placeholder="Día"
+                            removeIcon
+                            minLength={1}
+                            options={ day }
+                            feedback={ errors.day_birthday?.message }
+                            
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            value={value}
+
+                            required
+                        />
+                    )}
+                />
+                <Controller
+                    name="month_birthday"
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <Dropwdown
+                            type="text"
+                            name="month_birthday"
+                            id="month_birthday"
+                            placeholder="Mes"
+                            removeIcon
+                            minLength={1}
+                            options={ month }
+                            feedback={ errors.month_birthday?.message }
+                            
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            value={value}
+
+                            required
+                        />
+                    )}
+                />
+                <Controller
+                    name="year_birthday"
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <Dropwdown
+                            type="text"
+                            name="year_birthday"
+                            id="year_birthday"
+                            placeholder="Año"
+                            removeIcon
+                            minLength={1}
+                            options={ year }
+                            feedback={ errors.year_birthday?.message }
+                            
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            value={value}
+
+                            required
+                        />
+                    )}
+                />
+            </motion.div>
 
             <Controller
                 name="gender"
