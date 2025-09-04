@@ -6,9 +6,9 @@ const Layout = ():React.JSX.Element => {
     return (
         <>
             {isUserAuth ? (
-                <PublicLayout />
-            ) : (
                 <PrivateLayout />
+            ) : (
+                <PublicLayout />
             )}
         </>
     )

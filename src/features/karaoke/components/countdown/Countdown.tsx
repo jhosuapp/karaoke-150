@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-import { fadeInMotion } from "../../../../shared/motion";
+import { countdownMotion, fadeInMotion } from "../../../../shared/motion";
+
 import styles from './countdown.module.css';
 
 type Props = {
@@ -20,9 +21,10 @@ const Countdown = ({ count, controls }:Props) => {
                 <motion.picture
                     key={count}
                     animate={controls}
-                    {...fadeInMotion(0,0)}
+                    className={ styles.countDown__icon }
+                    {...countdownMotion()}
                 >
-                    <img src={`/assets/icon-counter-${count}.png`} alt="" />
+                    <img src={`/assets/icon-counter-update-${count}.png`} alt="" />
                 </motion.picture>
             </AnimatePresence>
         </motion.section>

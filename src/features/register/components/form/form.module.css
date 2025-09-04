@@ -1,5 +1,5 @@
 .form{
-    @apply pt-20 pb-2 flex flex-col gap-4;
+    @apply pt-12 pb-2 flex flex-col gap-4;
 }
 
 .form h1{

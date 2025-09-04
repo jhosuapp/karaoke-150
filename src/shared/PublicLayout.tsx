@@ -1,13 +1,16 @@
+import { motion } from 'framer-motion';
+
 import { Outlet } from "react-router-dom";
+import { fadeInMotion } from './motion';
 
 const PublicLayout = ():React.JSX.Element => {
     return (
-         <main className="w-full">
-            <section className="flex justify-center fixed top-0 left-0 w-full bg-white py-5 z-50">
-                <p className="text">Public layout</p>
-            </section>
+        <motion.main 
+            {...fadeInMotion(0,0)}
+            className="w-full bg-[#081E5A] overflow-hidden relative min-h-[100vh]"
+        >
             <Outlet />
-        </main>
+        </motion.main>
     )
 }
 

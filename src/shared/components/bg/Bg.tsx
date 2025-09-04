@@ -1,13 +1,14 @@
 import styles from './bg.module.css';
-import bg from '/assets/tmp/bg-general.jpg';
+import bg from '/assets/tmp/bg-general-optimized.jpg';
 
 type Props = {
     src?: string;
+    isFixed?: boolean;
 }
 
-const Bg = ({ src = bg }:Props) => {
+const Bg = ({ src = bg, isFixed = false }:Props) => {
     return (
-        <picture className={ styles.bg }>
+        <picture className={ `${styles.bg} ${isFixed && 'fixed'}` }>
             <img src={ src } alt="" />
         </picture>
     )

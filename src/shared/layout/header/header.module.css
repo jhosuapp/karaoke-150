@@ -1,0 +1,11 @@
+.header{
+    @apply relative z-10 w-full py-5 left-0 top-0;
+}
+
+.header__logo{
+    @apply block w-full max-w-[110px];
+}
+
+.header__logo img{
+    @apply block w-full;
+}

@@ -1,12 +1,12 @@
 .camera{
     max-height: calc(100svh - 160px);
     max-width: calc(100% - 60px);
-    @apply relative w-full h-svh flex items-center justify-center mt-[30px] left-[30px] overflow-hidden rounded-md;
+    @apply relative w-full h-svh flex items-center justify-center mt-[30px] left-[30px] overflow-hidden rounded-md z-10;
 }
 .camera video{
     min-height: 110vh;
     min-width: 110vw;
-    object-fit: cover;
+    @apply object-cover;
 }
 
 .camera__logo{

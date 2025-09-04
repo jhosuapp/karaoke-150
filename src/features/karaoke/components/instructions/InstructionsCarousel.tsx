@@ -57,12 +57,18 @@ const InstructionsCarousel = () => {
                     </Swiper>
                     {/* Botones personalizados */}
                     <div className={ styles.InstructionsCarousel__controls }>
-                        <button className='custom-prev'>
+                        <motion.button 
+                            whileTap={{ scale: 0.95 }}
+                            className='custom-prev'
+                        >
                             <img src={ iconLeft } alt="" />
-                        </button>
-                        <button className='custom-next'>
+                        </motion.button>
+                        <motion.button 
+                            whileTap={{ scale: 0.95 }}
+                            className='custom-next'
+                        >
                             <img src={ iconRight } alt="" />
-                        </button>
+                        </motion.button>
                     </div>
                 </Container>
             </motion.section>

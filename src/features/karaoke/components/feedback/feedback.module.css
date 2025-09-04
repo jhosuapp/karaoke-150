@@ -1,3 +1,4 @@
 .feedback{
-    @apply pt-20 pb-10 relative z-10 min-h-svh flex flex-col justify-between items-center gap-10;
+    min-height: calc(100svh - 105px);
+    @apply pt-14 pb-10 relative z-10  flex flex-col justify-between items-center gap-10;
 }

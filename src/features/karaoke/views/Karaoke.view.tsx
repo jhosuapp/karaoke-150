@@ -58,7 +58,7 @@ const KaraokeView = () => {
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
     return (
-        <section className="w-full animate-fadeIn">
+        <section className="w-full">
             {/* Bg */}
             <Bg key={'bg'} />
 

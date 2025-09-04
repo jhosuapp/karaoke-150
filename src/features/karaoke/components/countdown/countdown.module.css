@@ -2,10 +2,10 @@
     @apply flex flex-col items-center justify-center text-white z-10 fixed top-0 left-0 w-full h-svh gap-10;
 }
 
-.countDown picture{
+.countDown__icon{
     @apply block w-full max-w-[250px] min-h-[250px];
 }
 
-.countDown picture img{
+.countDown__icon img{
     @apply block w-full;
 }

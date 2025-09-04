@@ -21,11 +21,11 @@ const Form = () => {
     return (
         <motion.form 
             className={ styles.form } onSubmit={ handleSubmit(onSubmit) } noValidate
-            {...fadeInMotion(0,0)}
+            {...fadeInMotion(0.1,0.1)}
         >
             <motion.h1 
                 className="global-title"
-                {...fadeInMotion(0.05, 0.05)}
+                {...fadeInMotion(0.2, 0.2)}
             >
                 Ingresa tus datos
             </motion.h1>
@@ -47,7 +47,7 @@ const Form = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.1, 0.1)}
+                        {...fadeInMotion(0.3, 0.3)}
                     />
                 )}
             />
@@ -69,13 +69,13 @@ const Form = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.15, 0.15)}
+                        {...fadeInMotion(0.4, 0.4)}
                     />
                 )}
             />
 
             <motion.div 
-                {...fadeInMotion(0.2, 0.2)}
+                {...fadeInMotion(0.5, 0.5)}
                 className="flex gap-2"
             >
                 <Controller
@@ -164,7 +164,7 @@ const Form = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.2, 0.2)}
+                        {...fadeInMotion(0.6, 0.6)}
                     />
                 )}
             />
@@ -187,7 +187,7 @@ const Form = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.25, 0.25)}
+                        {...fadeInMotion(0.7, 0.7)}
                     />
                 )}
             />
@@ -203,9 +203,9 @@ const Form = () => {
                         onBlur={onBlur}
 
                         feedback={ errors.tyc?.message }
-                        {...fadeInMotion(0.3, 0.3)}
+                        {...fadeInMotion(0.8, 0.8)}
                     >
-                        <p>He leído, entendido y acepto los <a href="#" target="_blank">Términos de Uso</a> del sitio web.</p>
+                        <motion.p {...fadeInMotion(0.8,0.8)}>He leído, entendido y acepto los <a href="#" target="_blank">Términos de Uso</a> del sitio web.</motion.p>
                     </CheckboxField>
                 )}
             />
@@ -221,9 +221,9 @@ const Form = () => {
                         onBlur={onBlur}
 
                         feedback={ errors.pyp?.message }
-                        {...fadeInMotion(0.35, 0.35)}
+                        {...fadeInMotion(0.9, 0.9)}
                     >
-                        <p>Declaro que soy mayor de edad y autorizo que mis datos personales sean recolectados y tratados en las condiciones que se explican en el siguiente <a href="#" target="_blank">Aviso de Privacidad y de Cookies.</a></p>
+                        <motion.p {...fadeInMotion(0.9,0.9)} >Declaro que soy mayor de edad y autorizo que mis datos personales sean recolectados y tratados en las condiciones que se explican en el siguiente <a href="#" target="_blank">Aviso de Privacidad y de Cookies.</a></motion.p>
                     </CheckboxField>
                 )}
             />
@@ -232,7 +232,7 @@ const Form = () => {
                 text="Enviar"
                 type="submit"
                 style="secondary"
-                {...fadeInMotion(0.4, 0.4)}
+                {...fadeInMotion(1, 1)}
             />
         </motion.form>
     )
