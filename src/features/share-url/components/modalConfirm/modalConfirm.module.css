@@ -1,0 +1,8 @@
+.modalConfirm{
+    @apply fixed w-full h-svh flex items-center justify-center z-10 top-0 left-0;
+}
+
+.modalConfirm__bg{
+    backdrop-filter: blur(10px);
+    @apply fixed top-0 left-0 bg-black bg-opacity-70 w-full h-[110vh];
+}

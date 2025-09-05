@@ -3,7 +3,7 @@
 }
 
 .shareVideo__video{
-    @apply w-[90%] max-w-[200px] mx-auto mb-5 rounded-md;
+    @apply w-[90%] max-w-[200px] mx-auto mb-5 rounded-md min-h-[350px];
 }
 
 .shareVideo__ctas{

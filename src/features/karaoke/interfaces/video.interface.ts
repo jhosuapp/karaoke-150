@@ -8,8 +8,14 @@ export interface GetVideoResponseInterface {
     message:  string;
     response: Response;
 }
+export interface PostVideoResponseInterface {
+    status:   string;
+    uri:      string;
+    filename: string;
+    full_url: string;
 
 // get video response
+}
 
 interface Response {
     id:         string;

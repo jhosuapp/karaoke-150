@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Swal from 'sweetalert2';
 
 import { defaultPropsSwalUnexpected } from '../../../shared/constants';
-// import { useKaraokeStore } from '../../karaoke/stores';
-// import { useNavigate } from 'react-router-dom';
 import { ShareUrlInterface, shareUrlValidation } from '../validations/shareUrl.validation';
+import { useState } from 'react';
+import { RANKING_PATH } from '../../../router/routes.constant';
 
 const useShareUrlController = () => {
-    // const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [isFormSend, setIsFormSend] = useState<boolean>(false);
 
     // Form config
     const {
@@ -28,10 +29,15 @@ const useShareUrlController = () => {
     const onSubmit = async (formData: ShareUrlInterface) => {
         try {
             console.log(formData);
+            setIsFormSend(true);
         } catch (error:any) {
             Swal.fire(defaultPropsSwalUnexpected);
         }
     };
+
+    const handleRedirect = () => {
+        navigate(RANKING_PATH);
+    }
     
     return {
         errors,
@@ -40,6 +46,8 @@ const useShareUrlController = () => {
         onSubmit,
         isValid,
         setError,
+        isFormSend,
+        handleRedirect
     };
 };
 

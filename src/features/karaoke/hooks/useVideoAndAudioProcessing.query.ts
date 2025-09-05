@@ -70,7 +70,7 @@ const useVideoAndAudioProcessing = () => {
                 merge: [
                     {
                         find: "MY_VIDEO",
-                        replace: processVideoDrupalMutation.data.url 
+                        replace: processVideoDrupalMutation.data.full_url 
                     }
                 ]
             });

@@ -1,10 +1,11 @@
 import { drupalApi } from "../../../shared/api";
+import { PostVideoResponseInterface } from "../interfaces";
 
-const postVideoDrupalAction = async (file: File): Promise<any> => {
+const postVideoDrupalAction = async (file: File): Promise<PostVideoResponseInterface> => {
     const formData = new FormData();
     formData.append("video", file);
 
-    const { data } = await drupalApi.post<any>("/video-upload", formData, {
+    const { data } = await drupalApi.post<PostVideoResponseInterface>("/video-upload", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
