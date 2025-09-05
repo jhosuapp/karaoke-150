@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .awardSection {
-  @apply w-full min-h-[480px] bg-[#0a1a3a] flex flex-col items-center px-4 py-20;
+  @apply w-full max-w-[440px] min-h-[480px]  m-auto  flex flex-col items-center px-4 py-20;
 }
 
 .awardTitle {

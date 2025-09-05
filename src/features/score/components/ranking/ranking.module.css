@@ -1,0 +1,8 @@
+.rankingSection {
+  @apply w-full max-w-md m-auto min-h-[300px] flex flex-col items-center text-white font-futura px-4  py-8;
+}
+
+.imageText {
+  @apply w-auto max-w-[250px] h-auto mb-4;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}

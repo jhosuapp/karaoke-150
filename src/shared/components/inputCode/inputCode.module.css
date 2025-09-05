@@ -1,0 +1,32 @@
+
+.description {
+  @apply text-white text-center text-[24px] font-medium font-futura mb-8 flex flex-col items-center gap-2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.emojis {
+  @apply flex items-center justify-center gap-2;
+}
+
+.form {
+  @apply w-full max-w-md  px-4 flex flex-col;
+}
+
+.input {
+  @apply w-full text-center py-3 px-4 border border-white text-white  font-futura placeholder-white placeholder-opacity-80 focus:outline-none  text-[20px] shadow;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.button {
+  @apply w-full mt-4 py-3  bg-yellow-400 text-[#001E5A] font-bold  font-futura text-[20px] uppercase tracking-wide shadow hover:bg-yellow-300 transition;
+}
+
+.inputError {
+  @apply bg-[rgba(255,85,85,0.50)] border-2 border-[rgba(255,85,85)] placeholder-white text-white;
+}
+
+.msgError {
+  @apply w-full max-w-md p-2 text-center text-white  bg-[rgba(255,85,85)];
+}
+

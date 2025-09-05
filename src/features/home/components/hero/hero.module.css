@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .heroSection {
-  @apply w-full min-h-[600px] bg-gradient-to-b from-[#0a1a3a] to-[#1a2d5a] flex flex-col items-center  py-8;
+  @apply w-full min-h-[600px]  flex flex-col items-center  py-8;
     background-image: url('/assets/bg-section.png');
     background-size: cover;
     background-repeat: no-repeat;

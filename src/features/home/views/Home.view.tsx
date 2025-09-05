@@ -12,4 +12,4 @@ const HomeView = () => {
   );
 };
 
-export default HomeView;
+export { HomeView }

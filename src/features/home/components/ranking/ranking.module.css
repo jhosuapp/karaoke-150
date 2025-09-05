@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .rankingSection {
-  @apply w-full min-h-[600px] bg-[#0a1a3a] flex flex-col items-center px-4 py-8;
+  @apply w-full max-w-[440px] min-h-[600px] m-auto flex flex-col items-center px-4 py-8;
 }
 
 .rankingTitle {

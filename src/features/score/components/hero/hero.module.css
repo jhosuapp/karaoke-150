@@ -1,0 +1,98 @@
+.heroSection {
+  @apply w-full min-h-[600px] flex flex-col items-center text-white font-futura   py-8;
+    background-image: url('/assets/bg-section.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heroPositionContainer {
+  @apply w-full max-w-md flex flex-col items-center mt-20 px-4;
+}
+
+.heroPositionHeader{
+  @apply w-full  h-auto mb-4 mt-8 flex justify-between;
+  p {
+    @apply  text-[14px] font-bold;
+  }
+}
+
+.heroPosition {
+  @apply flex  justify-between  items-center w-full h-auto px-[10px] py-[5px] mb-12;
+  border: 4px solid transparent;
+  border-image: linear-gradient(to bottom, yellow, cyan) 1;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  animation: pulseBorder 2s infinite ease-in-out;
+}
+
+
+.positionNumber {
+  @apply text-[24px] font-bold;
+  /*text-shadow: 0 0 10px rgba(255,255,255,0.5);*/
+}
+
+.positionYellow {
+  @apply text-yellow-400;
+}
+
+.positionCyan {
+  @apply text-cyan-400;
+}
+
+.heroPoint{
+  @apply flex flex-col items-center justify-center  w-auto h-[160px]  relative;
+}
+
+.pointIcon {
+  @apply w-auto h-[150px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  z-index: -1;
+  animation: pulseShadow 2s infinite ease-in-out;
+}
+
+.number{
+  @apply text-center text-[64px] font-bold text-yellow-400;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.heroImageText {
+  @apply w-auto max-w-[250px] h-auto mb-4;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.heroDetail{
+  @apply text-center  uppercase  text-[20px] font-bold mt-12 mb-4;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+
+.containerCode{
+  @apply w-full mb-8 mt-4 flex flex-col items-center justify-center;
+}
+
+
+.heroCodeContainer{
+  @apply w-full  flex flex-col items-center  mt-12;
+}
+
+
+@keyframes pulseBorder {
+  0%, 100% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  }
+  50% {
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  }
+}
+
+
+@keyframes pulseShadow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  }
+}

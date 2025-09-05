@@ -1,0 +1,40 @@
+
+.gameSection {
+    @apply w-full  min-h-[300px] flex flex-col items-center text-white font-futura   py-8 px-4;
+}
+
+.imageText {
+  @apply w-auto max-w-[250px] h-auto mb-4;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.tableContainer {
+  @apply w-full max-w-md  py-4;
+}
+
+.tableWrapper {
+  @apply w-full bg-[#07122a]  shadow-lg border-2 border-[#00eaff] mt-4;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.table {
+  @apply w-full;
+}
+
+.tableHead {
+  @apply flex justify-between w-full  max-w-md gap-3 text-white  text-[14px] font-bold font-futura  uppercase;
+}
+
+.tableRow {
+  @apply flex items-center justify-between  text-[16px] font-medium font-futura   py-2 px-2  border-b-2 border-[#00eaff] last:border-b-0;
+  box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+}
+
+
+.tableCellPos {
+  @apply  text-left font-bold text-yellow-400  text-[14px];
+}
+
+.tableCellScore {
+  @apply  text-right font-bold text-cyan-300 text-[16px];
+}

@@ -1,6 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .tableRankingContainer {
   @apply w-full py-4;
@@ -20,10 +17,14 @@
 
 .tableRankingRow {
   @apply flex items-center justify-between  text-[16px] font-medium font-futura   py-2 px-2  border-b-2 border-[#00eaff] last:border-b-0;
-  span { display: none}
+  box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+
+  .micro { 
+    @apply hidden w-5 h-5 mr-1  align-middle;
+  }
   &.destacar {
     @apply bg-[rgba(0,212,255,0.25)];
-    span{  display: inline-block; }
+    .micro {   @apply  inline-block; }
   }
 }
 

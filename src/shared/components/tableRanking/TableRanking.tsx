@@ -35,7 +35,13 @@ const TableRanking = ({ rankingData }: TableRankingProps) => {
               className={`${styles.tableRankingRow} ${idx < 4 ? styles.destacar : ''}`}
               key={item.name}
             >
-              <div className={styles.tableRankingCellPos}><span>🎤</span> {item.pos}</div>
+              <div className={styles.tableRankingCellPos}> 
+                <img  src="./public/assets/icon-micro-sm.png" 
+                      alt='micro' 
+                      className={styles.micro} 
+                />
+                {item.pos}
+              </div>
               <div className={styles.tableRankingCell}>{item.name}</div>
               <div className={styles.tableRankingCellScore}>{item.score}</div>
             </div>
