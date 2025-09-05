@@ -44,7 +44,7 @@ const FormRegister = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.3, 0.3)}
+                        delay={{ initial: 0.3, exit: 0.3 }}
                     />
                 )}
             />
@@ -66,7 +66,7 @@ const FormRegister = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.4, 0.4)}
+                        delay={{ initial: 0.4, exit: 0.4 }}
                     />
                 )}
             />
@@ -93,7 +93,7 @@ const FormRegister = () => {
                             value={value}
 
                             required
-                            {...fadeInMotion(0.5, 0.5)}
+                            delay={{ initial: 0.5, exit: 0.5 }}
                         />
                     )}
                 />
@@ -116,7 +116,7 @@ const FormRegister = () => {
                             value={value}
 
                             required
-                            {...fadeInMotion(0.5, 0.5)}
+                            delay={{ initial: 0.5, exit: 0.5 }}
                         />
                     )}
                 />
@@ -139,7 +139,7 @@ const FormRegister = () => {
                             value={value}
 
                             required
-                            {...fadeInMotion(0.5, 0.5)}
+                            delay={{ initial: 0.5, exit: 0.5 }}
                         />
                     )}
                 />
@@ -163,7 +163,7 @@ const FormRegister = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.6, 0.6)}
+                        delay={{ initial: 0.6, exit: 0.6 }}
                     />
                 )}
             />
@@ -186,7 +186,7 @@ const FormRegister = () => {
                         value={value}
 
                         required
-                        {...fadeInMotion(0.7, 0.7)}
+                        delay={{ initial: 0.7, exit: 0.7 }}
                     />
                 )}
             />
@@ -202,9 +202,9 @@ const FormRegister = () => {
                         onBlur={onBlur}
 
                         feedback={ errors.tyc?.message }
-                        {...fadeInMotion(0.8, 0.8)}
+                        delay={{ initial: 0.8, exit: 0.8 }}
                     >
-                        <motion.p {...fadeInMotion(0.8,0.8)}>He leído, entendido y acepto los <a href="#" target="_blank">Términos de Uso</a> del sitio web.</motion.p>
+                        <p>He leído, entendido y acepto los <a href="#" target="_blank">Términos de Uso</a> del sitio web.</p>
                     </CheckboxField>
                 )}
             />
@@ -220,9 +220,9 @@ const FormRegister = () => {
                         onBlur={onBlur}
 
                         feedback={ errors.pyp?.message }
-                        {...fadeInMotion(0.9, 0.9)}
+                        delay={{ initial: 0.9, exit: 0.9 }}
                     >
-                        <motion.p {...fadeInMotion(0.9,0.9)} >Declaro que soy mayor de edad y autorizo que mis datos personales sean recolectados y tratados en las condiciones que se explican en el siguiente <a href="#" target="_blank">Aviso de Privacidad y de Cookies.</a></motion.p>
+                        <p>Declaro que soy mayor de edad y autorizo que mis datos personales sean recolectados y tratados en las condiciones que se explican en el siguiente <a href="#" target="_blank">Aviso de Privacidad y de Cookies.</a></p>
                     </CheckboxField>
                 )}
             />

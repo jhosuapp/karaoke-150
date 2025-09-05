@@ -3,6 +3,7 @@ import {  motion, MotionProps } from 'framer-motion';
 
 import styles from './dropdown.module.css';
 import DangerIcon from '/assets/icon-error.svg';
+import { fadeInMotion } from '../../motion';
 
 type NativeProps = InputHTMLAttributes<HTMLSelectElement>;
 
@@ -10,16 +11,18 @@ type CustomProps = {
     feedback?: string;
     placeholder: string;
     removeIcon?: boolean;
-    options: { value: string, name: string }[]
+    options: { value: string, name: string }[];
+    delay: { initial: number, exit: number };
 }
 
 type Props = NativeProps & CustomProps & MotionProps;
 
 
-const Dropwdown = ({ feedback, style, placeholder, options, removeIcon = false, ...props }:Props) => {
+const Dropwdown = ({ feedback, style, placeholder, options, removeIcon = false, delay, ...props }:Props) => {
     return (
         <motion.div 
             className={ `global-field ${styles.dropwdown} ${feedback && 'global-error-field'}` }
+            {...fadeInMotion(delay.initial, delay.exit)}
         >
             <div className='global-field__content'>
                 <motion.select 
