@@ -200,11 +200,12 @@ const FormRegister = () => {
                         id="tyc"
                         onChange={onChange}
                         onBlur={onBlur}
+                        className="mt-5"
 
                         feedback={ errors.tyc?.message }
-                        delay={{ initial: 0.8, exit: 0.8 }}
+                        delay={{ initial: 0.4, exit: 0.4 }}
                     >
-                        <p>He leído, entendido y acepto los <a href="#" target="_blank">Términos de Uso</a> del sitio web.</p>
+                        <p className="mt-5">He leído, entendido y acepto los <a href="#" target="_blank">Términos de Uso</a> del sitio web.</p>
                     </CheckboxField>
                 )}
             />

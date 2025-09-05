@@ -6,7 +6,7 @@ import { RegisterInterface, registerValidation } from '../validations/register.v
 import { defaultPropsSwalUnexpected } from '../../../shared/constants';
 import { isAlegalAge } from '../../../shared/utilities';
 import { useEffect } from 'react';
-import { useRegisterStore } from '../stores/register.store';
+import { useRegisterStore } from '../stores';
 import { useKaraokeStore } from '../../karaoke/stores';
 import { useNavigate } from 'react-router-dom';
 import { RANKING_PATH } from '../../../router/routes.constant';
@@ -71,7 +71,7 @@ const useRegisterController = () => {
             if(!responseProcessVideo.response.url){
                 navigate(RANKING_PATH);
             }
-            
+
             setIsSendRegisterForm(true);
         } catch (error:any) {
             Swal.fire(defaultPropsSwalUnexpected);

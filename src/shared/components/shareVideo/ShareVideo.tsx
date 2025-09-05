@@ -1,18 +1,22 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
 import styles from './shareVideo.module.css';
-import { countdownMotion, fadeInMotion } from '../../../../shared/motion';
-import { Button } from '../../../../shared/components';
-import { useShareVideoController } from '../../hooks';
 
 import bg from '/assets/preview-update.png';
+import { useShareVideoController } from '../../hooks';
+import { countdownMotion, fadeInMotion } from '../../motion';
+import { Button } from '../button/Button';
 
-const ShareVideo = () => {
+type Props = {
+    userName?: string;
+}
+
+const ShareVideo = ({ userName }:Props) => {
     const { 
         shareVideo,
-        registerData,
         responseProcessVideo,
         isLoad,
+        hanldeNavigate,
         isVideoPreloaded
      } = useShareVideoController();
 
@@ -26,7 +30,7 @@ const ShareVideo = () => {
                     className="global-title"
                     {...fadeInMotion(0.2, 0.2)}
                 >
-                    { registerData?.name ?? 'usuario' }, comparte tu video y dobla tus puntos
+                    { userName ?? 'usuario' }, comparte tu video y dobla tus puntos
                 </motion.h2>
                 <motion.p 
                     className='global-dsc my-10'
@@ -55,10 +59,11 @@ const ShareVideo = () => {
                             key={ `preload-${isVideoPreloaded}` }
                         />
                     </AnimatePresence>
-                    <Button 
+                    <Button
                         {...fadeInMotion(0.6, 0.6)}
                         text='Seguir sin compartir'
                         style='primary'
+                        onClick={ hanldeNavigate }
                     />
                 </div>
             </article>

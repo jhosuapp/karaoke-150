@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useKaraokeStore } from '../../karaoke/stores';
-import { useRegisterStore } from '../stores/register.store';
+import { useKaraokeStore } from '../../features/karaoke/stores';
+import { useNavigate } from 'react-router-dom';
+import { RANKING_PATH } from '../../router/routes.constant';
 
 const useShareVideoController = () => {
-    const registerData = useRegisterStore( state => state.registerData );
+    const navigate = useNavigate();
     const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
     const [isLoad, setIsLoad] = useState<boolean>(false);    
     const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -64,12 +65,16 @@ const useShareVideoController = () => {
             console.warn("Error al compartir:", err);
         }
     }
+
+    const hanldeNavigate = ()=>{
+        navigate(RANKING_PATH);
+    }
     
     return {
         shareVideo: videoFile ? sharePreloadedVideo : shareVideo,
-        registerData,
         responseProcessVideo,
         isLoad,
+        hanldeNavigate,
         isVideoPreloaded: !!videoFile
     };
 };

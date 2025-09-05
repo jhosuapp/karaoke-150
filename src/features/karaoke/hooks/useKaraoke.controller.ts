@@ -7,7 +7,7 @@ import { useKaraokeStore } from "../stores";
 import { useAudioPhytonQuery } from "./useAudioPhyton.query";
 import { defaultPropsSwalUnexpected } from "../../../shared/constants";
 import { useVideoAndAudioProcessing } from "./useVideoAndAudioProcessing.query";
-import { REGISTER_PATH } from "../../../router/routes.constant";
+import { LOGIN_PATH } from "../../../router/routes.constant";
 
 type Props = {
     stopRecording: ()=> void;
@@ -174,7 +174,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
 
 
     const redirectRegister = () => {      
-        navigate(REGISTER_PATH);
+        navigate(LOGIN_PATH);
     };
 
     return {

@@ -3,7 +3,7 @@
 }
 
 .checkboxFieldContent label{
-    @apply text-checkbox text-white text-left;
+    @apply text-checkbox text-white text-left leading-none;
 }
 
 .checkboxFieldContent label a{

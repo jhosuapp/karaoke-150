@@ -1,8 +1,8 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { Layout } from '../shared';
 import { anonymous } from '../guards';
-import { KaraokeView, RegisterView } from '../features';
-import { HOME_PATH, REGISTER_PATH } from './routes.constant';
+import { KaraokeView, LoginView, RegisterView } from '../features';
+import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from './routes.constant';
 
 const Router = () => {
     return createBrowserRouter(
@@ -32,6 +32,13 @@ const Router = () => {
                         path: REGISTER_PATH,
                         loader: anonymous(),
                         element: <RegisterView />,
+                    },
+                    {
+                        index: true,
+                        id: 'login',
+                        path: LOGIN_PATH,
+                        loader: anonymous(),
+                        element: <LoginView />,
                     },
                 ],
             },
