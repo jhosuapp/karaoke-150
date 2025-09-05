@@ -43,6 +43,7 @@ const InputCode = ({ inputCode }: InputCodeProps) => {
           id="code"
           name="code"
           placeholder="Escribe tu código aquí"
+          autoComplete='off'
           value={code}
           onChange={e => { setCode(e.target.value); setError(false); setShowMsg(false); }}
           className={`${styles.input} ${error ? styles.inputError : ''}`}

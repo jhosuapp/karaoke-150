@@ -14,7 +14,7 @@
   @apply text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-lg mb-4 tracking-wider;
 }
 .heroImageTitle {
-  @apply  max-w-[400px] pb-[40px];
+  @apply  w-full max-w-[400px] pb-[40px] px-[20px];
 }
 
 .heroImageWrapper {
@@ -53,7 +53,8 @@
 }
 
 .heroButton {
-  @apply w-full mt-4 py-3  bg-yellow-400 text-[#001E5A] font-bold  font-futura text-[20px] uppercase tracking-wide shadow hover:bg-yellow-300 transition;
+  @apply w-full mt-4 py-3  bg-secondary  text-cuartary  font-bold  font-futura text-[20px] uppercase tracking-wide shadow hover:bg-yellow-300 transition;
+  text-shadow: 0 1px 0 #FFEB00;
 }
 
 .heroInputError {

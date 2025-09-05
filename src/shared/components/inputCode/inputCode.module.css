@@ -19,7 +19,9 @@
 }
 
 .button {
-  @apply w-full mt-4 py-3  bg-yellow-400 text-[#001E5A] font-bold  font-futura text-[20px] uppercase tracking-wide shadow hover:bg-yellow-300 transition;
+  @apply w-full mt-4 py-3   text-cuartary  font-bold  font-futura text-[20px] uppercase tracking-wide shadow hover:bg-yellow-300 transition;
+  text-shadow: 0 1px 0 #FFEB00;
+  background-color: rgb(216 187 57 / var(--tw-bg-opacity, 1));
 }
 
 .inputError {
