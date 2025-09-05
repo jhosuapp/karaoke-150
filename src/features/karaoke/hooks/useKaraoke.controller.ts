@@ -18,9 +18,10 @@ type Props = {
     startRecordingCamera: ()=> void;
     // Files and items
     audioBlob: Blob;
+    videoBlob: Blob;
 }
 
-const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera, audioBlob }:Props) => {
+const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera, audioBlob, videoBlob }:Props) => {
     const controls = useAnimation();
     const navigate = useNavigate();
     const [count, setCount] = useState<number>(0);
@@ -39,44 +40,53 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const { 
         processVideoShotstackMutation, 
         processStatusVideoQuery,
-        processAudioPython
+        processAudioPython,
+        processVideoDrupalMutation,
+        startProcessing
     } = useVideoAndAudioProcessing();
 
     // Validate video generate
     useEffect(()=>{
-        const errorProcessVideo = processStatusVideoQuery.isError || processVideoShotstackMutation.isError;
-
-        if(errorProcessVideo || processAudioPython.isError){
-            Swal.fire({
-                ...defaultPropsSwalUnexpected,
-                title: errorProcessVideo ? 'Error en el procesamiento del video' : 'Error en el procesamiento del audio',
-                text: 'Intenta nuevamente más tarde.',
-            }).then(()=>{
-                window.location.reload();
-            });
-            return;
-        }
-
-        if(processStatusVideoQuery?.data && processStatusVideoQuery?.data?.response?.status === 'done' && processVideoShotstackMutation.isSuccess && processAudioPython.isSuccess){
+        if(processStatusVideoQuery?.data && processStatusVideoQuery?.data?.response?.status === 'done' && processVideoShotstackMutation.isSuccess && processAudioPython.isSuccess && processVideoDrupalMutation.isSuccess){
             setIsLoadVideo(false);
         }else{
             setIsLoadVideo(true);
-            if(processAudioPython.isPending){
-                return setLoaderText("Subiendo el audio");
-            }
-            if(processVideoShotstackMutation.isPending){
-                return setLoaderText("Subiendo video");
-            }
-            if(!processStatusVideoQuery?.data?.response?.url){
-                return setLoaderText("Generando video");
-            }
-            setLoaderText("Cargando");
+            if(processVideoDrupalMutation.isPending) return setLoaderText("Subiendo el video")
+            if(processAudioPython.isPending) return setLoaderText("Subiendo el audio")
+            if(processVideoShotstackMutation.isPending) return setLoaderText("Creación de video en cola")
+            if(!processStatusVideoQuery?.data?.response?.url) return setLoaderText("Generando video")
+            return setLoaderText("Cargando");
         }
 
         if(processStatusVideoQuery?.data?.response?.url){
             setResponseProcessVideo(processStatusVideoQuery?.data);
         }
-    },[ processStatusVideoQuery, processVideoShotstackMutation, processAudioPython]);
+    },[ processStatusVideoQuery, processVideoShotstackMutation, processAudioPython, processVideoDrupalMutation]);
+
+    // Audio and video processing
+    useEffect(() => {
+        const processAll = async () => {
+            try {
+                if (isRecorderFinished && videoBlob && audioBlob) {
+                    const videoFile = new File([videoBlob], "recording.webm", {
+                        type: "video/webm",
+                    });
+                    
+                    const audioFile = new File([audioBlob], "audio.webm", {
+                        type: "audio/webm",
+                    });
+                    
+                    await startProcessing(videoFile, audioFile);
+                }
+            } catch (error) {
+                console.error("Error en processAll:", error);
+            }
+        };
+    
+        if (isRecorderFinished) {
+            processAll();
+        }
+    }, [isRecorderFinished, videoBlob, audioBlob]);
 
     // Get audio, lyrics and times
     useEffect(()=>{
@@ -93,26 +103,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
             });
         }
     },[audioPythonQuery.data, audioPythonQuery.isError, setResponseAudio]);
-
-    // Generate Video in shotstack
-    useEffect(()=>{
-        const processAudio = async () => {
-            if (!audioBlob) {
-                console.error("No hay audio grabado");
-                return;
-            }
-
-            const audioFile = new File([audioBlob], "recording.webm", {
-                type: audioBlob.type || "audio/webm",
-            });
-            
-            await processAudioPython.mutateAsync(audioFile);
-        }
-
-        if(isRecorderFinished){
-            processAudio();
-        }
-    },[isRecorderFinished, audioBlob]);
 
     // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
@@ -133,7 +123,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                 setCurrentTime(now);
                 
                 if(now >= (audio_duration - 0.05)){
-                    audio.loop = false;
                     audio.pause();
                     clearInterval(interval);
                     setIsPlaying(false);

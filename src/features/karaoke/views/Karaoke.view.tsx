@@ -29,6 +29,7 @@ const KaraokeView = () => {
         startRecording,
         stopRecording,
         videoUrl,
+        videoBlob
     } = useUnifyStreamsController({ audioStream, mediaStream });
     // Principal controller
     const { 
@@ -52,7 +53,8 @@ const KaraokeView = () => {
         startRecordingAudio, 
         startRecordingCamera, 
         startRecording,
-        audioBlob
+        audioBlob,
+        videoBlob
     });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;

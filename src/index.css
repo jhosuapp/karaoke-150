@@ -94,6 +94,10 @@ div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{
     @apply text-cuartary;
 }
 
+.swal2-container{
+    @apply !z-[999999];
+}
+
 @font-face {
     font-family: "FuturaStd";
     src: url("./config/typography/FuturaStdBook.otf") format("truetype");
