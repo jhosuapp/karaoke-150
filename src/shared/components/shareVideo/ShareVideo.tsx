@@ -15,7 +15,6 @@ const ShareVideo = ({ userName }:Props) => {
     const { 
         shareVideo,
         responseProcessVideo,
-        isLoad,
         hanldeNavigate,
         isVideoPreloaded
      } = useShareVideoController();
@@ -54,7 +53,6 @@ const ShareVideo = ({ userName }:Props) => {
                             text={isVideoPreloaded ? 'Compartir mi video' : 'Preparando video...'}
                             style='secondary'
                             onClick={ shareVideo }
-                            isLoad={ isLoad }
                             disabled={ isVideoPreloaded }
                             key={ `preload-${isVideoPreloaded}` }
                         />

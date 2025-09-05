@@ -1,36 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useKaraokeStore } from '../../features/karaoke/stores';
 import { useNavigate } from 'react-router-dom';
-import { RANKING_PATH } from '../../router/routes.constant';
+import { RANKING_PATH, SHARE_URL_PATH } from '../../router/routes.constant';
 
 const useShareVideoController = () => {
     const navigate = useNavigate();
     const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
-    const [isLoad, setIsLoad] = useState<boolean>(false);    
     const [videoFile, setVideoFile] = useState<File | null>(null);
 
-    const shareVideo = async () => {
-        setIsLoad(true);
-        
-        try {
-            const res = await fetch(responseProcessVideo?.response?.url);
-            const blob = await res.blob();
-            const file = new File([blob], "video.mp4", { type: "video/mp4" });
-
-            if (navigator.share && navigator.canShare({ files: [file] })) {
-                await navigator.share({
-                    files: [file],
-                    text: '#Aguila',
-                });
-            } 
-        } catch (err) {
-            console.warn("Error al compartir:", err);
-            alert("No se pudo compartir directamente. El video se descargará.");
-        } finally {
-            setIsLoad(false);
-        }
-    }
-    
     useEffect(() => {
         const preloadVideo = async () => {
             if (responseProcessVideo?.response?.url) {
@@ -49,17 +26,15 @@ const useShareVideoController = () => {
     }, [responseProcessVideo]);
 
     const sharePreloadedVideo = async () => {
-        if (!videoFile) {
-            await shareVideo();
-            return;
-        }
-
         try {
+            console.log('click');
             if (navigator.share && navigator.canShare({ files: [videoFile] })) {
                 await navigator.share({
                     files: [videoFile],
                     text: '#Aguila',
                 });
+                
+                navigate(SHARE_URL_PATH);
             } 
         } catch (err) {
             console.warn("Error al compartir:", err);
@@ -71,9 +46,8 @@ const useShareVideoController = () => {
     }
     
     return {
-        shareVideo: videoFile ? sharePreloadedVideo : shareVideo,
+        shareVideo: sharePreloadedVideo,
         responseProcessVideo,
-        isLoad,
         hanldeNavigate,
         isVideoPreloaded: !!videoFile
     };

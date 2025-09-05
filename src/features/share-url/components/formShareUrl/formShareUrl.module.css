@@ -1,0 +1,12 @@
+.formShareUrl{
+    @apply pt-6 pb-5 flex flex-col gap-4;
+}
+
+.formShareUrl h1{
+    @apply block mb-5;
+}
+
+.formShareUrl button{
+    @apply mt-8;
+}
+

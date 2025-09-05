@@ -32,7 +32,6 @@ const FormLogin = () => {
                         id="email"
                         placeholder="Correo electrónico"
                         minLength={1}
-                        maxLength={50}
                         feedback={ errors.email?.message }
                         
                         onChange={onChange}
