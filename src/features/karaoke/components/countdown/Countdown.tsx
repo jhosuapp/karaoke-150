@@ -24,7 +24,7 @@ const Countdown = ({ count, controls }:Props) => {
                     className={ styles.countDown__icon }
                     {...countdownMotion()}
                 >
-                    <img src={`/assets/icon-counter-update-${count}.png`} alt="" />
+                    <img src={`/assets/icon-count-${count}.png`} alt="" />
                 </motion.picture>
             </AnimatePresence>
         </motion.section>

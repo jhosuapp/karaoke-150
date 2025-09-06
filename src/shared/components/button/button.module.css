@@ -8,7 +8,7 @@
 
 .button span{
     transition: .3s ease left;
-    @apply uppercase text-button relative left-0 font-extrabold leading-none;
+    @apply uppercase text-button relative left-0 font-extrabold;
 }
 
 @media(max-width: 768px){

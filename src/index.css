@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 body {
-    @apply flex h-[100vh] justify-center text-center font-futura;
+    @apply flex h-[100vh] justify-center text-center font-openSans;
 }
 
 .global-dsc,
 .swal2-html-container{
     text-shadow: 0 0 8px #001E5A, 0 0 8px #001E5A;
-    @apply text-white text-description font-futura font-medium leading-7;
+    @apply text-white text-description font-medium leading-7;
 }
 
 .global-dsc--secondary{
@@ -18,11 +18,11 @@ body {
 
 .global-title,
 .swal2-title{
-    @apply text-white text-title uppercase leading-10 font-futura font-extrabold;
+    @apply text-white text-title uppercase leading-10 font-openSans font-extrabold;
 }
 
 .global-subtitle{
-    @apply text-white text-subtitle uppercase leading-10 font-futura font-extrabold;
+    @apply text-white text-subtitle uppercase leading-10 font-openSans font-extrabold;
 }
 
 .global-title-s{
@@ -35,7 +35,7 @@ body {
 
 .global-points{
     text-shadow: 0 0 19px #3EC5FF;
-    @apply text-white text-center text-points uppercase leading-10 font-futura font-extrabold;
+    @apply text-white text-center text-points uppercase leading-10 font-openSans font-extrabold;
 }
 
 /* Fields */
@@ -48,7 +48,7 @@ body {
     background: rgba(0, 30, 90, 0.24);
     box-shadow: 0 0 24px 0 #3EC5FF inset, 0 0 14px 0 #3EC5FF;
     backdrop-filter: blur(7.5px);
-    @apply px-5 py-2 min-h-[72px] w-full block outline-none text-input transition-all text-white placeholder:text-white border-2 border-white;
+    @apply px-5 py-2 min-h-[72px] w-full block outline-none text-input transition-all text-white placeholder:text-white border-2 border-white !rounded-none;
 }
 
 .global-field__content{
@@ -99,25 +99,19 @@ div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{
 }
 
 @font-face {
-    font-family: "FuturaStd";
-    src: url("./config/typography/FuturaStdBook.otf") format("truetype");
+    font-family: "openSans";
+    src: url("./config/typography/OpenSans-Regular.ttf") format("truetype");
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "FuturaStd";
-    src: url("./config/typography/FuturaStdMedium.otf") format("truetype");
+    font-family: "openSans";
+    src: url("./config/typography/OpenSans-Medium.ttf") format("truetype");
     font-weight: 500;
 }
 
 @font-face {
-    font-family: "FuturaStd";
-    src: url("./config/typography/FuturaStdCondensedBold.otf") format("truetype");
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: "FuturaStd";
-    src: url("./config/typography/FuturaStdCondensedExtraBd.otf") format("truetype");
+    font-family: "openSans";
+    src: url("./config/typography/OpenSans_Condensed-ExtraBold.ttf") format("truetype");
     font-weight: 800;
 }

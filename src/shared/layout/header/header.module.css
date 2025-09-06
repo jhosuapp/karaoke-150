@@ -9,3 +9,19 @@
 .header__logo img{
     @apply block w-full;
 }
+
+.header__content{
+    @apply flex justify-between items-center;
+}
+
+.header__action{
+    @apply flex flex-col gap-2 justify-center items-center;
+}
+
+.header__action p{
+    @apply !text-sm uppercase font-medium;
+}
+
+.header__action img{
+    @apply w-[40px] object-contain block;
+}

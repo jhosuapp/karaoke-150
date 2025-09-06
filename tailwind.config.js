@@ -42,7 +42,7 @@ export default {
                 checkbox: '14px'
             },
             fontFamily: {
-                futura: ["FuturaStd", "sans-serif"],
+                openSans: ["openSans", "sans-serif"],
             },
             keyframes: {
                 fadeIn: {
