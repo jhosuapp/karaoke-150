@@ -67,32 +67,12 @@ const WrapperTables = ({ className, headItems, bodyItemsPrimary, bodyItemsSecond
                         </motion.div>
                     ))}
                     {bodyItemTertiary && (
-                        <motion.div
-                            className="p-[2px]"
-                            animate={{
-                                background: [
-                                    "linear-gradient(45deg, #FFEB00, #00D4FF)",
-                                    "linear-gradient(90deg, #FFEB00, #00D4FF)",
-                                    "linear-gradient(180deg, #FFEB00, #00D4FF)",
-                                    "linear-gradient(360deg, #FFEB00, #00D4FF)",
-                                    "linear-gradient(180deg, #FFEB00, #00D4FF)",
-                                    "linear-gradient(90deg, #FFEB00, #00D4FF)",
-                                    "linear-gradient(45deg, #FFEB00, #00D4FF)",
-                                ],
-                            }}
-                            transition={{
-                                duration: 4,
-                                ease: "linear",
-                                repeat: Infinity,
-                            }}
+                        <motion.div 
+                            {...fadeInMotion(0.8, 0.8)}
+                            className={`${styles.wrapperTables__body__item} ${styles.wrapperTables__body__item__position}`}
                         >
-                            <motion.div 
-                                {...fadeInMotion(0.3, 0.3)}
-                                className={`bg-black bg-opacity-25 ${styles.wrapperTables__body__item}`}
-                            >
-                                <p>{bodyItemTertiary.position}</p>
-                                <AnimatedCounter value={bodyItemTertiary.score} />
-                            </motion.div>
+                            <p>{bodyItemTertiary.position}</p>
+                            <AnimatedCounter value={bodyItemTertiary.score} />
                         </motion.div>
                     )}
                 </article>

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Subtitles, Permissions, Instructions, Countdown, Camera, Feedback } from "../components"
+import { Subtitles, Permissions, Instructions, Countdown, Camera, Feedback, SuccessCode } from "../components"
 import { useAudioController, useCameraController, useKaraokeController, useUnifyStreamsController } from "../hooks";
 import { Bg, LoaderSecondary } from "../../../shared/components";
 
@@ -45,7 +45,9 @@ const KaraokeView = () => {
         processStatusVideoQuery,
         loaderText,
         processAudioPython,
-        redirectRegister
+        redirectRegister,
+        handlePermissions,
+        showPermissions
     } = useKaraokeController({ 
         stopRecordingAudio, 
         stopRecordingCamera, 
@@ -54,10 +56,12 @@ const KaraokeView = () => {
         startRecordingCamera, 
         startRecording,
         audioBlob,
-        videoBlob
+        videoBlob,
     });
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
+
+    console.log(showPermissions);
 
     return (
         <section className="w-full">
@@ -67,6 +71,9 @@ const KaraokeView = () => {
             {/* First step flux */}
             <AnimatePresence mode='wait'>
                 {/* Instructions */}
+                {!showPermissions && (
+                    <SuccessCode handlePermissions={ handlePermissions } />
+                )}
                 {!isPlaying && permissions && count === 0 && !isRecorderFinished &&
                     <Instructions 
                         key={`key${permissions}`}
@@ -74,7 +81,7 @@ const KaraokeView = () => {
                     />
                 }
                 {/* Permissions camera, mic and screen */}
-                {!permissions && !isRecorderFinished &&
+                {showPermissions && !permissions && !isRecorderFinished &&
                     <Permissions 
                         key={ `key${permissions}` }
                         requestPermissionsMicrophone={ requestPermissionsMicrophone } 

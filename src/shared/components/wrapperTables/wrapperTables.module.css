@@ -44,3 +44,13 @@
 .wrapperTables__body__item__podium{
     background: rgba(0, 212, 255, 0.25);
 }
+
+.wrapperTables__body__item__position{
+    border: 4px solid transparent; 
+    -o-border-image: linear-gradient(360deg, #FFEB00, #00E3FF) 1; 
+    border-image: linear-gradient(360deg, #FFEB00, #00E3FF) 1;
+}
+
+.wrapperTables__body__item__position p{
+    @apply !text-lg;
+}

@@ -30,6 +30,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const [isRecorderFinished, setIsRecorderFinished] = useState<boolean>(false);
     const [loaderText, setLoaderText] = useState<string>('Cargando');
     const [isLoadVideo, setIsLoadVideo] = useState<boolean>(false);
+    const [showPermissions, setShowPermissions] = useState<boolean>(false);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
     const setIsPlaying = useKaraokeStore(state => state.setIsPlaying);
     const setResponseAudio = useKaraokeStore(state => state.setResponseAudio);
@@ -166,6 +167,10 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         navigate(LOGIN_PATH);
     };
 
+    const handlePermissions = () => {      
+        setShowPermissions(true);
+    };
+
     return {
         count,
         controls,
@@ -180,7 +185,9 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         isLoadVideo, 
         processStatusVideoQuery,
         processAudioPython,
-        redirectRegister
+        redirectRegister,
+        showPermissions,
+        handlePermissions
     }
 }
 

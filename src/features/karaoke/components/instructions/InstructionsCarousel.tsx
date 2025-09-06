@@ -11,12 +11,29 @@ import { fadeInMotion } from '../../../../shared/motion';
 import { Container } from '../../../../shared/components';
 
 import styles from './instructions.module.css';
-import icon from '/assets/tmp/icon-2.png';
 import iconLeft from '/assets/icon-arrow-left-update.svg';
 import iconRight from '/assets/icon-arrow-right-update.svg';
 
+const slidesData = [
+    {
+        asset: '/assets/tmp/icon-instructions-1.png',
+        description: 'Alístate para grabar tu video en un lugar sin ruido.'
+    },
+    {
+        asset: '/assets/tmp/icon-instructions-2.png',
+        description: 'Acepta los permisos de audio y video.'
+    },
+    {
+        asset: '/assets/tmp/icon-instructions-3.png',
+        description: 'Canta cuando te lo indiquemos y sigue bien la letra.'
+    },
+    {
+        asset: '/assets/tmp/icon-instructions-4.png',
+        description: 'Comparte tu video y duplica tus puntos'
+    },
+]
+
 const InstructionsCarousel = () => {
-    const slides = [1, 2, 3, 4, 5];
 
     return (
         <>
@@ -33,7 +50,6 @@ const InstructionsCarousel = () => {
                         className={ styles.InstructionsCarousel__swiper }
                         modules={[Navigation, Pagination, Keyboard, A11y, EffectFade]}
                         keyboard={{ enabled: true }}
-                        loop
                         spaceBetween={16}
                         slidesPerView={1}
                         effect="fade"
@@ -44,13 +60,13 @@ const InstructionsCarousel = () => {
                             prevEl: ".custom-prev",
                         }}
                     >
-                    {slides.map((n) => (
-                        <SwiperSlide key={n} className={ styles.InstructionsCarousel__swiper__item }>
+                    {slidesData.map((item, i) => (
+                        <SwiperSlide key={i} className={ styles.InstructionsCarousel__swiper__item }>
                             <picture>
-                                <img src={ icon } alt="" />
+                                <img src={ item.asset } alt="" />
                             </picture>
                             <p className="global-dsc">
-                                Alístate para grabar tu video en un lugar sin ruido. { n }
+                                {item.description}
                             </p>
                         </SwiperSlide>
                     ))}

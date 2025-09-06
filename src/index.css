@@ -98,6 +98,12 @@ div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{
     @apply !z-[999999];
 }
 
+/* Swiper */
+
+.swiper-button-disabled{
+    @apply opacity-40 pointer-events-none;
+}
+
 @font-face {
     font-family: "openSans";
     src: url("./config/typography/OpenSans-Regular.ttf") format("truetype");
