@@ -9,12 +9,13 @@ type Props = {
 } & MotionProps;
 
 const Container = ({ children, className, ...props }:Props) => {
+
     return (
         <motion.section 
-            className={ `${styles.container} ${className}` }
+            className={ `${styles.container} ${className} min-h-10` }
             {...props}
         >
-            { children }
+            {children}
         </motion.section>
     )
 }

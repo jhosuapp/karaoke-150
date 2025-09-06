@@ -1,9 +1,12 @@
 import { useEnterCodeController } from '../../hooks/useEnterCode.controller';
 import { Controller } from 'react-hook-form';
+import { motion } from 'framer-motion';
 import { TextField } from '../textField/TextField';
 import { Button } from '../button/Button';
 import { fadeInMotion } from '../../motion';
+import { ImageText } from '../imageText/ImageText';
 
+import imageText from '/assets/tmp/code-title.png';
 import styles from './enterCode.module.css';
 
 type Props = {
@@ -21,7 +24,18 @@ const EnterCode = ({ text, hasTitle }:Props) => {
     } = useEnterCodeController();
 
     return (
-        <form className={ styles.enterCode } onSubmit={ handleSubmit(onSubmit) } noValidate >
+        <motion.form 
+            className={ styles.enterCode } onSubmit={ handleSubmit(onSubmit) } noValidate 
+            {...fadeInMotion(0.05, 0.05)}
+        >
+            {hasTitle && 
+                <motion.div
+                    className='mb-2'
+                    {...fadeInMotion(0.1, 0.1)}
+                >
+                    <ImageText src={ imageText } />
+                </motion.div>
+            }
             <Controller
                 name="code"
                 control={control}
@@ -39,7 +53,8 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                         value={value}
 
                         required
-                        delay={{ initial: 0.1, exit: 0.1 }}
+                        className='text-center'
+                        delay={{ initial: 0.2, exit: 0.2 }}
                     />
                 )}
             />
@@ -48,9 +63,9 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                 text={ text }
                 type="submit"
                 style="secondary"
-                {...fadeInMotion(0.2, 0.2)}
+                {...fadeInMotion(0.3, 0.3)}
             />
-        </form>
+        </motion.form>
     )
 }
 

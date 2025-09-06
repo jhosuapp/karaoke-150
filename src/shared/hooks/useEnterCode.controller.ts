@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Swal from 'sweetalert2';
 import { EnterCodeInterface, enterCodeValidation } from '../validations';
 import { defaultPropsSwalUnexpected } from '../constants';
+import { KARAOKE_PATH } from '../../router/routes.constant';
 
 
 const useEnterCodeController = () => {
@@ -29,6 +30,7 @@ const useEnterCodeController = () => {
         try {
             console.log(formData);
             setIsFormSend(true);
+            navigate(KARAOKE_PATH);
         } catch (error:any) {
             Swal.fire(defaultPropsSwalUnexpected);
         }

@@ -3,7 +3,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 
 type Props = {
     value: number;
-    className: string;
+    className?: string;
 };
 
 const AnimatedCounter = ({ value, className }: Props) => {

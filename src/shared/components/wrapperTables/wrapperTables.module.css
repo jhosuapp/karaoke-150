@@ -1,0 +1,46 @@
+.wrapperTables{
+    @apply w-full block;
+}
+
+.wrapperTables__children{
+    @apply block w-full mb-2;
+}
+
+.wrapperTables__head,
+.wrapperTables__body__item{
+    @apply flex justify-between;
+}
+
+.wrapperTables__head p,
+.wrapperTables__body__item p{
+    @apply text-white text-sm flex-1 first:text-left last:text-right;
+}
+
+.wrapperTables__head{
+    @apply py-5;
+}
+
+.wrapperTables__head p{
+    @apply uppercase font-bold;
+}
+
+.wrapperTables__body__item p{
+    @apply first:text-[#FFEB00] first:font-bold last:text-[#00D4FF] last:font-bold max-w-[100px] relative overflow-hidden text-ellipsis text-nowrap;
+}
+
+.wrapperTables__body__item{
+    box-shadow: 0 0 12px 0 #3EC5FF inset;
+    @apply border-[3px] border-white min-h-16 items-center px-4 py-3 bg-black bg-opacity-25 border-b-0 last:border-b-[3px]; 
+}
+
+.wrapperTables__body__item__top{
+    @apply flex items-center;
+}
+
+.wrapperTables__body__item__top img{
+    @apply w-8 block;
+}
+
+.wrapperTables__body__item__podium{
+    background: rgba(0, 212, 255, 0.25);
+}
