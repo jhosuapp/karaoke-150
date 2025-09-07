@@ -26,12 +26,12 @@ const EnterCode = ({ text, hasTitle }:Props) => {
     return (
         <motion.form 
             className={ styles.enterCode } onSubmit={ handleSubmit(onSubmit) } noValidate 
-            {...fadeInMotion(0.05, 0.05)}
+            {...fadeInMotion(0.4, 0.4)}
         >
             {hasTitle && 
                 <motion.div
                     className='mb-2'
-                    {...fadeInMotion(0.1, 0.1)}
+                    {...fadeInMotion(0.5, 0.5)}
                 >
                     <ImageText src={ imageText } />
                 </motion.div>
@@ -53,8 +53,8 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                         value={value}
 
                         required
-                        className='text-center'
-                        delay={{ initial: 0.2, exit: 0.2 }}
+                        className='text-center !shadow-none'
+                        delay={{ initial: 0.6, exit: 0.6 }}
                     />
                 )}
             />
@@ -63,7 +63,7 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                 text={ text }
                 type="submit"
                 style="secondary"
-                {...fadeInMotion(0.3, 0.3)}
+                {...fadeInMotion(0.7, 0.7)}
             />
         </motion.form>
     )

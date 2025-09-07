@@ -21,12 +21,18 @@ const FormShareUrl = () => {
         <>
             {isFormSend && <ModalConfirm handleRedirect={ handleRedirect } />}
             <form className={ styles.formShareUrl } onSubmit={ handleSubmit(onSubmit) } noValidate >
-                <motion.h1 
+                <motion.h2 
                     className="global-title"
                     {...fadeInMotion(0.2, 0.2)}
                 >
                     Compartenos la url de tu video
-                </motion.h1>
+                </motion.h2>
+                <motion.p 
+                    className="global-dsc mt-0 mb-6"
+                    {...fadeInMotion(0.5, 0.5)}
+                >
+                    Sube tu video a una red social y compartenos la url
+                </motion.p>
                 <Controller
                     name="url"
                     control={control}

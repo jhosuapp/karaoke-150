@@ -15,7 +15,7 @@ const RegisterView = () => {
             <Bg />
             <Container>
                 <AnimatePresence mode='wait'>
-                    {isSendRegisterForm ? (
+                    {!isSendRegisterForm ? (
                         <ShareVideo userName={ registerData?.name } key={`share-${isSendRegisterForm}`} />
                     ) : (
                         <FormRegister key={`form-${isSendRegisterForm}`} />

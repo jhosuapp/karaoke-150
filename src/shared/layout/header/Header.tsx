@@ -6,7 +6,7 @@ import logo from '/assets/logo.png';
 import icon from '/assets/icon-login-update.png';
 import styles from './header.module.css';
 import { useNavigate } from 'react-router-dom';
-import { RANKING_PATH } from '../../../router/routes.constant';
+import { LOGIN_PATH } from '../../../router/routes.constant';
 
 
 type Props = {
@@ -32,7 +32,7 @@ const Header = ({ isFixed, hasItemRight = false, text, hasRedirect }:Props) => {
                     <div>
                         <button 
                             className={ styles.header__action }
-                            onClick={ ()=> hasRedirect && navigate(RANKING_PATH) }
+                            onClick={ ()=> hasRedirect && navigate(LOGIN_PATH) }
                         >
                             <img src={ icon } alt="" />
                             <p className='global-dsc'>{ text }</p>

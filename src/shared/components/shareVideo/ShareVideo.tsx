@@ -4,7 +4,7 @@ import styles from './shareVideo.module.css';
 
 import bg from '/assets/preview-update.png';
 import { useShareVideoController } from '../../hooks';
-import { countdownMotion, fadeInMotion } from '../../motion';
+import { fadeInMotion } from '../../motion';
 import { Button } from '../button/Button';
 
 type Props = {
@@ -16,8 +16,11 @@ const ShareVideo = ({ userName }:Props) => {
         shareVideo,
         responseProcessVideo,
         hanldeNavigate,
-        isVideoPreloaded
+        isVideoPreloaded,
+        isLoad
      } = useShareVideoController();
+
+     const validateStatusShare = !isVideoPreloaded && isLoad;
 
     return (
         <motion.section
@@ -49,12 +52,12 @@ const ShareVideo = ({ userName }:Props) => {
                 <div className={ styles.shareVideo__ctas }>
                     <AnimatePresence mode='wait'>
                         <Button 
-                            {...(isVideoPreloaded ? countdownMotion() : fadeInMotion(0.5, 0.5))}
-                            text={isVideoPreloaded ? 'Compartir mi video' : 'Preparando video...'}
+                            {...fadeInMotion(0.5, 0.5)}
+                            text={!validateStatusShare  ? 'Compartir mi video' : 'Preparando video...'}
                             style='secondary'
                             onClick={ shareVideo }
-                            disabled={ isVideoPreloaded }
-                            key={ `preload-${isVideoPreloaded}` }
+                            disabled={!validateStatusShare }
+                            key={ `preload-${validateStatusShare}` }
                         />
                     </AnimatePresence>
                     <Button

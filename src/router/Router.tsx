@@ -1,8 +1,8 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { Layout } from '../shared';
 import { anonymous, auth } from '../guards';
-import { KaraokeView, LoginView, RankingView, RegisterView, ShareUrlView } from '../features';
-import { HOME_PATH, LOGIN_PATH, RANKING_PATH, REGISTER_PATH, SHARE_URL_PATH } from './routes.constant';
+import { HomeView, KaraokeView, LoginView, RankingView, RegisterView, ShareUrlView } from '../features';
+import { HOME_PATH, KARAOKE_PATH, LOGIN_PATH, RANKING_PATH, REGISTER_PATH, SHARE_URL_PATH } from './routes.constant';
 
 const Router = () => {
     return createBrowserRouter(
@@ -24,7 +24,7 @@ const Router = () => {
                         id: 'home',
                         path: HOME_PATH,
                         loader: anonymous(),
-                        element: <KaraokeView />,
+                        element: <HomeView />,
                     },
                     {
                         index: true,
@@ -53,6 +53,13 @@ const Router = () => {
                         path: RANKING_PATH,
                         loader: auth(),
                         element: <RankingView />,
+                    },
+                    {
+                        index: true,
+                        id: 'karaoke',
+                        path: KARAOKE_PATH,
+                        loader: auth(),
+                        element: <KaraokeView />,
                     },
                 ],
             },

@@ -61,8 +61,6 @@ const KaraokeView = () => {
 
     const permissions = statusMic.hasPermissions && statusCam.hasPermissions;
 
-    console.log(showPermissions);
-
     return (
         <section className="w-full">
             {/* Bg */}

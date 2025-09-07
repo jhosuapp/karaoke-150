@@ -1,0 +1,23 @@
+.video{
+    @apply w-full block;
+}
+
+.video__content{
+    @apply relative flex items-center justify-center w-full;
+}
+
+.video__portrait{
+    @apply w-full block;
+}
+
+.video__portrait img{
+    @apply w-full;
+}
+
+.video__play{
+    @apply absolute block max-w-24 w-full;
+}
+
+.video__play img{
+    @apply w-full block;
+}

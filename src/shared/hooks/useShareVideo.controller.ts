@@ -7,6 +7,52 @@ const useShareVideoController = () => {
     const navigate = useNavigate();
     const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
     const [videoFile, setVideoFile] = useState<File | null>(null);
+    const [isLoad, setIsLoad] = useState<boolean>(false);  
+
+    const hanldeNavigate = ()=>{
+        navigate(RANKING_PATH);
+    }
+
+    const downLoadVideo = async () => {
+        const url = responseProcessVideo.response.url;
+        const res = await fetch(url);
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+      
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'video.mp4';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
+        
+        navigate(SHARE_URL_PATH);
+    };
+    
+    const shareVideo = async () => {
+        setIsLoad(true);
+        try {
+            const res = await fetch(responseProcessVideo?.response?.url);
+            const blob = await res.blob();
+            const file = new File([blob], "video.mp4", { type: "video/mp4" });
+            
+            if (navigator.share && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    text: '#Aguila',
+                    title: 'Video',
+                    url: window.location.href
+                });
+            } else {
+                downLoadVideo();
+            }
+        } catch (err) {
+            downLoadVideo();
+        } finally {
+            setIsLoad(false);
+        }
+    }
 
     useEffect(() => {
         const preloadVideo = async () => {
@@ -26,8 +72,12 @@ const useShareVideoController = () => {
     }, [responseProcessVideo]);
 
     const sharePreloadedVideo = async () => {
+        if (!videoFile) {
+            await shareVideo();
+            return;
+        }
+
         try {
-            console.log('click');
             if (navigator.share && navigator.canShare({ files: [videoFile] })) {
                 await navigator.share({
                     files: [videoFile],
@@ -35,21 +85,21 @@ const useShareVideoController = () => {
                 });
                 
                 navigate(SHARE_URL_PATH);
-            } 
+            } else {
+                downLoadVideo();
+            }
         } catch (err) {
+            downLoadVideo();
             console.warn("Error al compartir:", err);
         }
     }
-
-    const hanldeNavigate = ()=>{
-        navigate(RANKING_PATH);
-    }
     
     return {
-        shareVideo: sharePreloadedVideo,
+        shareVideo: videoFile ? sharePreloadedVideo : shareVideo,
         responseProcessVideo,
-        hanldeNavigate,
-        isVideoPreloaded: !!videoFile
+        isLoad,
+        isVideoPreloaded: !!videoFile,
+        hanldeNavigate
     };
 };
 

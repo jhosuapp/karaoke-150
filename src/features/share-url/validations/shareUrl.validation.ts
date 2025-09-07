@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const allowedDomains = ["facebook.com", "twitter.com", "tiktok.com", "instagram.com"];
+const allowedDomains = ["facebook.com", "x.com", "tiktok.com", "instagram.com"];
 
 const shareUrlValidation = z.object({
     url: z
@@ -18,7 +18,7 @@ const shareUrlValidation = z.object({
         } catch {
             return false; // no es una URL válida
         }
-    }, "La URL debe ser válida y de Facebook, Twitter, TikTok o Instagram"),
+    }, "La URL debe ser válida y de Facebook, X, TikTok o Instagram"),
 });
 
 export type ShareUrlInterface = z.infer<typeof shareUrlValidation>;
