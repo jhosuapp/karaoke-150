@@ -27,7 +27,7 @@ const FormLogin = () => {
                 control={control}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextField
-                        type="text"
+                        type="email"
                         name="email"
                         id="email"
                         placeholder="Correo electrónico"

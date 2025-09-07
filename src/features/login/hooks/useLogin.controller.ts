@@ -38,8 +38,8 @@ const useLoginController = () => {
                 return navigate(REGISTER_PATH);
             }
             
-            if(!responseProcessVideo.response.url){
-                navigate(RANKING_PATH);
+            if(!responseProcessVideo?.response?.url){
+                return navigate(RANKING_PATH);
             }
             
             setIsSendLoginForm(true);

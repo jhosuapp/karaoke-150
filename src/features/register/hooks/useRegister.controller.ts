@@ -68,12 +68,13 @@ const useRegisterController = () => {
         try {
             setRegisterData(formData);
             
-            if(!responseProcessVideo.response.url){
+            if(!responseProcessVideo?.response?.url){
                 navigate(RANKING_PATH);
             }
 
             setIsSendRegisterForm(true);
         } catch (error:any) {
+            console.log(error);
             Swal.fire(defaultPropsSwalUnexpected);
         }
     };
