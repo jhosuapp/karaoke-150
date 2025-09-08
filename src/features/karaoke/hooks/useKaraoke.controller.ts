@@ -69,17 +69,16 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         const processAll = async () => {
             try {
                 if (isRecorderFinished && videoBlob && audioBlob) {
-                    const videoFile = new File([videoBlob], "recording.webm", {
-                        type: "video/webm",
-                    });
-                    
-                    const audioFile = new File([audioBlob], "audio.webm", {
+                    if (!audioBlob) {
+                        console.error("No hay audio grabado");
+                        return;
+                    }
+        
+                    const audioFile = new File([audioBlob], "recording.webm", {
                         type: audioBlob.type || "audio/webm",
                     });
-                    
-                    alert(audioBlob.type);
 
-                    await startProcessing(videoFile, audioFile);
+                    await startProcessing(audioFile);
                 }
             } catch (error) {
                 console.error("Error en processAll:", error);
