@@ -74,21 +74,14 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     });
                     
                     const audioFile = new File([audioBlob], "audio.webm", {
-                        type: "audio/webm",
+                        type: audioBlob.type || "audio/webm",
                     });
                     
+                    alert(audioBlob.type);
+
                     await startProcessing(videoFile, audioFile);
                 }
             } catch (error) {
-                const videoFile = new File([videoBlob], "recording.webm", {
-                    type: "video/webm",
-                });
-                
-                const audioFile = new File([audioBlob], "audio.webm", {
-                    type: "audio/webm",
-                });
-                alert(videoFile);
-                alert(audioFile);
                 console.error("Error en processAll:", error);
             }
         };
