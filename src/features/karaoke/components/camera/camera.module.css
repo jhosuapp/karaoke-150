@@ -18,5 +18,5 @@
 }
 
 .camera__microphone img{
-    @apply w-full max-h-[60svh] h-svh object-contain block;
+    @apply w-full max-h-[60svh] h-svh object-contain block absolute left-0 object-left;
 }
