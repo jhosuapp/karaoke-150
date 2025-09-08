@@ -22,7 +22,6 @@ type Props = {
 }
 
 const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera, audioBlob, videoBlob }:Props) => {
-    console.log(videoBlob);
     const controls = useAnimation();
     const navigate = useNavigate();
     const [count, setCount] = useState<number>(0);
@@ -44,6 +43,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         processStatusVideoQuery,
         processAudioPython,
         processVideoDrupalMutation,
+        startProcessing
     } = useVideoAndAudioProcessing();
 
     // Validate video generate
@@ -65,24 +65,29 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     },[ processStatusVideoQuery, processVideoShotstackMutation, processAudioPython, processVideoDrupalMutation]);
 
     // Audio and video processing
-    useEffect(()=>{
-        const processAudio = async () => {
-            if (!audioBlob) {
-                console.error("No hay audio grabado");
-                return;
+    useEffect(() => {
+        const processAll = async () => {
+            try {
+                if (isRecorderFinished && videoBlob && audioBlob) {
+                    const videoFile = new File([videoBlob], "recording.webm", {
+                        type: "video/webm",
+                    });
+                    
+                    const audioFile = new File([audioBlob], "audio.webm", {
+                        type: "audio/webm",
+                    });
+                    
+                    await startProcessing(videoFile, audioFile);
+                }
+            } catch (error) {
+                console.error("Error en processAll:", error);
             }
-
-            const audioFile = new File([audioBlob], "recording.webm", {
-                type: audioBlob.type || "audio/webm",
-            });
-            
-            await processAudioPython.mutateAsync(audioFile);
+        };
+    
+        if (isRecorderFinished) {
+            processAll();
         }
-
-        if(isRecorderFinished){
-            processAudio();
-        }
-    },[isRecorderFinished, audioBlob]);
+    }, [isRecorderFinished, videoBlob, audioBlob]);
 
     // Get audio, lyrics and times
     useEffect(()=>{
@@ -103,9 +108,9 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
         if(!responseAudio.song) return;
-        const { challenge_start, challenge_end, audio_duration, audio_file_url } = responseAudio.song;
+        const { challenge_start, challenge_end, audio_file_url } = responseAudio.song;
         const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
-        audio.loop = true;
+        // audio.loop = true;
         audio.crossOrigin = "anonymous";
         setCount(4);
         startRecordingAudio();
@@ -113,29 +118,27 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         startRecording(audio);
         setIsPlaying(true);
         
-        const updatePosition = () => {
+        // Ended audio
+        audio.addEventListener("ended", () => {
+            setIsPlaying(false);
+            setCurrentTime(0);
+            stopRecording();
+            stopRecordingAudio();
+            stopRecordingCamera();
+            setIsRecorderFinished(true);
+        });
+
+        // update
+        audio.addEventListener("timeupdate", () => {
             const now = audio.currentTime;
             setCurrentTime(now);
-            
-            if(now >= (audio_duration - 0.05)){
-                audio.pause();
-                clearInterval(interval);
-                setIsPlaying(false);
-                setCurrentTime(0);
-                stopRecording();
-                stopRecordingAudio();
-                stopRecordingCamera();
-                setIsRecorderFinished(true);
-            }
 
-            if((now + 1) > challenge_start && now < challenge_end){
+            if ((now + 1) > challenge_start && now < challenge_end) {
                 setIsMyTurn(true);
-            }else{
+            } else {
                 setIsMyTurn(false);
             }
-        };
-    
-        const interval = setInterval(updatePosition, 10);        
+        });  
     }
 
     // Countdown animation

@@ -79,15 +79,15 @@ const useVideoAndAudioProcessing = () => {
     }, [processAudioPython.isSuccess, processVideoDrupalMutation.data]);
 
     // Start processing
-    const startProcessing = async (audioFile: File) => {
+    const startProcessing = async (videoFile: File, audioFile: File) => {
         try {
             // 1. upload video to drupal
-            // const drupalResponse = await processVideoDrupalMutation.mutateAsync(videoFile);
+            const drupalResponse = await processVideoDrupalMutation.mutateAsync(videoFile);
             
             // 2. audio proccesing
             const audioResponse = await processAudioPython.mutateAsync(audioFile);
             
-            return { audioResponse };
+            return { drupalResponse, audioResponse };
         } catch (error) {
             alert(JSON.stringify(error))
             console.error("Error en el procesamiento:", error);
