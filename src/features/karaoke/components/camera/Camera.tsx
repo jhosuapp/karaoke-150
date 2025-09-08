@@ -15,12 +15,12 @@ const Camera = ({ videoRef }:Props) => {
     return (
         <>
             <Bg {...fadeInMotion(3.5, 0)} isFixed src={ bg } key={'bg-camera'} />
-            <motion.picture 
+            <motion.div 
                 {...fadeInScaleMotion(3.9, 0)}
                 className={ styles.camera__microphone }
             >
                 <img src={ microphone } alt="Micro aguila" />
-            </motion.picture>
+            </motion.div>
             <motion.div
                 {...fadeInScaleMotion(3.6, 0)}
                 className={ styles.camera }

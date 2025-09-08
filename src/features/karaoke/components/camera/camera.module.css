@@ -14,9 +14,9 @@
 }
 
 .camera__microphone{
-    @apply fixed z-[100] !left-0 !bottom-0 block max-h-[60svh];
+    @apply fixed z-[100] !left-0 !top-0 h-svh flex items-end w-full;
 }
 
 .camera__microphone img{
-    @apply w-full max-h-[60svh] object-contain;
+    @apply w-full max-h-[60svh] h-svh object-contain block;
 }
