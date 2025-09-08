@@ -108,9 +108,9 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
         if(!responseAudio.song) return;
-        const { challenge_start, challenge_end, audio_file_url } = responseAudio.song;
+        const { challenge_start, challenge_end, audio_duration, audio_file_url } = responseAudio.song;
         const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
-        // audio.loop = true;
+        audio.loop = true;
         audio.crossOrigin = "anonymous";
         setCount(4);
         startRecordingAudio();
@@ -118,27 +118,29 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         startRecording(audio);
         setIsPlaying(true);
         
-        // Ended audio
-        audio.addEventListener("ended", () => {
-            setIsPlaying(false);
-            setCurrentTime(0);
-            stopRecording();
-            stopRecordingAudio();
-            stopRecordingCamera();
-            setIsRecorderFinished(true);
-        });
-
-        // update
-        audio.addEventListener("timeupdate", () => {
+        const updatePosition = () => {
             const now = audio.currentTime;
             setCurrentTime(now);
+            
+            if(now >= (audio_duration - 0.05)){
+                audio.pause();
+                clearInterval(interval);
+                setIsPlaying(false);
+                setCurrentTime(0);
+                stopRecording();
+                stopRecordingAudio();
+                stopRecordingCamera();
+                setIsRecorderFinished(true);
+            }
 
-            if ((now + 1) > challenge_start && now < challenge_end) {
+            if((now + 1) > challenge_start && now < challenge_end){
                 setIsMyTurn(true);
-            } else {
+            }else{
                 setIsMyTurn(false);
             }
-        });  
+        };
+    
+        const interval = setInterval(updatePosition, 10);        
     }
 
     // Countdown animation
