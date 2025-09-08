@@ -22,6 +22,7 @@ type Props = {
 }
 
 const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecordingCamera, startRecording, startRecordingAudio, startRecordingCamera, audioBlob, videoBlob }:Props) => {
+    console.log(videoBlob);
     const controls = useAnimation();
     const navigate = useNavigate();
     const [count, setCount] = useState<number>(0);
@@ -43,7 +44,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         processStatusVideoQuery,
         processAudioPython,
         processVideoDrupalMutation,
-        startProcessing
     } = useVideoAndAudioProcessing();
 
     // Validate video generate
@@ -65,30 +65,24 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     },[ processStatusVideoQuery, processVideoShotstackMutation, processAudioPython, processVideoDrupalMutation]);
 
     // Audio and video processing
-    useEffect(() => {
-        const processAll = async () => {
-            try {
-                if (isRecorderFinished && videoBlob && audioBlob) {
-                    if (!audioBlob) {
-                        console.error("No hay audio grabado");
-                        return;
-                    }
-        
-                    const audioFile = new File([audioBlob], "recording.webm", {
-                        type: audioBlob.type || "audio/webm",
-                    });
-
-                    await startProcessing(audioFile);
-                }
-            } catch (error) {
-                console.error("Error en processAll:", error);
+    useEffect(()=>{
+        const processAudio = async () => {
+            if (!audioBlob) {
+                console.error("No hay audio grabado");
+                return;
             }
-        };
-    
-        if (isRecorderFinished) {
-            processAll();
+
+            const audioFile = new File([audioBlob], "recording.webm", {
+                type: audioBlob.type || "audio/webm",
+            });
+            
+            await processAudioPython.mutateAsync(audioFile);
         }
-    }, [isRecorderFinished, videoBlob, audioBlob]);
+
+        if(isRecorderFinished){
+            processAudio();
+        }
+    },[isRecorderFinished, audioBlob]);
 
     // Get audio, lyrics and times
     useEffect(()=>{
