@@ -23,6 +23,48 @@ export const fadeInMotion = (delayAnimate?: number, delayExit?: number):PartialM
     }
 }
 
+export const fadeInScaleMotion = (delayAnimate?: number, delayExit?: number):PartialMotionVariants => {
+    return {
+        initial:{ opacity: 0 },
+        animate:{ 
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                ease: easeIn,
+                delay:  delayAnimate ?? 0
+            }
+        },
+        exit: {
+            scale: 0.8,
+            opacity: 0,
+            transition: {
+                duration: 0.3,
+                delay: delayExit ?? 0
+            },
+        },
+    }
+}
+
+export const fadeInOutMotion = ():PartialMotionVariants => {
+    return {
+        initial:{ opacity: 0 },
+        animate:{ 
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                ease: easeIn,
+                delay:  0
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.3,
+            },
+        },
+    }
+}
+
 export const fadeUpMotion = (delayAnimate: number, delayExit: number):PartialMotionVariants => {
     return {
         initial: { opacity: 0, translateY: 100 },

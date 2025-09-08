@@ -118,10 +118,12 @@ const KaraokeView = () => {
                 )}
                 
                 {isRecorderFinished && isLoadVideo && (
-                    <LoaderSecondary 
-                        key={`loader-${isLoadVideo}`}
-                        text={ loaderText }
-                    />
+                    <div className="!hidden">
+                        <LoaderSecondary 
+                            key={`loader-${isLoadVideo}`}
+                            text={ loaderText }
+                        />
+                    </div>
                 )}
 
                 {isRecorderFinished && !isLoadVideo && (
@@ -131,7 +133,7 @@ const KaraokeView = () => {
                     />
                 )}
 
-                {videoCameraUrl && !isLoadVideo && (
+                {audioUrl && (
                     <motion.div 
                         key={`preview-${videoCameraUrl}`}
                         className="relative z-10 bg-primary"

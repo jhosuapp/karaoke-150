@@ -26,7 +26,7 @@ body {
 }
 
 .global-title-s{
-    @apply text-titles;
+    @apply text-titles leading-9;
 }
 
 .global-title--secondary{

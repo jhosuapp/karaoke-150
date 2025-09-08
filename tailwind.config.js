@@ -29,7 +29,7 @@ export default {
                 },
             },
             fontSize: {
-                titles: '30px',
+                titles: '28px',
                 title: '34px',
                 titleb: '40px',
                 subtitle: '20px',

@@ -3,6 +3,7 @@ import { Button, Carousel, Container, Wrapper } from '../../../../shared/compone
 
 import icon from '/assets/tmp/icon-1.png';
 import styles from './instructions.module.css';
+import { useState } from 'react';
 
 type Props = {
     handlePlaying: ()=> void;
@@ -29,6 +30,13 @@ const slidesData = [
 ]
 
 const Instructions = ({ handlePlaying }:Props) => {
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    
+    const handleClickPlaying = ()=> {
+        setIsPlaying(true);
+        handlePlaying();
+    }
+
     return (
         <Wrapper
             srcIcon={ icon }
@@ -39,9 +47,10 @@ const Instructions = ({ handlePlaying }:Props) => {
                 <Button
                     {...fadeInMotion(0.6, 0.6)}
                     className='mt-20'
-                    onClick={ handlePlaying } 
+                    onClick={ handleClickPlaying } 
                     text='¿Estás listo? a jugar'
                     style="secondary"
+                    disabled={ !isPlaying }
                 />
             </div>
             <Container>

@@ -12,3 +12,11 @@
 .camera__logo{
     @apply absolute z-10 top-5 max-w-[120px] w-[90%];
 }
+
+.camera__microphone{
+    @apply absolute z-[100] left-0 bottom-0 block max-h-[60svh];
+}
+
+.camera__microphone img{
+    @apply w-full max-h-[60svh] object-contain;
+}

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { fadeInMotion } from '../../../../shared/motion';
+import { fadeInMotion, fadeInScaleMotion } from '../../../../shared/motion';
 
 import styles from './subtitles.module.css';
 import beer from '/assets/beer.png';
@@ -17,7 +17,7 @@ const Subtitles = ({ currentTime, isMyTurn, lyrics }:Props) => {
 
     return (
         <motion.section 
-            {...fadeInMotion(0.1, 0)}
+            {...fadeInScaleMotion(3.7, 0)}
             className={styles.subtitles}
         >
             <AnimatePresence mode='wait'>

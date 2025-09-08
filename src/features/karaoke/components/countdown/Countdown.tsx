@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-import { countdownMotion, fadeInMotion } from "../../../../shared/motion";
+import { countdownMotion, fadeInScaleMotion } from "../../../../shared/motion";
 
 import styles from './countdown.module.css';
 
@@ -13,7 +13,7 @@ const Countdown = ({ count, controls }:Props) => {
 
     return (
         <motion.section 
-            {...fadeInMotion(0,0)}
+            {...fadeInScaleMotion()}
             className={ styles.countDown }
         >
             <h4 className={ 'global-title' }>¿Estás preparado?</h4>

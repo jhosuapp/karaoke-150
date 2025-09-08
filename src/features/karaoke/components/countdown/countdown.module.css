@@ -1,5 +1,5 @@
 .countDown{
-    @apply flex flex-col items-center justify-center text-white z-10 fixed top-0 left-0 w-full h-svh gap-10;
+    @apply flex flex-col items-center justify-center text-white z-[99999] fixed top-0 left-0 w-full h-svh gap-10;
 }
 
 .countDown__icon{

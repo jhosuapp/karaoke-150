@@ -1,16 +1,20 @@
+import { MotionProps, motion } from 'framer-motion';
 import styles from './bg.module.css';
 import bg from '/assets/tmp/bg-general-optimized.jpg';
 
 type Props = {
     src?: string;
     isFixed?: boolean;
-}
+} & MotionProps;
 
-const Bg = ({ src = bg, isFixed = false }:Props) => {
+const Bg = ({ src = bg, isFixed = false, ...props }:Props) => {
     return (
-        <picture className={ `${styles.bg} ${isFixed && 'fixed'}` }>
+        <motion.picture 
+            {...props}
+            className={ `${styles.bg} ${isFixed && 'fixed min-h-[100vh]'}` }
+        >
             <img src={ src } alt="" />
-        </picture>
+        </motion.picture>
     )
 }
 
