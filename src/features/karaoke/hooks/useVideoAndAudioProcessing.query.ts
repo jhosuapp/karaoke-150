@@ -90,6 +90,7 @@ const useVideoAndAudioProcessing = () => {
             return { drupalResponse, audioResponse };
         } catch (error) {
             console.error("Error en el procesamiento:", error);
+            alert(error);
             throw error;
         }
     };
