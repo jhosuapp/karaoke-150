@@ -112,33 +112,35 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
         // audio.loop = true;
         audio.crossOrigin = "anonymous";
-        setCount(4);
-        startRecordingAudio();
-        startRecordingCamera();
-        startRecording(audio);
-        setIsPlaying(true);
-        
-        // Ended audio
-        audio.addEventListener("ended", () => {
-            setIsPlaying(false);
-            setCurrentTime(0);
-            stopRecording();
-            stopRecordingAudio();
-            stopRecordingCamera();
-            setIsRecorderFinished(true);
-        });
-
-        // update
-        audio.addEventListener("timeupdate", () => {
-            const now = audio.currentTime;
-            setCurrentTime(now);
-
-            if ((now + 1) > challenge_start && now < challenge_end) {
-                setIsMyTurn(true);
-            } else {
-                setIsMyTurn(false);
-            }
-        });  
+        setTimeout(()=>{
+            setCount(4);
+            startRecordingAudio();
+            startRecordingCamera();
+            startRecording(audio);
+            setIsPlaying(true);
+            
+            // Ended audio
+            audio.addEventListener("ended", () => {
+                setIsPlaying(false);
+                setCurrentTime(0);
+                stopRecording();
+                stopRecordingAudio();
+                stopRecordingCamera();
+                setIsRecorderFinished(true);
+            });
+    
+            // update
+            audio.addEventListener("timeupdate", () => {
+                const now = audio.currentTime;
+                setCurrentTime(now);
+    
+                if ((now + 1) > challenge_start && now < challenge_end) {
+                    setIsMyTurn(true);
+                } else {
+                    setIsMyTurn(false);
+                }
+            });  
+        },1000);
     }
 
     // Countdown animation
