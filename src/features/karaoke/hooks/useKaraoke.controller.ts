@@ -113,32 +113,35 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         // audio.loop = true;
         audio.crossOrigin = "anonymous";
         setCount(4);
-        startRecordingAudio();
-        startRecordingCamera();
-        startRecording(audio);
-        setIsPlaying(true);
-        
-        // Ended audio
-        audio.addEventListener("ended", () => {
-            setIsPlaying(false);
-            setCurrentTime(0);
-            stopRecording();
-            stopRecordingAudio();
-            stopRecordingCamera();
-            setIsRecorderFinished(true);
-        });
+        setTimeout(()=>{
 
-        // update
-        audio.addEventListener("timeupdate", () => {
-            const now = audio.currentTime;
-            setCurrentTime(now);
+            startRecordingAudio();
+            startRecordingCamera();
+            startRecording(audio);
+            setIsPlaying(true);
+            
+            // Ended audio
+            audio.addEventListener("ended", () => {
+                setIsPlaying(false);
+                setCurrentTime(0);
+                stopRecording();
+                stopRecordingAudio();
+                stopRecordingCamera();
+                setIsRecorderFinished(true);
+            });
 
-            if ((now + 1) > challenge_start && now < challenge_end) {
-                setIsMyTurn(true);
-            } else {
-                setIsMyTurn(false);
-            }
-        });  
+            // update
+            audio.addEventListener("timeupdate", () => {
+                const now = audio.currentTime;
+                setCurrentTime(now);
+
+                if ((now + 1) > challenge_start && now < challenge_end) {
+                    setIsMyTurn(true);
+                } else {
+                    setIsMyTurn(false);
+                }
+            });  
+        },1000);
     }
 
     // Countdown animation
