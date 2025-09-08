@@ -7,13 +7,14 @@ const useShareVideoController = () => {
     const navigate = useNavigate();
     const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
     const [videoFile, setVideoFile] = useState<File | null>(null);
-    const [isLoad, setIsLoad] = useState<boolean>(false);  
+    const [isLoad, setIsLoad] = useState<boolean>(true);  
 
     const hanldeNavigate = ()=>{
         navigate(RANKING_PATH);
     }
 
     const downLoadVideo = async () => {
+        navigate(SHARE_URL_PATH);
         const url = responseProcessVideo.response.url;
         const res = await fetch(url);
         const blob = await res.blob();
@@ -26,9 +27,14 @@ const useShareVideoController = () => {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(blobUrl);
-        
-        navigate(SHARE_URL_PATH);
     };
+
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setIsLoad(false)
+        },7500);
+    },[]);
     
     const shareVideo = async () => {
         setIsLoad(true);
@@ -44,6 +50,8 @@ const useShareVideoController = () => {
                     title: 'Video',
                     url: window.location.href
                 });
+
+                navigate(SHARE_URL_PATH);
             } else {
                 downLoadVideo();
             }

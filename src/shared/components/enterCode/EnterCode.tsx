@@ -42,10 +42,11 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextField
                         type="text"
-                        name="url"
-                        id="url"
+                        name="code"
+                        id="code"
                         placeholder="Escribe tu código aquí"
                         minLength={1}
+                        maxLength={10}
                         feedback={ errors.code?.message }
                         
                         onChange={onChange}
@@ -55,6 +56,7 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                         required
                         className='text-center !shadow-none'
                         delay={{ initial: 0.6, exit: 0.6 }}
+                        autoComplete='false'
                     />
                 )}
             />
