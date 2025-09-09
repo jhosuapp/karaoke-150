@@ -73,7 +73,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     });
                     
                     const audioFile = new File([audioBlob], "audio.webm", {
-                        type: "audio/webm",
+                        type: audioBlob.type || "audio/webm",
                     });
 
                     const url = URL.createObjectURL(audioFile);
@@ -129,29 +129,27 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         // audio.loop = true;
         audio.crossOrigin = "anonymous";
         setCount(4);
-        setTimeout(()=>{
 
-            startRecordingAudio();
-            startRecordingCamera();
-            startRecording(audio);
-            setIsPlaying(true);
-            
-            // Ended audio
-            audio.addEventListener("ended", () => {
-                setIsPlaying(false);
-                setCurrentTime(0);
-                stopRecording();
-                stopRecordingAudio();
-                stopRecordingCamera();
-                setIsRecorderFinished(true);
-            });
+        startRecordingAudio();
+        startRecordingCamera();
+        startRecording(audio);
+        setIsPlaying(true);
+        
+        // Ended audio
+        audio.addEventListener("ended", () => {
+            setIsPlaying(false);
+            setCurrentTime(0);
+            stopRecording();
+            stopRecordingAudio();
+            stopRecordingCamera();
+            setIsRecorderFinished(true);
+        });
 
-            // update
-            audio.addEventListener("timeupdate", () => {
-                const now = audio.currentTime;
-                setCurrentTime(now);
-            });  
-        },1000);
+        // update
+        audio.addEventListener("timeupdate", () => {
+            const now = audio.currentTime;
+            setCurrentTime(now);
+        });  
     }
 
     // Countdown animation
