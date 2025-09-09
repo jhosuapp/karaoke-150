@@ -1,38 +1,19 @@
 import { motion } from 'framer-motion';
-import { Bg, Carousel, Container, EnterCode, Video, WrapperTables } from "../../../shared/components"
-import { ImageText } from "../../../shared/components/imageText/ImageText";
+import { Bg, Carousel, Container, EnterCode, ImageText, Video, WrapperTables } from "../../../shared/components"
 import { Header } from "../../../shared/layout/header/Header"
 import { fadeInMotion } from "../../../shared/motion";
 
-import portrait from '/assets/tmp/portrait-video.jpg';
 import title from '/assets/tmp/title-home.png';
 import { useLoaderData } from 'react-router-dom';
 import { ResponseAdminContentInterface } from '../../../shared/interfaces';
+import { IMAGES_PATH } from '../../../router/routes.constant';
 
-
-const slidesData = [
-    {
-        asset: '/assets/tmp/award-1.png',
-        description: 'Compra tu Águila Light y encuentra el código bajo la tapa.'
-    },
-    {
-        asset: '/assets/tmp/award-1.png',
-        description: 'Compra tu Águila Light y encuentra el código bajo la tapa.'
-    },
-    {
-        asset: '/assets/tmp/award-1.png',
-        description: 'Compra tu Águila Light y encuentra el código bajo la tapa.'
-    },
-    {
-        asset: '/assets/tmp/award-1.png',
-        description: 'Compra tu Águila Light y encuentra el código bajo la tapa.'
-    },
-]
 
 const HomeView = () => {
     const loaderData:ResponseAdminContentInterface = useLoaderData();
     const banner = loaderData?.data?.banner;
     const awards = loaderData?.data?.premios;
+    const ranking = loaderData?.data?.ranking;
 
     return (
         <>
@@ -41,56 +22,62 @@ const HomeView = () => {
                 text="Login"
                 hasRedirect
             />
-            <Bg />
+            
+            <Bg 
+                className='min-h-svh'
+                src={ `${IMAGES_PATH}${banner?.banner?.imgurl_raw}` } 
+                isAbsolute
+            />
 
             <Container 
                 {...fadeInMotion(0.1,0.1)}
-                className="my-10"
+                className="my-1 !min-h-[calc(90svh-35px)] flex flex-col justify-between"
             >
-                <ImageText src={ title } />
+                <motion.article 
+                    {...fadeInMotion(0.2,0.2)}
+                    className="w-[90%] mx-auto block mt-5 mb-10"
+                >
+                    <ImageText src={ title } />
+                </motion.article>
+                <motion.article 
+                    {...fadeInMotion(0.3,0.3)}
+                    className="w-[90%] mx-auto block mt-5 mb-10"
+                >
+                    <p className="global-dsc mb-4">{ banner?.desc }</p>
+                    {/* Enter code */}
+                    <EnterCode
+                        text={ banner?.button }
+                        placeholder={ banner?.label_field }
+                        key={'code'}
+                    />
+                    {/* End Enter code */}
+                </motion.article>
             </Container>
 
             <Container 
-                {...fadeInMotion(0.2,0.2)}
-                className="!w-full"
+                {...fadeInMotion(0.4,0.4)}
+                className="!w-full !max-w-full"
             >
-                <motion.article 
-                    {...fadeInMotion(0.3,0.3)}
-                    className="w-full mt-10"
-                >
-                    <Video portrait={ portrait } />
-                </motion.article>
-                <motion.article 
-                    {...fadeInMotion(0.4,0.4)}
-                    className="w-[90%] mx-auto block mt-5 mb-10"
-                >
-                    <p className="global-dsc">{ banner?.desc }</p>
-                </motion.article>
+                <Video portrait={ `${IMAGES_PATH}${banner?.portada?.imgurl_raw}` } />
             </Container>
 
             <Container>
-                {/* Enter code */}
-                <EnterCode
-                    text={ banner?.button }
-                    placeholder={ banner?.label_field }
-                    key={'code'}
-                />
-                {/* End Enter code */}
-
                 {/* Awards */}
-                <Carousel 
-                    title="los premios"
-                    description={ awards?.desc }
-                    key={'carousel'}
-                    slidesData={ slidesData }
-                    isFull
-                />
+                {awards?.act === "1" && (
+                    <Carousel 
+                        title={ awards?.title }
+                        description={ awards?.desc }
+                        key={'carousel'}
+                        slidesData={ awards?.items }
+                        isFull
+                    />
+                )}
                 {/* End awards */}
 
                 {/* Ranking data */}
                 <WrapperTables
                     headItems={['Posición', 'Nombre', 'Puntaje']}
-                    className="pb-16 pt-8"
+                    className="pb-16 pt-0"
                     bodyItemsPrimary={[
                         { position: '01', name: 'Pepito Pérez', score: 233123 },
                         { position: '02', name: 'Juanita Gómez', score: 120000 },
@@ -105,8 +92,8 @@ const HomeView = () => {
                     ]}
                     key={'ranking'}
                 >
-                    <h2 className="global-title">Ranking</h2>
-                    <p className="global-dsc mt-5 mb-6">Ellos ya la están rompiendo ¿Qué esperas para sumarte a este top?</p>
+                    <h2 className="global-title">{ ranking?.title }</h2>
+                    <p className="global-dsc mt-5 mb-6">{ ranking?.desc }</p>
                 </WrapperTables>
                 {/* End Ranking data */}
             </Container>

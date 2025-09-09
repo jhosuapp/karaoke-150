@@ -1,14 +1,18 @@
+import { motion, MotionProps } from 'framer-motion';
 import styles from './imageText.module.css';
 
 type Props = {
     src: string
-} 
+} & MotionProps;
 
-const ImageText = ({ src }:Props) => {
+const ImageText = ({ src, ...props }:Props) => {
     return (
-        <picture className={ styles.imageText }>
+        <motion.picture 
+            className={ styles.imageText }
+            {...props}
+        >
             <img src={ src } alt="" />
-        </picture>
+        </motion.picture>
     )
 }
 

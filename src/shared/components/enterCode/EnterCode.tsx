@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { TextField } from '../textField/TextField';
 import { Button } from '../button/Button';
 import { fadeInMotion } from '../../motion';
-import { ImageText } from '../imageText/ImageText';
 
 import imageText from '/assets/tmp/code-title.png';
 import styles from './enterCode.module.css';
+import { ImageText } from '../imageText/ImageText';
 
 type Props = {
     text: string;

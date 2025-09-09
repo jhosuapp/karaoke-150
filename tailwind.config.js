@@ -34,7 +34,7 @@ export default {
                 titleb: '40px',
                 subtitle: '20px',
                 button: '20px',
-                description: '22px',
+                description: '18px',
                 buttonMobile: '18px',
                 points: '59px',
                 input: '20px',

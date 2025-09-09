@@ -4,55 +4,73 @@ export interface ResponseAdminContentInterface {
     data:    Data;
 }
 
-export interface Data {
-    only_mobile: OnlyMobile;
-    header:      Header;
-    banner:      Banner;
-    premios:     Premios;
-    ranking:     Ranking;
+interface Data {
+    only_mobile:   OnlyMobile;
+    header:        Header;
+    banner:        DataBanner;
+    premios:       Premios;
+    ranking:       Ranking;
+    codigo:        Codigo;
+    instrucciones: Instrucciones;
 }
 
-export interface Banner {
-    portada:     Portada;
+interface DataBanner {
+    banner:      PortadaClass;
+    portada:     PortadaClass;
     video:       string;
     desc:        string;
     label_field: string;
     button:      string;
 }
 
-export interface Portada {
+interface PortadaClass {
     imgurl_raw:  string;
     imgurl_webp: string;
     img_alt:     string;
 }
 
-export interface Header {
-    logo:  Portada;
-    title: Portada;
+interface Codigo {
+    title: string;
+    desc:  string;
+    btn:   string;
+    img:   PortadaClass;
+}
+
+interface Header {
+    logo:  PortadaClass;
+    title: PortadaClass;
     icon:  boolean;
 }
 
-export interface OnlyMobile {
+interface Instrucciones {
+    img:   PortadaClass;
+    video: string;
     desc:  string;
-    bg:    Portada;
-    title: Portada;
-    qr:    boolean;
-    logo:  Portada;
+    act:   string;
+    items: ItemAdmincontent[];
 }
 
-export interface Premios {
+export interface ItemAdmincontent {
+    desc: string;
+    img:  PortadaClass;
+}
+
+interface OnlyMobile {
+    desc:  string;
+    bg:    PortadaClass;
+    title: PortadaClass;
+    qr:    PortadaClass;
+    logo:  PortadaClass;
+}
+
+interface Premios {
     title: string;
     desc:  string;
     act:   string;
-    items: Item[];
+    items: ItemAdmincontent[];
 }
 
-export interface Item {
-    desc: string;
-    img:  Portada;
-}
-
-export interface Ranking {
+interface Ranking {
     title: string;
     desc:  string;
 }

@@ -4,3 +4,4 @@ export * from './login/views/Login.view';
 export * from './share-url/views/ShareUrl.view';
 export * from './ranking/views/Ranking.view';
 export * from './home/views/Home.view';
+export * from './qr/views/Qr.view';

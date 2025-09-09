@@ -1,5 +1,4 @@
-import { Bg, Container, EnterCode, WrapperTables } from "../../../shared/components"
-import { ImageText } from "../../../shared/components/imageText/ImageText"
+import { Bg, Container, EnterCode, ImageText, WrapperTables } from "../../../shared/components"
 import { Header } from "../../../shared/layout/header/Header"
 
 import gameTitle from '/assets/tmp/game-title.png';

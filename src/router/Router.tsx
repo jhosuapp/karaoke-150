@@ -1,8 +1,8 @@
 import { createHashRouter } from 'react-router-dom';
 import { Layout } from '../shared';
 import { anonymous, auth } from '../guards';
-import { HomeView, KaraokeView, LoginView, RankingView, RegisterView, ShareUrlView } from '../features';
-import { HOME_PATH, KARAOKE_PATH, LOGIN_PATH, RANKING_PATH, REGISTER_PATH, SHARE_URL_PATH } from './routes.constant';
+import { HomeView, KaraokeView, LoginView, QrView, RankingView, RegisterView, ShareUrlView } from '../features';
+import { HOME_PATH, KARAOKE_PATH, LOGIN_PATH, QR_PATH, RANKING_PATH, REGISTER_PATH, SHARE_URL_PATH } from './routes.constant';
 import { LoaderSecondary } from '../shared/components';
 
 const Router = () => {
@@ -55,6 +55,13 @@ const Router = () => {
                         path: KARAOKE_PATH,
                         loader: anonymous(),
                         element: <KaraokeView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
+                    },
+                    {
+                        id: 'qr',
+                        path: QR_PATH,
+                        loader: anonymous(),
+                        element: <QrView />,
                         HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                 ],

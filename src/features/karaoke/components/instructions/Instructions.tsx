@@ -4,34 +4,18 @@ import { Button, Carousel, Container, Wrapper } from '../../../../shared/compone
 import icon from '/assets/tmp/icon-1.png';
 import styles from './instructions.module.css';
 import { useState } from 'react';
+import { ResponseAdminContentInterface } from '../../../../shared/interfaces';
+import { useLoaderData } from 'react-router-dom';
 
 type Props = {
     handlePlaying: ()=> void;
 }
 
-
-const slidesData = [
-    {
-        asset: '/assets/tmp/icon-instructions-1.png',
-        description: 'Alístate para grabar tu video en un lugar sin ruido.'
-    },
-    {
-        asset: '/assets/tmp/icon-instructions-2.png',
-        description: 'Acepta los permisos de audio y video.'
-    },
-    {
-        asset: '/assets/tmp/icon-instructions-3.png',
-        description: 'Canta cuando te lo indiquemos y sigue bien la letra.'
-    },
-    {
-        asset: '/assets/tmp/icon-instructions-4.png',
-        description: 'Comparte tu video y duplica tus puntos'
-    },
-]
-
 const Instructions = ({ handlePlaying }:Props) => {
+    const loaderData:ResponseAdminContentInterface = useLoaderData();
+    const instructions = loaderData?.data?.instrucciones;
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
-    
+
     const handleClickPlaying = ()=> {
         setIsPlaying(true);
         handlePlaying();
@@ -56,7 +40,7 @@ const Instructions = ({ handlePlaying }:Props) => {
             <Container>
                 <Carousel
                     title='instructivo'
-                    slidesData={ slidesData }
+                    slidesData={ instructions?.items }
                 />
             </Container>
         </Wrapper>

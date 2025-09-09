@@ -13,3 +13,4 @@ export * from './enterCode/EnterCode';
 export * from './wrapperTables/WrapperTables';
 export * from './carousel/Carousel';
 export * from './video/Video';
+export * from './imageText/ImageText';

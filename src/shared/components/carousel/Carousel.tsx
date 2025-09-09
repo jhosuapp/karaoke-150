@@ -8,16 +8,18 @@ import 'swiper/css/pagination';
 import "swiper/css/effect-fade";
 
 import styles from './carousel.module.css';
-import iconLeft from '/assets/icon-arrow-left-update.svg';
-import iconRight from '/assets/icon-arrow-right-update.svg';
+import iconLeft from '/assets/icon-arrow-left.png';
+import iconRight from '/assets/icon-arrow-right.png';
 import { fadeInMotion } from '../../motion';
+import { ItemAdmincontent } from '../../interfaces';
+import { IMAGES_PATH } from '../../../router/routes.constant';
 
 
 
 type Props = {
     title: string;
     description?: string;
-    slidesData: { asset:string, description:string }[];
+    slidesData: ItemAdmincontent[];
     isFull?: boolean;
 }
 
@@ -49,13 +51,13 @@ const Carousel = ({title, description, slidesData, isFull = false}:Props) => {
                             prevEl: ".custom-prev",
                         }}
                     >
-                    {slidesData.map((item, i) => (
+                    {slidesData && slidesData?.map((item, i) => (
                         <SwiperSlide key={i} className={ styles.carousel__swiper__item }>
                             <picture>
-                                <img src={ item.asset } alt="" />
+                                <img src={`${IMAGES_PATH}${item?.img?.imgurl_raw}`} alt={ item?.img?.img_alt } />
                             </picture>
                             <p className="global-dsc">
-                                {item.description}
+                                {item?.desc}
                             </p>
                         </SwiperSlide>
                     ))}

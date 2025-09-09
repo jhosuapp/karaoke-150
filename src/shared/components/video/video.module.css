@@ -7,7 +7,7 @@
 }
 
 .video__portrait{
-    @apply w-full block;
+    @apply w-full block border-2 border-white;
 }
 
 .video__portrait img{

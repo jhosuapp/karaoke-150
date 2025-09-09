@@ -10,25 +10,34 @@ export const sanitizeResponse = (response: ResponseAdminContentInterface): Respo
             ...data,
             banner: {
                 ...data.banner,
-                desc: cleanHTML(data.banner.desc),
+                desc: cleanHTML(data?.banner?.desc),
             },
             only_mobile: {
                 ...data.only_mobile,
-                desc: cleanHTML(data.only_mobile.desc),
+                desc: cleanHTML(data?.only_mobile?.desc),
             },
             premios: {
                 ...data.premios,
-                desc: cleanHTML(data.premios.desc),
-                act: cleanHTML(data.premios.act),
-                items: data.premios.items.map(item => ({
+                desc: cleanHTML(data?.premios?.desc),
+                title: cleanHTML(data?.premios?.title),
+                act: cleanHTML(data?.premios?.act),
+                items: data?.premios?.items?.map(item => ({
                     ...item,
-                    desc: cleanHTML(item.desc),
+                    desc: cleanHTML(item?.desc),
                 })),
             },
             ranking: {
                 ...data.ranking,
-                desc: cleanHTML(data.ranking.desc),
+                desc: cleanHTML(data?.ranking?.desc),
+                title: cleanHTML(data?.ranking?.title),
             },
+            instrucciones: {
+                ...data.instrucciones,
+                items: data?.instrucciones?.items?.map(item => ({
+                    ...item,
+                    desc: cleanHTML(item?.desc),
+                })),
+            }
         },
     };
 }

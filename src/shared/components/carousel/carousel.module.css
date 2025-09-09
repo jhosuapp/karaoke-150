@@ -35,3 +35,7 @@
 .carouselFull .carousel__swiper{
     @apply mt-8;
 }
+
+.carouselFull .carousel__content {
+    @apply mt-10;
+}

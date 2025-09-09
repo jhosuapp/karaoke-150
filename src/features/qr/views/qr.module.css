@@ -1,0 +1,19 @@
+.qr__content{
+    @apply max-w-[650px] flex flex-col items-center justify-center !min-h-svh;
+}
+
+.qr__logo{
+    @apply max-w-32 lg:max-w-44 block;
+}
+
+.qr__logo img{
+    @apply w-full block;
+}
+
+.qr__qr {
+    @apply mt-10 max-w-40 block;
+}
+
+.qr__qr img{
+    @apply w-full;
+}
