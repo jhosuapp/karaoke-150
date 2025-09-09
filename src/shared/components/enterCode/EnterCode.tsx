@@ -12,15 +12,17 @@ import styles from './enterCode.module.css';
 type Props = {
     text: string;
     hasTitle?: boolean;
+    placeholder?: string;
 }
 
-const EnterCode = ({ text, hasTitle }:Props) => {
+const EnterCode = ({ text, hasTitle, placeholder }:Props) => {
 
     const { 
         control,
         errors,
         handleSubmit, 
-        onSubmit 
+        onSubmit,
+        mutation 
     } = useEnterCodeController();
 
     return (
@@ -44,7 +46,7 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                         type="text"
                         name="code"
                         id="code"
-                        placeholder="Escribe tu código aquí"
+                        placeholder={placeholder ? placeholder : "Escribe tu código aquí"}
                         minLength={1}
                         maxLength={10}
                         feedback={ errors.code?.message }
@@ -65,6 +67,7 @@ const EnterCode = ({ text, hasTitle }:Props) => {
                 text={ text }
                 type="submit"
                 style="secondary"
+                isLoad={ mutation.isPending }
                 {...fadeInMotion(0.7, 0.7)}
             />
         </motion.form>

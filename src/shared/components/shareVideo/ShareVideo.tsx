@@ -4,7 +4,7 @@ import styles from './shareVideo.module.css';
 
 import bg from '/assets/preview-update.png';
 import { useShareVideoController } from '../../hooks';
-import { fadeInMotion } from '../../motion';
+import { countdownMotion, fadeInMotion } from '../../motion';
 import { Button } from '../button/Button';
 
 type Props = {
@@ -17,7 +17,9 @@ const ShareVideo = ({ userName }:Props) => {
         responseProcessVideo,
         hanldeNavigate,
         isVideoPreloaded,
-        isLoad
+        isLoad,
+        countDown,
+        isLoadSecondary
      } = useShareVideoController();
 
      const validateStatusShare = !isVideoPreloaded && isLoad;
@@ -51,14 +53,27 @@ const ShareVideo = ({ userName }:Props) => {
                 />
                 <div className={ styles.shareVideo__ctas }>
                     <AnimatePresence mode='wait'>
-                        <Button 
-                            {...fadeInMotion(0.5, 0.5)}
-                            text={!validateStatusShare  ? 'Compartir mi video' : 'Preparando video...'}
-                            style='secondary'
-                            onClick={ shareVideo }
-                            disabled={!validateStatusShare }
-                            key={ `preload-${validateStatusShare}` }
-                        />
+                        {isLoadSecondary ? (
+                            <Button 
+                                {...countdownMotion()}
+                                text={`Descargando video (${countDown})s`}
+                                style='secondary'
+                                disabled={!isLoadSecondary}
+                                key={ `preload-${isLoadSecondary}` }
+                            />
+                        ) : (
+                            <Button 
+                                {...(countDown === 0 
+                                    ? countdownMotion() 
+                                    : fadeInMotion(0.5, 0.5)
+                                )}
+                                text={!validateStatusShare ? `${countDown === 0 ? 'Compartir mi video' : `Preparando video (${countDown})s` }` : `Preparando video (${countDown})s`}
+                                style='secondary'
+                                onClick={ shareVideo }
+                                disabled={!validateStatusShare && countDown === 0 }
+                                key={ `preload-${countDown === 0}` }
+                            />
+                        )}
                     </AnimatePresence>
                     <Button
                         {...fadeInMotion(0.6, 0.6)}

@@ -1,18 +1,13 @@
-import { createBrowserRouter, redirect } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import { Layout } from '../shared';
 import { anonymous, auth } from '../guards';
 import { HomeView, KaraokeView, LoginView, RankingView, RegisterView, ShareUrlView } from '../features';
 import { HOME_PATH, KARAOKE_PATH, LOGIN_PATH, RANKING_PATH, REGISTER_PATH, SHARE_URL_PATH } from './routes.constant';
+import { LoaderSecondary } from '../shared/components';
 
 const Router = () => {
-    return createBrowserRouter(
+    return createHashRouter(
         [
-            {
-              id: 'not-found',
-              path: '*',
-              loader: () => redirect('/'),
-              errorElement: <div>Error</div>,
-            },
             {
                 id: 'root',
                 path: '/',
@@ -25,41 +20,42 @@ const Router = () => {
                         path: HOME_PATH,
                         loader: anonymous(),
                         element: <HomeView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                     {
-                        index: true,
                         id: 'register',
                         path: REGISTER_PATH,
                         loader: anonymous(),
                         element: <RegisterView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                     {
-                        index: true,
                         id: 'login',
                         path: LOGIN_PATH,
                         loader: anonymous(),
                         element: <LoginView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                     {
-                        index: true,
                         id: 'shareUrl',
                         path: SHARE_URL_PATH,
                         loader: anonymous(),
                         element: <ShareUrlView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                     {
-                        index: true,
                         id: 'ranking',
                         path: RANKING_PATH,
                         loader: auth(),
                         element: <RankingView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                     {
-                        index: true,
                         id: 'karaoke',
                         path: KARAOKE_PATH,
-                        loader: auth(),
+                        loader: anonymous(),
                         element: <KaraokeView />,
+                        HydrateFallback: () => <LoaderSecondary key="loader-sec" />,
                     },
                 ],
             },

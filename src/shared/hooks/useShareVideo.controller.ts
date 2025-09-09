@@ -8,14 +8,17 @@ const useShareVideoController = () => {
     const responseProcessVideo = useKaraokeStore( state => state.responseProcessVideo );
     const [videoFile, setVideoFile] = useState<File | null>(null);
     const [isLoad, setIsLoad] = useState<boolean>(true);  
+    const [isLoadSecondary, setIsLoadSecondary] = useState<boolean>(false);  
+    const [countDown, setCountDown] = useState<number>(15);  
 
     const hanldeNavigate = ()=>{
         navigate(RANKING_PATH);
     }
 
     const downLoadVideo = async () => {
-        navigate(SHARE_URL_PATH);
         const url = responseProcessVideo.response.url;
+        setIsLoadSecondary(true);
+        setCountDown(15);
         const res = await fetch(url);
         const blob = await res.blob();
         const blobUrl = URL.createObjectURL(blob);
@@ -27,13 +30,23 @@ const useShareVideoController = () => {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(blobUrl);
+        navigate(SHARE_URL_PATH);
     };
 
 
     useEffect(()=>{
-        setTimeout(()=>{
-            setIsLoad(false)
-        },7500);
+        const interval = setInterval(() => {
+            setCountDown((prev) => {
+              if (prev <= 1) {
+                    clearInterval(interval); 
+                    setIsLoad(false);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);
     },[]);
     
     const shareVideo = async () => {
@@ -107,7 +120,9 @@ const useShareVideoController = () => {
         responseProcessVideo,
         isLoad,
         isVideoPreloaded: !!videoFile,
-        hanldeNavigate
+        hanldeNavigate,
+        countDown,
+        isLoadSecondary
     };
 };
 

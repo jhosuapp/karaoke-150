@@ -25,7 +25,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     const controls = useAnimation();
     const navigate = useNavigate();
     const [count, setCount] = useState<number>(0);
-    const [isMyTurn, setIsMyTurn] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [isRecorderFinished, setIsRecorderFinished] = useState<boolean>(false);
     const [loaderText, setLoaderText] = useState<string>('Cargando');
@@ -108,7 +107,7 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
         if(!responseAudio.song) return;
-        const { challenge_start, challenge_end, audio_file_url } = responseAudio.song;
+        const { audio_file_url } = responseAudio.song;
         const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
         // audio.loop = true;
         audio.crossOrigin = "anonymous";
@@ -134,12 +133,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
             audio.addEventListener("timeupdate", () => {
                 const now = audio.currentTime;
                 setCurrentTime(now);
-
-                if ((now + 1) > challenge_start && now < challenge_end) {
-                    setIsMyTurn(true);
-                } else {
-                    setIsMyTurn(false);
-                }
             });  
         },1000);
     }
@@ -177,7 +170,6 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
         currentTime,
         isPlaying,
         isRecorderFinished,
-        isMyTurn,
         audioPythonQuery,
         responseAudio,
         loaderText,

@@ -39,7 +39,6 @@ const KaraokeView = () => {
         currentTime,
         isPlaying,
         isRecorderFinished,
-        isMyTurn,
         responseAudio,
         isLoadVideo,
         processStatusVideoQuery,
@@ -112,7 +111,6 @@ const KaraokeView = () => {
                     <Subtitles
                         key={`audio`}
                         currentTime={ currentTime }
-                        isMyTurn={ isMyTurn }
                         lyrics={ responseAudio.song.lyrics }
                     />
                 )}

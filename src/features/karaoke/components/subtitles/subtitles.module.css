@@ -22,7 +22,7 @@
 }
 
 .turn{
-    @apply relative z-10;
+    @apply z-[999] fixed top-[30svh];
 }
 
 .turn__beer{

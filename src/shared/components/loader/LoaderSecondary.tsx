@@ -26,8 +26,8 @@ const LoaderSecondary = ( { text = "cargando" }:Props ) => {
                         className={styles.loaderSecondary__icon}
                         key={`icon-${text}`}
                     >
-                        <img src={ icon } alt="" />
-                        <img src={ cirlce } alt="" />
+                        <img key="icon-image" src={ icon } alt="" />
+                        <img key="circle-image" src={ cirlce } alt="" />
                     </motion.picture>
                     <motion.p 
                         {...countdownMotion()} 

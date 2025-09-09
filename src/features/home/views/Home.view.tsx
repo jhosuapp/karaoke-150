@@ -6,6 +6,8 @@ import { fadeInMotion } from "../../../shared/motion";
 
 import portrait from '/assets/tmp/portrait-video.jpg';
 import title from '/assets/tmp/title-home.png';
+import { useLoaderData } from 'react-router-dom';
+import { ResponseAdminContentInterface } from '../../../shared/interfaces';
 
 
 const slidesData = [
@@ -28,6 +30,10 @@ const slidesData = [
 ]
 
 const HomeView = () => {
+    const loaderData:ResponseAdminContentInterface = useLoaderData();
+    const banner = loaderData?.data?.banner;
+    const awards = loaderData?.data?.premios;
+
     return (
         <>
             <Header 
@@ -58,14 +64,15 @@ const HomeView = () => {
                     {...fadeInMotion(0.4,0.4)}
                     className="w-[90%] mx-auto block mt-5 mb-10"
                 >
-                    <p className="global-dsc">🍺🎤 Ingresa los códigos de tus Águila Light, súbete al Karaoke y conviértete en el crack del escenario.</p>
+                    <p className="global-dsc">{ banner?.desc }</p>
                 </motion.article>
             </Container>
 
             <Container>
                 {/* Enter code */}
                 <EnterCode
-                    text="Ingresa tu código"
+                    text={ banner?.button }
+                    placeholder={ banner?.label_field }
                     key={'code'}
                 />
                 {/* End Enter code */}
@@ -73,7 +80,7 @@ const HomeView = () => {
                 {/* Awards */}
                 <Carousel 
                     title="los premios"
-                    description="Canta con todo y gana premios épicos. Entre más juegues, más chances tienes."
+                    description={ awards?.desc }
                     key={'carousel'}
                     slidesData={ slidesData }
                     isFull

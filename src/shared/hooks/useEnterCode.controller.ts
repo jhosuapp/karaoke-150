@@ -1,16 +1,14 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Swal from 'sweetalert2';
 import { EnterCodeInterface, enterCodeValidation } from '../validations';
-import { defaultPropsSwalUnexpected } from '../constants';
 import { KARAOKE_PATH } from '../../router/routes.constant';
+import { useEnterCodeMutation } from './useEnterCode.query';
 
 
 const useEnterCodeController = () => {
     const navigate = useNavigate();
-    const [isFormSend, setIsFormSend] = useState<boolean>(false);
+    const mutation = useEnterCodeMutation();
 
     // Form config
     const {
@@ -28,11 +26,14 @@ const useEnterCodeController = () => {
     // Async 
     const onSubmit = async (formData: EnterCodeInterface) => {
         try {
-            console.log(formData);
-            setIsFormSend(true);
-            navigate(KARAOKE_PATH);
+            const response = await mutation.mutateAsync(formData);
+
+            if(response){
+                navigate(KARAOKE_PATH);
+            }
         } catch (error:any) {
-            Swal.fire(defaultPropsSwalUnexpected);
+            navigate(KARAOKE_PATH);
+            // Swal.fire(defaultPropsSwalUnexpected);
         }
     };
 
@@ -43,7 +44,7 @@ const useEnterCodeController = () => {
         onSubmit,
         isValid,
         setError,
-        isFormSend,
+        mutation
     };
 };
 
