@@ -75,6 +75,23 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
                     const audioFile = new File([audioBlob], "audio.webm", {
                         type: "audio/webm",
                     });
+
+                    const url = URL.createObjectURL(audioFile);
+
+                    const audio = new Audio(url);
+                    audio.addEventListener("loadedmetadata", () => {
+                      // si devuelve Infinity, forzamos un seek
+                      if (audio.duration === Infinity) {
+                        audio.currentTime = Number.MAX_SAFE_INTEGER;
+                        audio.ontimeupdate = () => {
+                            audio.ontimeupdate = null;
+                            alert(audio.duration);
+                            audio.currentTime = 0; // lo regresamos al inicio
+                        };
+                      } else {
+                        alert(audio.duration);
+                      }
+                    });
                     
                     await startProcessing(videoFile, audioFile);
                 }
