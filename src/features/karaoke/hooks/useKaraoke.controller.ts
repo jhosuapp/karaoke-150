@@ -124,32 +124,33 @@ const useKaraokeController = ({ stopRecording, stopRecordingAudio, stopRecording
     // Sync audio, video and background audio + create a video with all elements
     const handlePlaying = ()=>{
         if(!responseAudio.song) return;
-        const { audio_file_url } = responseAudio.song;
+        const { audio_file_url, audio_duration } = responseAudio.song;
         const audio = new Audio(`${import.meta.env.VITE_API_AUDIO_URL}${audio_file_url}`);
-        // audio.loop = true;
+        audio.loop = true;
         audio.crossOrigin = "anonymous";
         setCount(4);
-
         startRecordingAudio();
         startRecordingCamera();
         startRecording(audio);
         setIsPlaying(true);
         
-        // Ended audio
-        audio.addEventListener("ended", () => {
-            setIsPlaying(false);
-            setCurrentTime(0);
-            stopRecording();
-            stopRecordingAudio();
-            stopRecordingCamera();
-            setIsRecorderFinished(true);
-        });
-
-        // update
-        audio.addEventListener("timeupdate", () => {
+        const updatePosition = () => {
             const now = audio.currentTime;
             setCurrentTime(now);
-        });  
+            
+            if(now >= (audio_duration - 0.05)){
+                audio.pause();
+                clearInterval(interval);
+                setIsPlaying(false);
+                setCurrentTime(0);
+                stopRecording();
+                stopRecordingAudio();
+                stopRecordingCamera();
+                setIsRecorderFinished(true);
+            }
+        };
+    
+        const interval = setInterval(updatePosition, 10);   
     }
 
     // Countdown animation
