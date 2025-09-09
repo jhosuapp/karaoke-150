@@ -22,10 +22,10 @@ const useLoginController = () => {
         formState: { errors, isValid },
         setError,
     } = useForm<LoginInterface>({
-        mode: 'onChange',
+        mode: 'onBlur',
         resolver: zodResolver(loginValidation),
         defaultValues: {
-            email: '',
+            phone: '',
             tyc: false,
             pyp: false
         },

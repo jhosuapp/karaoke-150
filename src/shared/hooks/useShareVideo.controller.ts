@@ -47,7 +47,7 @@ const useShareVideoController = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    },[]);
+    },[countDown]);
     
     const shareVideo = async () => {
         setIsLoad(true);

@@ -5,6 +5,7 @@ import styles from './formLogin.module.css';
 import { Button, CheckboxField, TextField } from "../../../../shared/components";
 import { fadeInMotion } from "../../../../shared/motion";
 import { useLoginController } from "../../hooks";
+import { allowOnlyNumbers } from "../../../../shared/utilities";
 
 const FormLogin = () => {
     const { 
@@ -20,19 +21,21 @@ const FormLogin = () => {
                 className="global-title"
                 {...fadeInMotion(0.2, 0.2)}
             >
-                Ingresa tu correo
+                Ingresa tu número telefónico
             </motion.h1>
             <Controller
-                name="email"
+                name="phone"
                 control={control}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextField
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Correo electrónico"
-                        minLength={1}
-                        feedback={ errors.email?.message }
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        placeholder="Número telefónico"
+                        minLength={10}
+                        maxLength={10}
+                        feedback={ errors.phone?.message }
+                        onKeyDown={ allowOnlyNumbers }
                         
                         onChange={onChange}
                         onBlur={onBlur}

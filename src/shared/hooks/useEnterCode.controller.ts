@@ -17,7 +17,7 @@ const useEnterCodeController = () => {
         formState: { errors, isValid },
         setError,
     } = useForm<EnterCodeInterface>({
-        mode: 'onChange',
+        mode: 'onBlur',
         resolver: zodResolver(enterCodeValidation),
         defaultValues: {
             code: '',

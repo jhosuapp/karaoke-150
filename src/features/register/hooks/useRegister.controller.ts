@@ -26,7 +26,7 @@ const useRegisterController = () => {
         watch,
         setValue,
     } = useForm<RegisterInterface>({
-        mode: 'onChange',
+        mode: 'onBlur',
         resolver: zodResolver(registerValidation),
         defaultValues: {
             name: '',

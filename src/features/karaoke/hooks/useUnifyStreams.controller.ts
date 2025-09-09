@@ -6,7 +6,6 @@ type Props = {
 };
 
 const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
-    const [videoUrl, setVideoUrl] = useState<string>("");
     const [videoBlob, setVideoBlob] = useState<Blob | null>(null);
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
@@ -52,7 +51,6 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
         recorder.onstop = async () => {
             const blob = new Blob(chunksRef.current, { type: "video/mp4" });
             setVideoBlob(blob);
-            setVideoUrl(URL.createObjectURL(blob));
             chunksRef.current = [];
         };
 
@@ -65,7 +63,6 @@ const useUnifyStreamsController = ({ audioStream, mediaStream }: Props) => {
 
     return {
         startRecording,
-        videoUrl,
         stopRecording,
         videoBlob
     };

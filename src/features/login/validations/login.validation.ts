@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const loginValidation = z.object({
-    email: z.string().min(5, 'Ingresa mínimo 5 caracteres').email('Ingresa un email válido'),
+    phone: z.string().min(10, 'Ingresa mínimo 10 caracteres').max(10, 'Puede ingresar máximo 10 caracteres'),
     tyc: z.boolean().refine(
         (value) => value,
         {

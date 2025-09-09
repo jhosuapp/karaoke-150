@@ -47,8 +47,8 @@ const EnterCode = ({ text, hasTitle, placeholder }:Props) => {
                         name="code"
                         id="code"
                         placeholder={placeholder ? placeholder : "Escribe tu código aquí"}
-                        minLength={1}
-                        maxLength={10}
+                        minLength={5}
+                        maxLength={5}
                         feedback={ errors.code?.message }
                         
                         onChange={onChange}

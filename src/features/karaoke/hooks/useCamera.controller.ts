@@ -6,7 +6,6 @@ const useCameraController = () => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
     const [statusCam, setStatusCam] = useState<PermissionsKaraoke>({ isLoad: false, isError: false, hasPermissions: false, });
-    const [videoCameraUrl, setVideoCameraUrl] = useState<string>("");
     const recorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
     const isPlaying = useKaraokeStore(state => state.isPlaying);
@@ -61,8 +60,8 @@ const useCameraController = () => {
         };
 
         recorder.onstop = () => {
-            const blob = new Blob(chunksRef.current, { type: "video/mp4" });
-            setVideoCameraUrl(URL.createObjectURL(blob));
+            new Blob(chunksRef.current, { type: "video/mp4" });
+            // setVideoCameraUrl(URL.createObjectURL(blob));
             chunksRef.current = [];
         };
 
@@ -86,7 +85,6 @@ const useCameraController = () => {
         requestPermissionsCamera,
         startRecordingCamera,
         stopRecordingCamera,
-        videoCameraUrl,
         mediaStream
     };
 };
