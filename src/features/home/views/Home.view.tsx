@@ -31,7 +31,7 @@ const HomeView = () => {
 
             <Container 
                 {...fadeInMotion(0.1,0.1)}
-                className="my-1 !min-h-[calc(90svh-35px)] flex flex-col justify-between"
+                className="my-1 !min-h-[calc(90svh-45px)] flex flex-col justify-between"
             >
                 <motion.article 
                     {...fadeInMotion(0.2,0.2)}
