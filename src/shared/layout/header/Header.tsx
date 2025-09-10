@@ -2,11 +2,10 @@ import { motion } from 'framer-motion';
 import { fadeInMotion } from '../../motion';
 import { Container } from '../../components';
 
-import logo from '/assets/logo.png';
-import icon from '/assets/icon-login-update.png';
 import styles from './header.module.css';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_PATH } from '../../../router/routes.constant';
+import { defPath } from '../../../config';
 
 
 type Props = {
@@ -26,7 +25,7 @@ const Header = ({ isFixed, hasItemRight = false, text, hasRedirect }:Props) => {
         >
             <Container className={ styles.header__content }>
                 <picture className={ styles.header__logo }>
-                    <img src={ logo } alt="" />
+                    <img src={ `${defPath}/logo.png` } alt="Logo aguila" />
                 </picture>
                 {hasItemRight && (
                     <div>
@@ -34,7 +33,7 @@ const Header = ({ isFixed, hasItemRight = false, text, hasRedirect }:Props) => {
                             className={ styles.header__action }
                             onClick={ ()=> hasRedirect && navigate(LOGIN_PATH) }
                         >
-                            <img src={ icon } alt="" />
+                            <img src={ `${defPath}/icon-login-update.png` } alt="" />
                             <p className='global-dsc'>{ text }</p>
                         </button>
                     </div>

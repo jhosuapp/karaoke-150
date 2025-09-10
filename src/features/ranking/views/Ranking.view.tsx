@@ -1,11 +1,9 @@
 import { Bg, Container, EnterCode, ImageText, WrapperTables } from "../../../shared/components"
 import { Header } from "../../../shared/layout/header/Header"
 
-import gameTitle from '/assets/tmp/game-title.png';
-import topTitle from '/assets/tmp/top-title.png';
-import positionTitle from '/assets/tmp/position-title.png';
 import { ResumePoints } from "../components";
 import { AnimatePresence } from "framer-motion";
+import { defPath } from "../../../config";
 
 
 const RankingView = () => {
@@ -30,7 +28,7 @@ const RankingView = () => {
                     bodyItemTertiary={{ position: '134', score: 1231232 }}
                     key={'position'}
                 >
-                    <ImageText src={ positionTitle } />
+                    <ImageText src={ `${defPath}/tmp/position-title.png` } />
                 </WrapperTables>
                 {/* End My position data */}
 
@@ -53,7 +51,7 @@ const RankingView = () => {
                     ]}
                     key={'games'}
                 >
-                    <ImageText src={ gameTitle } />
+                    <ImageText src={ `${defPath}/tmp/game-title.png` } />
                 </WrapperTables>
                 {/* End My games data */}
 
@@ -75,7 +73,7 @@ const RankingView = () => {
                     ]}
                     key={'ranking'}
                 >
-                    <ImageText src={ topTitle } />
+                    <ImageText src={ `${defPath}/tmp/top-title.png` } />
                 </WrapperTables>
                 {/* End Ranking data */}
                 </AnimatePresence>

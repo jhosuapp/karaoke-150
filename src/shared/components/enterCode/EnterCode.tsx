@@ -5,9 +5,9 @@ import { TextField } from '../textField/TextField';
 import { Button } from '../button/Button';
 import { fadeInMotion } from '../../motion';
 
-import imageText from '/assets/tmp/code-title.png';
 import styles from './enterCode.module.css';
 import { ImageText } from '../imageText/ImageText';
+import { defPath } from '../../../config';
 
 type Props = {
     text: string;
@@ -35,7 +35,7 @@ const EnterCode = ({ text, hasTitle, placeholder }:Props) => {
                     className='mb-2'
                     {...fadeInMotion(0.5, 0.5)}
                 >
-                    <ImageText src={ imageText } />
+                    <ImageText src={ `${defPath}/code-title.png` } />
                 </motion.div>
             }
             <Controller

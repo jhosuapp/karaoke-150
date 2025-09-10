@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import { fadeInMotion, fadeUpMotion } from '../../../../shared/motion/motion';
 import { PermissionsKaraoke } from '../../interfaces';
+import { PermissionsItem } from './PermissionsItem';
+import { defPath } from '../../../../config';
 
 import styles from './permissions.module.css';
-import iconAudio from '/assets/icon-audio.svg';
-import iconCamera from '/assets/icon-camera.svg';
-import { PermissionsItem } from './PermissionsItem';
 
 type Props = {
     requestPermissionsMicrophone: ()=> void;
@@ -27,13 +26,13 @@ const Permissions = ({ requestPermissionsMicrophone, statusMic, requestPermissio
                 <h2>Dar permisos</h2>
                 <PermissionsItem 
                     text='Permisos de audio'
-                    icon={ iconAudio }
+                    icon={ `${defPath}/icon-audio.svg` }
                     status={ statusMic }
                     requestPermissions={ requestPermissionsMicrophone }
                 />
                 <PermissionsItem 
                     text='Permisos de camara'
-                    icon={ iconCamera }
+                    icon={ `${defPath}/icon-camera.svg` }
                     status={ statusCam }
                     requestPermissions={ requestPermissionsCamera }
                 />

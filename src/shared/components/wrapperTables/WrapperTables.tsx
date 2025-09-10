@@ -4,8 +4,8 @@ import { BodyItemPrimaryWrapperTables, BodyItemSecondaryWrapperTables, BodyItemT
 import { AnimatedCounter } from '../counter/Counter';
 
 import styles from './wrapperTables.module.css';
-import micro from '/assets/icon-microphone-s.png';
 import { fadeInMotion } from '../../motion';
+import { defPath } from '../../../config';
 
 
 type Props = {
@@ -49,7 +49,7 @@ const WrapperTables = ({ className, headItems, bodyItemsPrimary, bodyItemsSecond
                             className={`${styles.wrapperTables__body__item} ${i < 3 && styles.wrapperTables__body__item__podium}`}
                         >
                             <p className={ styles.wrapperTables__body__item__top }>
-                                {i < 3 && <img src={ micro } alt="Icon micro" />}
+                                {i < 3 && <img src={ `${defPath}/icon-microphone-s.png` } alt="Icon micro" />}
                                 {row.position}
                             </p>
                             <p>{row.name}</p>

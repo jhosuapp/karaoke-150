@@ -2,8 +2,8 @@ import { InputHTMLAttributes, ReactNode } from "react";
 import { motion, MotionProps } from 'framer-motion';
 
 import styles from './checkboxField.module.css';
-import DangerIcon from '/assets/icon-error.svg';
 import { fadeInMotion } from "../../motion";
+import { defPath } from "../../../config";
 
 type NativeProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -26,6 +26,9 @@ const CheckboxField = ({ feedback, label, children, delay, ...props }:Props) => 
             <div className={ styles.checkboxFieldContent }>
                 <motion.input 
                     type="checkbox"
+                    style={{ 
+                        ["--bg-img" as any]: `url(${defPath}/icon-checkbox.svg)` 
+                    }}
                     {...props}
                 />
                 <label
@@ -35,7 +38,7 @@ const CheckboxField = ({ feedback, label, children, delay, ...props }:Props) => 
                 </label>
                 {feedback && (
                     <div className={ styles.checkboxField__icons }>
-                        <img src={ DangerIcon } alt="" />
+                        <img src={ `${defPath}/icon-error.svg` } alt="" />
                     </div>
                 )}
             </div>

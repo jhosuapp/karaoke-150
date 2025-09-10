@@ -1,9 +1,8 @@
+import { defPath } from '../../../../config';
 import { Loader } from '../../../../shared/components';
 import { PermissionsKaraoke } from '../../interfaces';
 
 import styles from './permissions.module.css';
-import iconSuccess from '/assets/icon-check.svg';
-import iconError from '/assets/icon-error.svg';
 
 type Props = {
     icon: string;
@@ -32,8 +31,8 @@ const PermissionsItem = ({ icon, status, text, requestPermissions }:Props) => {
                     onClick={  ()=> { !status.hasPermissions && requestPermissions() } }
                 >
                     {!hasStatus && 'Aceptar'}
-                    { status.hasPermissions && <img src={ iconSuccess } alt="icon success" /> }  
-                    { status.isError && <img src={ iconError } alt="icon error" /> }  
+                    { status.hasPermissions && <img src={ `${defPath}/icon-check.svg` } alt="icon success" /> }  
+                    { status.isError && <img src={ `${defPath}/icon-error.svg` } alt="icon error" /> }  
                     {status.isError && 'Reintentar'}
                 </button>
             )}

@@ -108,20 +108,28 @@ div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{
     @apply opacity-40 pointer-events-none;
 }
 
+input[type="checkbox"]::before {
+    background-image: var(--bg-img);
+}
+
+select {
+    background-image: var(--bg-img-dropdown) !important;
+}
+
 @font-face {
     font-family: "roboto";
-    src: url("./config/typography/Roboto-Regular.ttf") format("truetype");
+    src: url("/assets/fonts/Roboto-Regular.ttf") format("truetype");
     font-weight: 400;
 }
 
 @font-face {
     font-family: "roboto";
-    src: url("./config/typography/Roboto-Medium.ttf") format("truetype");
+    src: url("/fonts/Roboto-Medium.ttf") format("truetype");
     font-weight: 500;
 }
 
 @font-face {
     font-family: "roboto";
-    src: url("./config/typography/Roboto_Condensed-ExtraBold.ttf") format("truetype");
+    src: url("/fonts/Roboto_Condensed-ExtraBold.ttf") format("truetype");
     font-weight: 800;
 }

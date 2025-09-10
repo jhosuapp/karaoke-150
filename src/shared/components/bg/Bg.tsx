@@ -1,6 +1,6 @@
 import { MotionProps, motion } from 'framer-motion';
 import styles from './bg.module.css';
-import bg from '/assets/tmp/bg-general-optimized.jpg';
+import { defPath } from '../../../config';
 
 type Props = {
     src?: string;
@@ -9,7 +9,7 @@ type Props = {
     isAbsolute?:boolean;
 } & MotionProps;
 
-const Bg = ({ src = bg, isFixed = false, isAbsolute = false, className, ...props }:Props) => {
+const Bg = ({ src = `${defPath}/tmp/bg-general-optimized.jpg`, isFixed = false, isAbsolute = false, className, ...props }:Props) => {
     return (
         <motion.picture 
             {...props}

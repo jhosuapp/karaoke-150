@@ -3,10 +3,10 @@ import { Bg, Carousel, Container, EnterCode, ImageText, Video, WrapperTables } f
 import { Header } from "../../../shared/layout/header/Header"
 import { fadeInMotion } from "../../../shared/motion";
 
-import title from '/assets/tmp/title-home.png';
 import { useLoaderData } from 'react-router-dom';
 import { ResponseAdminContentInterface } from '../../../shared/interfaces';
 import { IMAGES_PATH } from '../../../router/routes.constant';
+import { defPath } from '../../../config';
 
 
 const HomeView = () => {
@@ -37,7 +37,7 @@ const HomeView = () => {
                         {...fadeInMotion(0.2,0.2)}
                         className="w-[90%] mx-auto block mt-5 mb-10"
                     >
-                        <ImageText src={ title } />
+                        <ImageText src={ `${defPath}/tmp/title-home.png` } />
                     </motion.article>
                     <motion.article 
                         {...fadeInMotion(0.3,0.3)}

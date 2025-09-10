@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 
 import styles from './wrapperIcon.module.css';
-import iconDefault from '/assets/icon-wrapper-update.png';
+import { defPath } from '../../../config';
 
 type Props = {
     src?: string;
@@ -10,7 +10,7 @@ type Props = {
     children: ReactNode;
 } & MotionProps;
 
-const WrapperIcon = ({ src = iconDefault, children, className, ...props }: Props) => {
+const WrapperIcon = ({ src = `${defPath}/icon-wrapper-update.png`, children, className, ...props }: Props) => {
     return (
         <motion.div 
             className={ `${styles.wrapperIcon} ${className}` }

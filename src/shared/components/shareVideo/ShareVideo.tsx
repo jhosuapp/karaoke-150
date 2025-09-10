@@ -2,10 +2,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import styles from './shareVideo.module.css';
 
-import bg from '/assets/preview-update.png';
 import { useShareVideoController } from '../../hooks';
 import { countdownMotion, fadeInMotion } from '../../motion';
 import { Button } from '../button/Button';
+import { defPath } from '../../../config';
 
 type Props = {
     userName?: string;
@@ -47,7 +47,7 @@ const ShareVideo = ({ userName }:Props) => {
                     {...fadeInMotion(0.4, 0.4)}
                     className={ styles.shareVideo__video } 
                     src={responseProcessVideo?.response?.url} 
-                    poster={ bg }
+                    poster={ `${defPath}/preview-update.png` }
                     preload="none"
                     controls
                 />

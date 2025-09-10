@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import IconSpinner from '/assets/icon-spinner.svg';
 import styles from './loader.module.css';
 import { fadeInMotion } from '../../motion';
+import { defPath } from '../../../config';
 
 
 type Props = {
@@ -16,7 +16,7 @@ const Loader = ({ key, className }:Props) => {
             className={ `${styles.loader} ${className}` }
             key={ key }
         >
-            <img src={ IconSpinner } alt="cargando" />
+            <img src={ `${defPath}/icon-spinner.svg` } alt="cargando" />
         </motion.div>
     )
 }

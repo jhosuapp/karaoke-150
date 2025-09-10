@@ -2,9 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { countdownMotion, fadeInMotion } from '../../motion';
 
 import styles from './loader.module.css';
-import bg from '/assets/loader-bg.jpg';
-import icon from '/assets/icon-loader.svg';
-import cirlce from '/assets/loader-circle.png';
+import { defPath } from '../../../config';
 
 type Props = {
     text?: string;
@@ -17,7 +15,7 @@ const LoaderSecondary = ( { text = "cargando" }:Props ) => {
             className={styles.loaderSecondary}
         >
             <picture className={styles.loaderSecondary__bg}>
-                <img src={ bg } alt="loader" />
+                <img src={ `${defPath}/loader-bg.jpg` } alt="loader" />
             </picture>
             <div className={styles.loaderSecondary__content}>
                 <AnimatePresence mode="wait">
@@ -26,8 +24,8 @@ const LoaderSecondary = ( { text = "cargando" }:Props ) => {
                         className={styles.loaderSecondary__icon}
                         key={`icon-${text}`}
                     >
-                        <img key="icon-image" src={ icon } alt="" />
-                        <img key="circle-image" src={ cirlce } alt="" />
+                        <img key="icon-image" src={ `${defPath}/icon-loader.svg` } alt="" />
+                        <img key="circle-image" src={ `${defPath}/loader-circle.png` } alt="" />
                     </motion.picture>
                     <motion.p 
                         {...countdownMotion()} 

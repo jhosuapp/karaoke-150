@@ -8,11 +8,10 @@ import 'swiper/css/pagination';
 import "swiper/css/effect-fade";
 
 import styles from './carousel.module.css';
-import iconLeft from '/assets/icon-arrow-left.png';
-import iconRight from '/assets/icon-arrow-right.png';
 import { fadeInMotion } from '../../motion';
 import { ItemAdmincontent } from '../../interfaces';
 import { IMAGES_PATH } from '../../../router/routes.constant';
+import { defPath } from '../../../config';
 
 
 
@@ -68,13 +67,13 @@ const Carousel = ({title, description, slidesData, isFull = false}:Props) => {
                             whileTap={{ scale: 0.95 }}
                             className='custom-prev'
                         >
-                            <img src={ iconLeft } alt="" />
+                            <img src={ `${defPath}/icon-arrow-left.png` } alt="" />
                         </motion.button>
                         <motion.button 
                             whileTap={{ scale: 0.95 }}
                             className='custom-next'
                         >
-                            <img src={ iconRight } alt="" />
+                            <img src={ `${defPath}/icon-arrow-right.png` } alt="" />
                         </motion.button>
                     </div>
                 </motion.article>

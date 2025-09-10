@@ -16,7 +16,6 @@
 }
 
 .checkboxFieldContent input::before{
-    background-image: url('/assets/icon-checkbox.svg');
     @apply content-[''] absolute w-[18px] h-[20px] block bg-no-repeat bg-contain opacity-0 pointer-events-none translate-y-3 transition-all;
 }
 
@@ -33,31 +32,3 @@
 }
 
 /* Variants */
-
-/* 
-.checkboxField--primary .checkboxFieldContent label{
-    @apply ;
-}
-
-.checkboxField--primary .checkboxField__feedback {
-    @apply text-feedback-error-primary;
-} */
-
-/* Variants */
-/* 
-.checkboxField--secondary .checkboxFieldContent input{
-    @apply border-grayLighten checked:bg-primary checked:border-primary;
-}
-
-.checkboxField--secondary .checkboxFieldContent input::before{
-    background-image: url('../../../config/assets/svg/icon-check-secondary.svg');
-    background-position: center;
-}
-
-.checkboxField--secondary .checkboxFieldContent label{
-    @apply text-grayDarken;
-}
-
-.checkboxField--secondary .checkboxField__feedback {
-    @apply text-feedback-error-secondary;
-} */

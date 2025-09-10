@@ -2,8 +2,8 @@ import { InputHTMLAttributes } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 
 import styles from './textField.module.css';
-import DangerIcon from '/assets/icon-error.svg';
 import { fadeInMotion } from '../../motion';
+import { defPath } from '../../../config';
 
 type NativeProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -25,7 +25,7 @@ const TextField = ({ feedback, style, delay, ...props }:Props) => {
                 <motion.input 
                     {...props}
                 />
-                {feedback && <img className='global-field__icon' src={ DangerIcon } alt="" />}
+                {feedback && <img className='global-field__icon' src={ `${defPath}/icon-error.svg` } alt="" />}
             </div>
             {/* Feedback */}
             {feedback && <span className='global-field__error' role='alert'>{ feedback }</span>}

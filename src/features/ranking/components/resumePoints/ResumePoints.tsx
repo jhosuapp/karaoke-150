@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion';
 import { fadeInMotion } from '../../../../shared/motion';
 
-import welcomeTitle from '/assets/tmp/welcome-up-title.png';
 import { ImageText } from '../../../../shared/components/imageText/ImageText';
 import { AnimatedCounter, WrapperIcon } from '../../../../shared/components';
+import { defPath } from '../../../../config';
 
 const ResumePoints = () => {
     return (
         <motion.section
             {...fadeInMotion(0.2,0.2)}
         >
-            <ImageText src={ welcomeTitle } />
+            <ImageText src={ `${defPath}/tmp/welcome-up-title.png` } />
             <motion.div 
                 {...fadeInMotion(0.3,0.3)}
                 className="my-10"

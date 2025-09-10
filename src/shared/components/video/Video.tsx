@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import styles from './video.module.css';
+import { defPath } from '../../../config';
 
-import iconPlay from '/assets/icon-play-freeze.png';
+import styles from './video.module.css';
 
 type Props = {
     portrait: string;
@@ -18,7 +18,7 @@ const Video = ({ portrait }:Props) => {
                     whileTap={{ scale: 0.95 }}
                     className={ styles.video__play }
                 >
-                    <img src={ iconPlay } alt="" />
+                    <img src={ `${defPath}/icon-play-freeze.png` } alt="" />
                 </motion.button>
             </article>
         </section>
