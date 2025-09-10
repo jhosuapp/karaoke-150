@@ -17,42 +17,43 @@ const HomeView = () => {
 
     return (
         <>
-            <Header 
-                hasItemRight
-                text="Login"
-                hasRedirect
-            />
-            
-            <Bg 
-                className='min-h-svh'
-                src={ `${IMAGES_PATH}${banner?.banner?.imgurl_raw}` } 
-                isAbsolute
-            />
+            <div className='relative'>
+                <Header 
+                    hasItemRight
+                    text="Login"
+                    hasRedirect
+                />
+                <Bg 
+                    className='min-h-svh h-full'
+                    src={ `${IMAGES_PATH}${banner?.banner?.imgurl_raw}` } 
+                    isAbsolute
+                />
 
-            <Container 
-                {...fadeInMotion(0.1,0.1)}
-                className="my-1 !min-h-[calc(90svh-45px)] flex flex-col justify-between"
-            >
-                <motion.article 
-                    {...fadeInMotion(0.2,0.2)}
-                    className="w-[90%] mx-auto block mt-5 mb-10"
+                <Container 
+                    {...fadeInMotion(0.1,0.1)}
+                    className="my-0 !min-h-[calc(90svh-45px)] flex flex-col justify-between"
                 >
-                    <ImageText src={ title } />
-                </motion.article>
-                <motion.article 
-                    {...fadeInMotion(0.3,0.3)}
-                    className="w-[90%] mx-auto block mt-5 mb-10"
-                >
-                    <p className="global-dsc mb-4">{ banner?.desc }</p>
-                    {/* Enter code */}
-                    <EnterCode
-                        text={ banner?.button }
-                        placeholder={ banner?.label_field }
-                        key={'code'}
-                    />
-                    {/* End Enter code */}
-                </motion.article>
-            </Container>
+                    <motion.article 
+                        {...fadeInMotion(0.2,0.2)}
+                        className="w-[90%] mx-auto block mt-5 mb-10"
+                    >
+                        <ImageText src={ title } />
+                    </motion.article>
+                    <motion.article 
+                        {...fadeInMotion(0.3,0.3)}
+                        className="w-[90%] mx-auto block mt-5 mb-10"
+                    >
+                        <p className="global-dsc mb-4">{ banner?.desc }</p>
+                        {/* Enter code */}
+                        <EnterCode
+                            text={ banner?.button }
+                            placeholder={ banner?.label_field }
+                            key={'code'}
+                        />
+                        {/* End Enter code */}
+                    </motion.article>
+                </Container>
+            </div>            
 
             <Container 
                 {...fadeInMotion(0.4,0.4)}
