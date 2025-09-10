@@ -1,9 +1,9 @@
 .wrapper{
-    @apply flex flex-col items-center justify-center;
+    @apply flex flex-col items-center justify-between min-h-svh pt-16 pb-8;
 }
 
 .wrapper__content{
-    @apply flex flex-col justify-center items-center gap-10 w-[90%] mt-14;
+    @apply flex flex-col justify-center items-center gap-10 w-[90%];
 }
 
 .wrapper__dsc{
@@ -15,9 +15,13 @@
 }
 
 .wrapper__icon{
-    @apply max-w-icon w-full block;
+    @apply max-w-44 w-full block;
 }
 
 .wrapper__icon img{
     @apply w-full block;
+}
+
+.wrapper__icon__big{
+    @apply max-w-64 my-5;
 }

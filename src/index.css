@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply flex h-[100vh] justify-center text-center font-openSans;
+    @apply flex h-[100vh] justify-center text-center font-roboto;
 }
 
 .global-dsc,
@@ -18,11 +18,15 @@ body {
 
 .global-title,
 .swal2-title{
-    @apply text-white text-title uppercase leading-10 font-openSans font-extrabold;
+    @apply text-white text-title uppercase leading-10 font-roboto font-extrabold;
 }
 
 .global-subtitle{
-    @apply text-white text-subtitle uppercase leading-10 font-openSans font-extrabold;
+    @apply text-white text-subtitle uppercase leading-10 font-roboto font-extrabold;
+}
+
+.global-dsc-b{
+    @apply text-descriptionb mb-5 !leading-none;
 }
 
 .global-title-s{
@@ -35,7 +39,7 @@ body {
 
 .global-points{
     text-shadow: 0 0 19px #3EC5FF;
-    @apply text-white text-center text-points uppercase leading-10 font-openSans font-extrabold;
+    @apply text-white text-center text-points uppercase leading-10 font-roboto font-extrabold;
 }
 
 /* Fields */
@@ -105,19 +109,19 @@ div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{
 }
 
 @font-face {
-    font-family: "openSans";
-    src: url("./config/typography/OpenSans-Regular.ttf") format("truetype");
+    font-family: "roboto";
+    src: url("./config/typography/Roboto-Regular.ttf") format("truetype");
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "openSans";
-    src: url("./config/typography/OpenSans-Medium.ttf") format("truetype");
+    font-family: "roboto";
+    src: url("./config/typography/Roboto-Medium.ttf") format("truetype");
     font-weight: 500;
 }
 
 @font-face {
-    font-family: "openSans";
-    src: url("./config/typography/OpenSans_Condensed-ExtraBold.ttf") format("truetype");
+    font-family: "roboto";
+    src: url("./config/typography/Roboto_Condensed-ExtraBold.ttf") format("truetype");
     font-weight: 800;
 }

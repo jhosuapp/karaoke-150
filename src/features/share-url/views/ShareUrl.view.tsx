@@ -6,7 +6,7 @@ const ShareUrlView = () => {
     return (
         <section>
             <Header />
-            <Bg />
+             <Bg />
             <Container>
                 <FormShareUrl />
             </Container>

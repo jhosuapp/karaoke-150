@@ -30,11 +30,12 @@ export default {
             },
             fontSize: {
                 titles: '28px',
-                title: '34px',
+                title: '40px',
                 titleb: '40px',
                 subtitle: '20px',
                 button: '20px',
                 description: '18px',
+                descriptionb: '30px',
                 buttonMobile: '18px',
                 points: '59px',
                 input: '20px',
@@ -42,7 +43,7 @@ export default {
                 checkbox: '14px'
             },
             fontFamily: {
-                openSans: ["openSans", "sans-serif"],
+                roboto: ["roboto", "sans-serif"],
             },
             keyframes: {
                 fadeIn: {

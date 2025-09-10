@@ -9,47 +9,44 @@ import { Container } from '../container/Container';
 type Props = {
     children: ReactNode;
     srcIcon: string;
+    iconIsBig?: boolean;
     title?: string;
     description1?: string;
-    description2?: string;
+    subtitle?: string;
 }
 
-const Wrapper = ({ children, srcIcon, title, description1, description2 }:Props) => {
+const Wrapper = ({ children, srcIcon, title, description1, subtitle, iconIsBig }:Props) => {
     return (
         <motion.section className={ styles.wrapper }>
             <Bg />
             <Container  className={ styles.wrapper__content }>
-                <motion.picture
-                    className={ styles.wrapper__icon }
+                <motion.h1 
                     {...fadeInMotion(0.2, 0.2)}
+                    className='global-title'
+                >
+                    { title }
+                </motion.h1>
+                <motion.picture
+                    className={ `${styles.wrapper__icon} ${iconIsBig && styles.wrapper__icon__big}` }
+                    {...fadeInMotion(0.3, 0.3)}
                 >
                     <img src={ srcIcon } alt="" />
                 </motion.picture>
                 <div>
-                    <motion.h1 
-                        {...fadeInMotion(0.3, 0.3)}
-                        className='global-title'
-                    >
-                        { title }
-                    </motion.h1>
-                    <br />
+                    {subtitle && (
+                        <motion.p 
+                            {...fadeInMotion(0.4, 0.4)}
+                            className="global-dsc global-dsc-b"
+                        >
+                            { subtitle }
+                        </motion.p>
+                    )}
                     <motion.p 
-                        {...fadeInMotion(0.4, 0.4)}
+                        {...fadeInMotion(0.5, 0.5)}
                         className="global-dsc"
                     >
                         { description1 }
                     </motion.p>
-                    {description2 && (
-                        <>
-                            <br />
-                            <motion.p 
-                                {...fadeInMotion(0.5, 0.5)}
-                                className="global-dsc"
-                            >
-                                { description2 }
-                            </motion.p>
-                        </>
-                    )}
                 </div>
             </Container>
             <Container className={ styles.wrapper__children }>

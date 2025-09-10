@@ -1,5 +1,5 @@
 .subtitles {
-    @apply flex justify-center items-end py-6 px-[30px] w-full relative z-10;
+    @apply flex justify-center items-end py-6 px-[30px] w-full relative z-10 h-svh;
 }
 
 .lyricsScrollContainer {

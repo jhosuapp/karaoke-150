@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion';
 import styles from './camera.module.css';
-import { Bg } from '../../../../shared/components';
 
 import logo from '/assets/logo.png';
-import bg from '/assets/bg-karaoke.jpg';
 import microphone from '/assets/microphone.png';
-import { fadeInMotion, fadeInScaleMotion } from '../../../../shared/motion';
+import { fadeInScaleMotion } from '../../../../shared/motion';
 
 type Props = {
     videoRef:  React.RefObject<HTMLVideoElement>;
@@ -14,10 +12,15 @@ type Props = {
 const Camera = ({ videoRef }:Props) => {
     return (
         <>
-            <Bg {...fadeInMotion(3.5, 0)} isFixed src={ bg } key={'bg-camera'} />
             <motion.div 
                 {...fadeInScaleMotion(3.9, 0)}
                 className={ styles.camera__microphone }
+            >
+                <img src={ microphone } alt="Micro aguila" />
+            </motion.div>
+            <motion.div 
+                {...fadeInScaleMotion(3.9, 0)}
+                className={ `${styles.camera__microphone} ${styles.camera__microphone__secondary}` }
             >
                 <img src={ microphone } alt="Micro aguila" />
             </motion.div>

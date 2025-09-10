@@ -1,11 +1,11 @@
 import { fadeInMotion } from '../../../../shared/motion';
 import { Button, Carousel, Container, Wrapper } from '../../../../shared/components';
 
-import icon from '/assets/tmp/icon-1.png';
 import styles from './instructions.module.css';
 import { useState } from 'react';
 import { ResponseAdminContentInterface } from '../../../../shared/interfaces';
 import { useLoaderData } from 'react-router-dom';
+import { IMAGES_PATH } from '../../../../router/routes.constant';
 
 type Props = {
     handlePlaying: ()=> void;
@@ -23,14 +23,14 @@ const Instructions = ({ handlePlaying }:Props) => {
 
     return (
         <Wrapper
-            srcIcon={ icon }
+            srcIcon={ `${IMAGES_PATH}${instructions?.img?.imgurl_raw}` }
             title='Ha llegado el momento de ser una estrella'
-            description1='Antes de empezar: busca un lugar tranquilo y activo los permisos para disfrutar la experiencia completa.'
+            description1={ instructions?.desc }
         >
             <div className={ styles.instructions__cta }>
                 <Button
                     {...fadeInMotion(0.6, 0.6)}
-                    className='mt-20'
+                    className='mt-4'
                     onClick={ handleClickPlaying } 
                     text='¿Estás listo? a jugar'
                     style="secondary"

@@ -17,7 +17,7 @@ const ResumePoints = () => {
             >
                 <p className='global-subtitle mb-4'>Tu mejor puntaje es</p>
                 <WrapperIcon>
-                    <AnimatedCounter value={234567} className='global-points !text-[#F1D501]' />
+                    <AnimatedCounter value={234567} className='global-points' />
                 </WrapperIcon>
             </motion.div>
         </motion.section>

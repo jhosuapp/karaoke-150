@@ -1,7 +1,5 @@
 .camera{
-    max-height: calc(100svh - 160px);
-    max-width: calc(100% - 60px);
-    @apply relative w-full h-svh flex items-center justify-center mt-[30px] left-[30px] overflow-hidden rounded-md z-10;
+    @apply fixed w-full h-svh flex items-center justify-center left-0 overflow-hidden z-10;
 }
 .camera video{
     min-height: 110vh;
@@ -10,13 +8,21 @@
 }
 
 .camera__logo{
-    @apply absolute z-10 top-5 max-w-[120px] w-[90%];
+    @apply absolute z-10 top-5 w-[90%] left-[5%] max-w-16;
 }
 
 .camera__microphone{
-    @apply fixed z-[100] !left-0 !top-0 h-svh flex items-end w-full;
+    @apply fixed z-[100] left-0 top-0 h-svh flex items-end w-full max-w-16;
 }
 
 .camera__microphone img{
-    @apply w-full max-h-[60svh] h-svh object-contain block absolute left-0 object-left;
+    @apply w-full;
+}
+
+.camera__microphone__secondary{
+    @apply left-[unset] right-0;
+}
+
+.camera__microphone__secondary img{
+    transform: rotateY(180deg);
 }

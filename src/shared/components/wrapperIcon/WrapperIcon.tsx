@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 
 import styles from './wrapperIcon.module.css';
-import iconDefault from '/assets/icon-wrapper-icon.png';
+import iconDefault from '/assets/icon-wrapper-update.png';
 
 type Props = {
     src?: string;
