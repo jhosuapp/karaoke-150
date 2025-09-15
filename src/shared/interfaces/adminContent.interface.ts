@@ -47,6 +47,9 @@ interface Instrucciones {
     video: string;
     desc:  string;
     act:   string;
+    btn: string;
+    tit: string;
+    tit2: string;
     items: ItemAdmincontent[];
 }
 

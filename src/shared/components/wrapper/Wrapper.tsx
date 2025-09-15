@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { Bg } from '../bg/Bg';
 
@@ -15,7 +15,7 @@ type Props = {
     subtitle?: string;
 }
 
-const Wrapper = ({ children, srcIcon, title, description1, subtitle, iconIsBig }:Props) => {
+const Wrapper = memo(({ children, srcIcon, title, description1, subtitle, iconIsBig }:Props) => {
     return (
         <motion.section className={ styles.wrapper }>
             <Bg />
@@ -54,6 +54,6 @@ const Wrapper = ({ children, srcIcon, title, description1, subtitle, iconIsBig }
             </Container>
         </motion.section>
     )
-}
+})
 
 export { Wrapper }

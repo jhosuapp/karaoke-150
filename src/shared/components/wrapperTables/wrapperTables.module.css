@@ -13,7 +13,7 @@
 
 .wrapperTables__head p,
 .wrapperTables__body__item p{
-    @apply text-white text-sm flex-1 first:text-left last:text-right;
+    @apply text-white text-sm flex-1 text-center first:text-left last:text-right;
 }
 
 .wrapperTables__head{

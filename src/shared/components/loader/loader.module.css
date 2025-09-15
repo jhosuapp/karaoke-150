@@ -37,7 +37,7 @@
 }
 
 .loaderSecondary__text{
-    @apply text-lg uppercase font-bold mt-5 text-white;
+    @apply text-lg uppercase font-bold mt-5 text-white text-center;
 }
 
 @keyframes rotateLoop {

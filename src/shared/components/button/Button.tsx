@@ -1,6 +1,6 @@
 import { motion, MotionProps } from 'framer-motion';
 import styles from './button.module.css';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 import { Loader } from '../loader/Loader';
 
 type NativeProps = ButtonHTMLAttributes<HTMLButtonElement>;
@@ -16,7 +16,7 @@ type CustomProps = {
 
 type Props = CustomProps & NativeProps & MotionProps;
 
-const Button = ({ text, style, className, iconLeft, iconRight, isLoad, disabled, ...props }:Props) => {
+const Button = memo(({ text, style, className, iconLeft, iconRight, isLoad, disabled, ...props }:Props) => {
     return (
         <motion.button 
             className={ `${styles.button} ${styles[`button--${style}`]} ${isLoad && styles.button__load} ${disabled == false && styles.button__disabled} ${className ?? ''}` }
@@ -32,6 +32,6 @@ const Button = ({ text, style, className, iconLeft, iconRight, isLoad, disabled,
             )}
         </motion.button>
     )
-}
+})
 
 export { Button }

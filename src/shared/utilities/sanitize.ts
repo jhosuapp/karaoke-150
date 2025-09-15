@@ -34,6 +34,8 @@ export const sanitizeResponse = (response: ResponseAdminContentInterface): Respo
             instrucciones: {
                 ...data.instrucciones,
                 desc: cleanHTML(data?.instrucciones?.desc),
+                tit: cleanHTML(data?.instrucciones?.tit),
+                tit2: cleanHTML(data?.instrucciones?.tit2),
                 items: data?.instrucciones?.items?.map(item => ({
                     ...item,
                     desc: cleanHTML(item?.desc),

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --watch",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest --forceExit --coverage --detectOpenHandles --verbose --watchAll --silent",
